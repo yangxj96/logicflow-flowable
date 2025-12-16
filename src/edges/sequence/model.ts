@@ -1,7 +1,8 @@
-import {BaseEdgeModel} from '@logicflow/core'
+import {PolylineEdgeModel} from '@logicflow/core'
 import {BPMN_PREFIX} from "../../core/constants";
 
-export class SequenceFlowModel extends BaseEdgeModel {
+export class SequenceFlowModel extends PolylineEdgeModel {
+
     static readonly type = `${BPMN_PREFIX}:sequenceFlow`
 
     constructor(data: any, graphModel: any) {

@@ -15,7 +15,7 @@ export class EndEventModel extends CircleNodeModel {
         this.isAllowOutgoing = false
 
         // 默认文本
-        if (!this.text || !this.text.value) {
+        if (!this.text?.value) {
             this.text.value = '结束'
             this.text.x = this.x
             this.text.y = this.y + 30

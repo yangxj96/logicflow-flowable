@@ -1,9 +1,9 @@
-import { nodeToXml } from './nodes'
-import { edgeToXml } from './edges'
-import { processToXml } from './process'
-import { attrs } from './utils'
+import {nodeToXml} from './nodes'
+import {edgeToXml} from './edges'
+import {processToXml} from './process'
+import {attrs} from './utils'
 
-import { BPMN_PREFIX, BPMN_NS, FLOWABLE_NAMESPACE } from '../../../core/constants'
+import {BPMN_NS, BPMN_PREFIX, FLOWABLE_NAMESPACE} from '../../core/constants'
 
 const DEFINITIONS_ATTR = {
     [`xmlns:${BPMN_PREFIX}`]: BPMN_NS,
@@ -13,7 +13,7 @@ const DEFINITIONS_ATTR = {
 
 
 export function toBpmnXml(lfData: any) {
-    const { nodes = [], edges = [] } = lfData
+    const {nodes = [], edges = []} = lfData
 
     const nodeXml = nodes.map(nodeToXml).join('\n')
     const edgeXml = edges.map(edgeToXml).join('\n')

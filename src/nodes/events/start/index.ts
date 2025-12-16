@@ -1,6 +1,6 @@
-import { LogicFlow } from '@logicflow/core'
-import { StartEventModel } from './model'
-import { StartEventView } from './view'
+import {LogicFlow} from '@logicflow/core'
+import {StartEventModel} from './model'
+import {StartEventView} from './view'
 
 export function registerStartEvent(lf: LogicFlow) {
     lf.register({

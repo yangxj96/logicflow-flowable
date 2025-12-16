@@ -1,4 +1,4 @@
-import { BaseProperty } from '../base'
+import {BaseProperty} from '../base'
 
 export const UserTaskProperties: BaseProperty[] = [
     {

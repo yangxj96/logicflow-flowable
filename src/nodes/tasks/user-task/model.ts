@@ -1,4 +1,4 @@
-import { RectNodeModel } from '@logicflow/core'
+import {RectNodeModel} from '@logicflow/core'
 import {BPMN_PREFIX} from "../../../core/constants";
 
 export class UserTaskModel extends RectNodeModel {
@@ -26,7 +26,7 @@ export class UserTaskModel extends RectNodeModel {
         }
 
         // 默认文本
-        if (!this.text || !this.text.value) {
+        if (!this.text?.value) {
             this.text.value = '用户任务'
             this.text.x = this.x
             this.text.y = this.y + 4

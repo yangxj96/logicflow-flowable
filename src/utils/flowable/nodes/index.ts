@@ -1,6 +1,6 @@
-import { startEventToXml } from './start-event'
-import { userTaskToXml } from './user-task'
-import { endEventToXml } from './end-event'
+import {startEventToXml} from './start-event'
+import {userTaskToXml} from './user-task'
+import {endEventToXml} from './end-event'
 
 
 export function nodeToXml(node: any): string {

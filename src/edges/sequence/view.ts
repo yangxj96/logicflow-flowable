@@ -1,3 +1,4 @@
-import { PolylineEdge } from '@logicflow/core'
+import {PolylineEdge} from '@logicflow/core'
 
-export class SequenceFlowView extends PolylineEdge {}
+export class SequenceFlowView extends PolylineEdge {
+}

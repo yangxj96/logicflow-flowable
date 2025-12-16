@@ -1,4 +1,4 @@
-import { attrs } from '../utils'
+import {attrs} from '../utils'
 
 export function userTaskToXml(node: any): string {
     const {

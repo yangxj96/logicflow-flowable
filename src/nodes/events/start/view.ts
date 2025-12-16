@@ -1,3 +1,4 @@
-import { CircleNode } from '@logicflow/core'
+import {CircleNode} from '@logicflow/core'
 
-export class StartEventView extends CircleNode {}
+export class StartEventView extends CircleNode {
+}

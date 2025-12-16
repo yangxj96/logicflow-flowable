@@ -1,4 +1,4 @@
-import {LogicFlow} from '@logicflow/core'
+import LogicFlow from '@logicflow/core'
 import {registerStartEvent} from './start';
 import {registerEndEvent} from "./end";
 
