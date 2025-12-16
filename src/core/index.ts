@@ -8,3 +8,5 @@ export const FlowablePlugin: LogicFlow.ExtensionDefinition = {
         registerAll(lf)
     }
 }
+
+export default FlowablePlugin;

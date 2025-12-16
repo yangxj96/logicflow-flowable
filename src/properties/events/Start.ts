@@ -1,3 +1,3 @@
-import {BaseProperty} from '../Base'
+import {BaseProperty} from '../base'
 
 export const StartEventProperties: BaseProperty[] = []

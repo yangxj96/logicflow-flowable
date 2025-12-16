@@ -1,15 +1,12 @@
 // 注册节点/边
-import { LogicFlow } from '@logicflow/core'
+import {LogicFlow} from '@logicflow/core';
+import {registerEventNodes} from "../nodes/events";
+import {registerTaskNodes} from "../nodes/tasks";
 
-// 这里只 import “注册函数”，不 import 具体实现
-import {StartEvent} from "../nodes/events/StartEvent";
-import {SequenceFlow} from '../edges/sequence/SequenceFlow';
-import {UserTask} from "../nodes/tasks/UserTask";
-import {EndEvent} from "../nodes/events/EndEvent"
+import { registerSequenceEdges } from '../edges/sequence'
 
 export function registerAll(lf: LogicFlow) {
-    lf.register(StartEvent);
-    lf.register(SequenceFlow);
-    lf.register(UserTask);
-    lf.register(EndEvent);
+    registerEventNodes(lf);
+    registerTaskNodes(lf);
+    registerSequenceEdges(lf);
 }

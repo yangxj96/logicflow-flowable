@@ -1,8 +1,5 @@
-import {BaseProperty} from '../Base'
+import { BaseProperty } from '../base'
 
-/**
- * 用户服务Properties
- */
 export const UserTaskProperties: BaseProperty[] = [
     {
         key: 'assignee',
@@ -11,17 +8,22 @@ export const UserTaskProperties: BaseProperty[] = [
     },
     {
         key: 'candidateUsers',
-        label: '候选用户',
+        label: '候选用户（逗号分隔）',
         type: 'string'
     },
     {
         key: 'candidateGroups',
-        label: '候选组',
+        label: '候选组（逗号分隔）',
         type: 'string'
     },
     {
         key: 'formKey',
         label: '表单 Key',
+        type: 'string'
+    },
+    {
+        key: 'dueDate',
+        label: '到期时间',
         type: 'string'
     }
 ]

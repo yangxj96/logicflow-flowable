@@ -1,0 +1,1 @@
+export {nodeToXml} from './writer'
