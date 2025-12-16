@@ -1,0 +1,40 @@
+{
+  "name": "@yangxj96/logicflow-flowable",
+  "version": "0.0.1",
+  "description": "LogicFlow BPMN plugin for Flowable",
+  "keywords": [
+    "logicflow",
+    "bpmn",
+    "flowable"
+  ],
+  "author": "your-name",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "@logicflow/core": "^2.2.0",
+    "@logicflow/extension": "^2.2.0"
+  },
+  "devDependencies": {
+    "@logicflow/core": "^2.2.0",
+    "@logicflow/extension": "^2.2.0",
+    "typescript": "^5.8.3",
+    "tsup": "^8.0.1"
+  }
+}
