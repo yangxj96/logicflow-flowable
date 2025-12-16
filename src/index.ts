@@ -1,3 +1,4 @@
-import FlowablePlugin from './core'
+import FlowablePlugin from './core';
+
 
 export default FlowablePlugin
