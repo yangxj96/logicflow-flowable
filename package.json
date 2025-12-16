@@ -1,14 +1,14 @@
 {
   "name": "@yangxj96/logicflow-flowable",
   "version": "0.0.1",
-  "description": "LogicFlow BPMN plugin for Flowable",
+  "description": "Flowable 的 LogicFlow BPMN 插件",
   "keywords": [
     "logicflow",
     "bpmn",
     "flowable"
   ],
-  "author": "your-name",
-  "license": "MIT",
+  "author": "yangxj96",
+  "license": "Apache-2.0",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",

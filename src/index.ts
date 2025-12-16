@@ -1,11 +1,11 @@
-export * from './plugin'
-export * from './flowable/serializer'
-export * from './dnd'
+export * from './core'
+export * from './utils/flowable/Serializer'
+export * from './utils/dnd/FlowableItems'
 
-export * from './logicflow/start-event'
-export * from './logicflow/end-event'
-export * from './logicflow/sequence-flow'
-export * from './logicflow/user-task'
+export * from './nodes/events/StartEvent'
+export * from './nodes/events/EndEvent'
+export * from './edges/sequence/SequenceFlow'
+export * from './nodes/tasks/UserTask'
 
 export * from './properties/types'
 export * from './properties/registry'

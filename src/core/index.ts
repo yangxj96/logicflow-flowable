@@ -1,8 +1,8 @@
 import type LogicFlow from '@logicflow/core'
-import {StartEvent} from "../logicflow/start-event";
-import {SequenceFlow} from '../logicflow/sequence-flow';
-import {UserTask} from "../logicflow/user-task";
-import {EndEvent} from "../logicflow/end-event"
+import {StartEvent} from "../nodes/events/StartEvent";
+import {SequenceFlow} from '../edges/sequence/SequenceFlow';
+import {UserTask} from "../nodes/tasks/UserTask";
+import {EndEvent} from "../nodes/events/EndEvent"
 
 export const FlowablePlugin: LogicFlow.ExtensionDefinition = {
     pluginName: 'flowable',

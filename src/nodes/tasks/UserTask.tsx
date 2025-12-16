@@ -1,5 +1,5 @@
 import {RectNode, RectNodeModel} from '@logicflow/core'
-import { registerNodeProperties } from '../properties/registry'
+import { registerNodeProperties } from '../../properties/registry'
 
 registerNodeProperties({
     type: 'bpmn:userTask',
@@ -17,7 +17,7 @@ export class UserTaskView extends RectNode {
 }
 
 export class UserTaskModel extends RectNodeModel {
-    static type = 'bpmn:userTask'
+    static readonly type = 'bpmn:userTask'
 
     initNodeData(data: any) {
         super.initNodeData(data)

@@ -1,6 +1,6 @@
-import type {FlowableDndItem} from './types'
+import {ShapeItem} from "@logicflow/extension";
 
-export function getFlowableDndItems(): FlowableDndItem[] {
+export function getFlowableDndItems(): ShapeItem[] {
     return [
         {
             type: 'bpmn:startEvent',
