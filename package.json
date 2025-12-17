@@ -1,40 +1,43 @@
 {
-  "name": "@yangxj96/logicflow-flowable",
-  "version": "0.0.1",
-  "description": "Flowable 的 LogicFlow BPMN 插件",
-  "keywords": [
-    "logicflow",
-    "bpmn",
-    "flowable"
-  ],
-  "author": "yangxj96",
-  "license": "Apache-2.0",
-  "type": "module",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+    "name": "@yangxj96/logicflow-flowable",
+    "version": "0.0.1",
+    "description": "Flowable 的 LogicFlow BPMN 插件",
+    "keywords": [
+        "logicflow",
+        "bpmn",
+        "flowable"
+    ],
+    "author": "yangxj96",
+    "license": "Apache-2.0",
+    "type": "module",
+    "main": "dist/index.cjs",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "prepublishOnly": "pnpm build",
+        "format": "prettier --write ./src",
+        "format:check": "prettier --check ./src"
+    },
+    "peerDependencies": {
+        "@logicflow/core": "^2.2.0",
+        "@logicflow/extension": "^2.2.0"
+    },
+    "devDependencies": {
+        "@logicflow/core": "^2.2.0",
+        "@logicflow/extension": "^2.2.0",
+        "prettier": "^3.7.4",
+        "tsup": "^8.0.1",
+        "typescript": "^5.8.3"
     }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "prepublishOnly": "pnpm build"
-  },
-  "peerDependencies": {
-    "@logicflow/core": "^2.2.0",
-    "@logicflow/extension": "^2.2.0"
-  },
-  "devDependencies": {
-    "@logicflow/core": "^2.2.0",
-    "@logicflow/extension": "^2.2.0",
-    "typescript": "^5.8.3",
-    "tsup": "^8.0.1"
-  }
 }

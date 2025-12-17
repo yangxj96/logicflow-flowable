@@ -1,12 +1,12 @@
 // 插件入口
-import type LogicFlow from '@logicflow/core'
-import {registerAll} from "./register";
+import type LogicFlow from "@logicflow/core";
+import { registerAll } from "./register";
 
 export const FlowablePlugin: LogicFlow.ExtensionDefinition = {
-    pluginName: 'flowable',
+    pluginName: "flowable",
     install(lf: LogicFlow) {
-        registerAll(lf)
+        registerAll(lf);
     }
-}
+};
 
 export default FlowablePlugin;

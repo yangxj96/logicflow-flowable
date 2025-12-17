@@ -1,3 +1,3 @@
-import {BaseProperty} from '../base'
+import { BaseProperty } from "../base";
 
-export const StartEventProperties: BaseProperty[] = []
+export const StartEventProperties: BaseProperty[] = [];

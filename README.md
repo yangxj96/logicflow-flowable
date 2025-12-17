@@ -6,3 +6,4 @@ LogicFlow BPMN plugin for Flowable.
 
 ```bash
 pnpm add logicflow-flowable
+```
