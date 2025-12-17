@@ -1,8 +1,14 @@
-import { attrs } from "./utils";
+import type LogicFlow from "@logicflow/core";
+import { getProcessContext } from "../../context/process";
 
-export function processToXml(processId: string, name: string, body: string) {
+export function processToXml(lf: LogicFlow, body: string) {
+    const process = getProcessContext(lf);
     return `
-  <bpmn:process id="${processId}" name="${name}" isExecutable="true">
+  <bpmn:process
+    id="${process.id}"
+    name="${process.name}"
+    isExecutable="${process.isExecutable}"
+  >
 ${body}
   </bpmn:process>`;
 }

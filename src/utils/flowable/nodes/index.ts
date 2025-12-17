@@ -8,7 +8,7 @@ export function nodeToXml(node: any): string {
             return startEventToXml(node);
         case "bpmn:userTask":
             return userTaskToXml(node);
-        case "bpmn:endTask":
+        case "bpmn:endEvent":
             return endEventToXml(node);
         default:
             return "";

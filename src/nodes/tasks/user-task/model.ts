@@ -1,4 +1,6 @@
 import { RectNodeModel } from "@logicflow/core";
+import { BpmnIdGenerator } from "../../../utils/id-generator";
+import { UserTaskProperties } from "../../../properties/tasks/user-task";
 import { BPMN_PREFIX } from "../../../core/constants";
 
 export class UserTaskModel extends RectNodeModel {
@@ -16,14 +18,17 @@ export class UserTaskModel extends RectNodeModel {
         this.isAllowIncoming = true;
         this.isAllowOutgoing = true;
 
+        let bpmnId = BpmnIdGenerator.generate();
+        this.id = bpmnId
+
         // 初始化 properties（非常关键）
-        this.properties = {
-            assignee: "",
-            candidateUsers: "",
-            candidateGroups: "",
-            formKey: "",
-            dueDate: ""
-        };
+        this.properties = {};
+        UserTaskProperties.forEach(prop => {
+            this.properties[prop.key] = "";
+            if (prop.key === "id") {
+                this.properties[prop.key] = bpmnId;
+            }
+        });
 
         // 默认文本
         if (!this.text?.value) {

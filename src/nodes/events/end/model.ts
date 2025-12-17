@@ -1,5 +1,8 @@
 import { CircleNodeModel } from "@logicflow/core";
 import { BPMN_PREFIX } from "../../../core/constants";
+import { UserTaskProperties } from "../../../properties/tasks/user-task";
+import { BpmnIdGenerator } from "../../../utils/id-generator";
+import { EndEventProperties } from "../../../properties/events/end";
 
 export class EndEventModel extends CircleNodeModel {
     static readonly type = `${BPMN_PREFIX}:endEvent`;
@@ -13,6 +16,18 @@ export class EndEventModel extends CircleNodeModel {
         // 语义约束
         this.isAllowIncoming = true;
         this.isAllowOutgoing = false;
+
+        let bpmnId = BpmnIdGenerator.generate();
+        this.id = bpmnId
+
+        // 初始化 properties（非常关键）
+        this.properties = {};
+        EndEventProperties.forEach(prop => {
+            this.properties[prop.key] = "";
+            if (prop.key === "id") {
+                this.properties[prop.key] = bpmnId;
+            }
+        });
 
         // 默认文本
         if (!this.text?.value) {

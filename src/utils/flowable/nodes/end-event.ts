@@ -1,8 +1,21 @@
-import { attrs } from "../utils";
+import { attrsToString, buildXmlParts } from "../utils";
+import { EndEventProperties } from "../../../properties/events/end";
 
 export function endEventToXml(node: any): string {
-    return `<bpmn:endEvent${attrs({
+
+    const { attrs, elements } = buildXmlParts(node, EndEventProperties);
+
+    const attrStr = attrsToString({
         id: node.id,
-        name: node.text?.value
-    })} />`;
+        name: node.text?.value,
+        ...attrs
+    });
+
+    if (elements.length) {
+        return `<bpmn:endEvent${attrStr}>
+      ${elements.join("")}
+    </bpmn:endEvent>`;
+    }
+
+    return `<bpmn:endEvent${attrStr} />`;
 }

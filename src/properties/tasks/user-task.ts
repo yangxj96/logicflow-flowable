@@ -1,29 +1,53 @@
-import { BaseProperty } from "../base";
+import { BaseProperty, CommonNodeProperties } from "../base";
 
+/**
+ * 用户任务组件的属性
+ */
 export const UserTaskProperties: BaseProperty[] = [
+    ...CommonNodeProperties,
     {
         key: "assignee",
         label: "处理人",
-        type: "string"
+        type: "string",
+        group: "扩展信息",
+        xml: {
+            attr: "flowable:assignee"
+        }
     },
     {
         key: "candidateUsers",
         label: "候选用户（逗号分隔）",
-        type: "string"
+        type: "string",
+        group: "扩展信息",
+        xml: {
+            attr: "flowable:candidateUsers"
+        }
     },
     {
         key: "candidateGroups",
         label: "候选组（逗号分隔）",
-        type: "string"
+        type: "string",
+        group: "扩展信息",
+        xml: {
+            attr: "flowable:candidateGroups"
+        }
     },
     {
         key: "formKey",
         label: "表单 Key",
-        type: "string"
+        type: "string",
+        group: "扩展信息",
+        xml: {
+            attr: "flowable:formKey"
+        }
     },
     {
         key: "dueDate",
         label: "到期时间",
-        type: "string"
+        type: "string",
+        group: "扩展信息",
+        xml: {
+            attr: "flowable:dueDate"
+        }
     }
 ];

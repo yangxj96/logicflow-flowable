@@ -1,8 +1,21 @@
-import { attrs } from "../utils";
+import { attrsToString, buildXmlParts } from "../utils";
+import { StartEventProperties } from "../../../properties/events/start";
 
 export function startEventToXml(node: any): string {
-    return `<bpmn:startEvent${attrs({
+
+    const { attrs, elements } = buildXmlParts(node, StartEventProperties);
+
+    const attrStr = attrsToString({
         id: node.id,
-        name: node.text?.value
-    })} />`;
+        name: node.text?.value,
+        ...attrs
+    });
+
+    if (elements.length) {
+        return `<bpmn:startEvent${attrStr}>
+      ${elements.join("")}
+    </bpmn:startEvent>`;
+    }
+
+    return `<bpmn:startEvent${attrStr} />`;
 }
