@@ -3,7 +3,7 @@ name: Publish Package
 on:
   push:
     tags:
-      - 'v*'
+      - 'v0.*'
 
 permissions:
   id-token: write  # Required for OIDC

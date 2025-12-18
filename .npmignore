@@ -1,0 +1,30 @@
+# 源码
+src/
+tests/
+__tests__/
+examples/
+
+# 构建&工具
+node_modules/
+.vscode/
+.idea/
+coverage/
+
+# 配置文件
+tsconfig.json
+tsconfig.*.json
+tsup.config.ts
+.prettierrc
+.eslintrc*
+eslint.config.*
+commitlint.config.*
+lint-staged.config.*
+
+# 包管理
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# 其他
+*.log
+*.map
