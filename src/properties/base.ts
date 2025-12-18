@@ -22,6 +22,10 @@ export interface BaseProperty {
     defaultValue?: any;
     group: string;
     xml?: XmlMeta;
+    validate?: {
+        required?: boolean;
+        ruleKey?: string;
+    }
 }
 
 export const CommonNodeProperties: BaseProperty[] = [
@@ -33,6 +37,9 @@ export const CommonNodeProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "id"
+        },
+        validate: {
+            required: true
         }
     },
     {
@@ -43,6 +50,9 @@ export const CommonNodeProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "name"
+        },
+        validate: {
+            required: true
         }
     },
     {

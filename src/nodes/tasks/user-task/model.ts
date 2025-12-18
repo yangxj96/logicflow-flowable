@@ -20,6 +20,7 @@ export class UserTaskModel extends RectNodeModel {
 
         let bpmnId = BpmnIdGenerator.generate();
         this.id = bpmnId
+        this.text.value = "用户任务"
 
         // 初始化 properties（非常关键）
         this.properties = {};
@@ -27,6 +28,9 @@ export class UserTaskModel extends RectNodeModel {
             this.properties[prop.key] = "";
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;
+            }
+            if (prop.key === "name") {
+                this.properties[prop.key] = "用户任务";
             }
         });
 

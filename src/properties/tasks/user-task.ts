@@ -12,6 +12,10 @@ export const UserTaskProperties: BaseProperty[] = [
         group: "扩展信息",
         xml: {
             attr: "flowable:assignee"
+        },
+        validate: {
+            required: true,
+            ruleKey: "flowableAssignee"
         }
     },
     {
