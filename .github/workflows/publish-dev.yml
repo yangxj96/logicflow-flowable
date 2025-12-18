@@ -33,8 +33,6 @@ jobs:
       - name: Force OIDC (remove token)
         run: |
           npm config delete //registry.npmjs.org/:_authToken || true
-          rm -f ~/.npmrc
-          rm -f .npmrc
 
       - name: Generate dev version and publish
         run: |
