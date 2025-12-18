@@ -6,8 +6,11 @@ on:
 jobs:
   publish-dev:
     runs-on: ubuntu-latest
+
+    # ✅ 关键：开启 OIDC，用于 npm Trusted Publisher
     permissions:
       contents: read
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -29,8 +32,6 @@ jobs:
         run: npm run build
 
       - name: Generate dev version and publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           # 获取基础版本
           BASE_VERSION=$(node -p "require('./package.json').version")
@@ -40,8 +41,8 @@ jobs:
 
           echo "Publishing dev version: $DEV_VERSION"
 
-          # 临时设置版本（不修改 Git）
+          # 临时设置版本（不修改 Git，也不打 tag）
           npm pkg set version="$DEV_VERSION" --no-git-tag-version
 
-          # 发布到 npm，使用 dev 标签
+          # ✅ 不再需要 token，npm 会通过 OIDC 自动认证
           npm publish --tag dev --access public
