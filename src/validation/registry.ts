@@ -1,4 +1,3 @@
-// 校验注册中心
 import { flowableRules } from "./rules/flowable";
 
 const ruleMap = {

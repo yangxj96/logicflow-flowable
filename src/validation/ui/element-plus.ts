@@ -1,6 +1,6 @@
 import type { FormRules } from "element-plus";
 import { validateProperty } from "../registry";
-import { BaseProperty } from "../../types/common";
+import { BaseProperty } from "../../types";
 
 /**
  * 构建ElementPlus的表单校验对象

@@ -1,4 +1,3 @@
-// 插件入口
 import type LogicFlow from "@logicflow/core";
 import { registerAll } from "./register";
 

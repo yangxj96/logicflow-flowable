@@ -1,167 +1,180 @@
-# logicflow-flowable
+# 🧩 logicflow-flowable
 
-> 基于 **LogicFlow** 的 **Flowable BPMN** 设计器与数据转换工具
+> 基于 [LogicFlow](https://logicflow.org) 的 **BPMN 2.0 流程图建模插件**，无缝对接 [Flowable](https://www.flowable.org) 工作流引擎。  
+> 用 LogicFlow 画流程图，一键导出 Flowable 可直接部署的 BPMN XML！
 
-`logicflow-flowable` 是一个将前端流程建模库 **LogicFlow** 与流程引擎 **Flowable BPMN** 规范打通的项目，提供：
+[![npm version](https://img.shields.io/npm/v/@yangxj96/logicflow-flowable?color=blue)](https://www.npmjs.com/package/@yangxj96/logicflow-flowable)
+[![License](https://img.shields.io/github/license/yangxj96/logicflow-flowable)](LICENSE)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@yangxj96/logicflow-flowable)](https://bundlephobia.com/package/@yangxj96/logicflow-flowable)
 
-* 🧩 Flowable BPMN 节点 / 连线的前端建模能力
-* 🔄 LogicFlow JSON ⇄ Flowable BPMN XML 的双向转换
-* 🧱 可扩展的节点、属性与命名空间设计
-* 🛠️ 适合二次开发的工程化结构
-
-该项目适用于 **流程设计器**、**低代码 / BPM 平台**、**工作流可视化建模** 等场景。
-
----
-
-## ✨ 特性
-
-* **BPMN 2.0 规范**：生成符合 Flowable / Activiti / Camunda 兼容的 BPMN XML
-* **LogicFlow 深度集成**：基于 LogicFlow 自定义节点、边与属性
-* **Flowable 扩展支持**：支持 `flowable:*` 扩展属性与命名空间
-* **模块化设计**：节点、边、流程、XML 转换逻辑完全解耦
-* **可定制 ID 生成器**：避免节点 / 连线 ID 冲突
-
----
-
-## 📦 安装(暂未完成)
-
-```bash
-npm install @yangxj96/logicflow-flowable
-# or
-pnpm add @yangxj96/logicflow-flowable
-# or
-yarn add @yangxj96/logicflow-flowable
-```
-
-> 依赖前置：
->
-> * `logicflow` ^2.2.x
-> * `xml-formatter`
+![流程设计器示例](https://via.placeholder.com/800x450/e0e0e0/333333?text=LogicFlow+%2B+Flowable+BPMN+Designer+Preview)  
+*▲ 支持拖拽节点、属性配置、BPMN XML 导出*
 
 ---
 
 ## 🚀 快速开始
 
-### 1️⃣ 初始化使用
+### 1. 安装
+
+```bash
+npm install @yangxj96/logicflow-flowable
+```
+
+### 2. 使用
 
 ```ts
-import LogicFlow from "@logicflow/core";
-import "@logicflow/core/dist/index.css";
-import FlowablePlugin, * as Flowable from "@yangxj96/logicflow-flowable";
-import { Control, DndPanel, SelectionSelect } from "@logicflow/extension";
-import "@logicflow/extension/dist/index.css";
+import LogicFlow from '@logicflow/core';
+import '@logicflow/core/dist/style/index.css';
 
-const container = useTemplateRef<HTMLDivElement>("container");
-const panel = useTemplateRef<HTMLDivElement>("panel");
+// 引入扩展（如 Control）
+import { Control, DndPanel } from '@logicflow/extension';
+import '@logicflow/extension/dist/style/index.css';
 
+// 引入本插件
+import Flowable from '@yangxj96/logicflow-flowable';
+
+// 初始化画布
 const lf = new LogicFlow({
-  container: container.value!,
-  grid: true,
-  plugins: [Control, DndPanel, SelectionSelect, FlowablePlugin],
-})
+    container: document.getElementById('app'),
+    plugins: [Control, DndPanel, Flowable.Plugin], // 注册插件
+    grid: true,
+});
 
-// 注册DND面板,也就是左侧的空间面板
-(logicFlow.extension.dndPanel as DndPanel)?.setPatternItems(Flowable.getFlowableDndItems());
-// 导出xml的方式
-(logicFlow.extension.control as Control)?.addItem({
-    key: "export",
-    title: "",
-    text: "导出",
-    iconClass: "export",
-    onClick: lf => {
-        console.log(lf);
-        let xml = Flowable.toBpmnXml(lf);
+// 设置左侧工具栏（DnD 面板）
+(Control as any)?.dndPanel?.setPatternItems(Flowable.getFlowableDndItems());
+
+// 添加“导出 BPMN”按钮
+(Control as any)?.control?.addItem({
+    key: 'export-bpmn',
+    text: '导出 BPMN',
+    onClick: () => {
+        const xml = Flowable.toBpmnXml(lf);
         console.log(xml);
+        // 可下载或发送至后端 Flowable 引擎
     }
 });
 
-lf.render()
+lf.render({});
 
-// 注册属性面板,也就是右侧流程和组件属性
+// 注册属性面板
 Flowable.registerPropertyPanel({
     container: panel.value!,
     lf: lf
 });
 ```
 
-```html
-<template>
-    <el-row style="height: 100%">
-        <el-col :span="18" style="height: 100%">
-            <div ref="container" style="height: 100%; width: 100%" />
-        </el-col>
-        <el-col :span="6" style="height: 100%">
-            <div ref="panel" style="height: 100%; width: 100%" />
-        </el-col>
-    </el-row>
-</template>
+---
+
+## 🧰 支持的 BPMN 元素
+
+#### 事件类
+
+| BPMN 元素 | 状态 | LogicFlow 节点类型    |
+|---------|----|-------------------|
+| 开始事件    | ✅  | `bpmn:startEvent` |
+| 结束事件    | ✅  | `bpmn:endEvent`   |
+| 消息开始事件  | ⏳  | —                 |
+| 定时开始事件  | ⏳  | —                 |
+| 中间捕获事件  | ⏳  | —                 |
+
+#### 任务类
+
+| BPMN 元素 | 状态 | LogicFlow 节点类型  |
+|---------|----|-----------------|
+| 用户任务    | ✅  | `bpmn:userTask` |
+| 服务任务    | ⏳  | —               |
+| 脚本任务    | ⏳  | —               |
+| 接收任务    | ⏳  | —               |
+| 业务规则任务  | ⏳  | —               |
+
+#### 网关类
+
+| BPMN 元素 | 状态 | LogicFlow 节点类型          |
+|---------|----|-------------------------|
+| 排他网关    | ✅  | `bpmn:exclusiveGateway` |
+| 并行网关    | ⏳  | —                       |
+| 包容网关    | ⏳  | —                       |
+| 事件网关    | ⏳  | —                       |
+
+#### 子流程与调用
+
+| BPMN 元素 | 状态 | LogicFlow 节点类型 |
+|---------|----|----------------|
+| 嵌入式子流程  | ⏳  | —              |
+| 调用活动    | ⏳  | —              |
+
+#### 连线类
+
+| BPMN 元素 | 状态 | LogicFlow 节点类型      |
+|---------|----|---------------------|
+| 序列流（连线） | ✅  | `bpmn:sequenceFlow` |
+| 消息流     | ⏳  | —                   |
+
+> ✅ = 已支持 ⏳ = 计划中（欢迎 PR！）
+
+---
+
+## 📦 API
+
+本插件导出一个命名空间对象，推荐按如下方式使用：
+
+```ts
+import Flowable from '@yangxj96/logicflow-flowable';
+```
+
+| 属性/方法                                     | 类型                             | 说明                                                 |
+|-------------------------------------------|--------------------------------|----------------------------------------------------|
+| `Flowable.Plugin`                         | `object`                       | LogicFlow 插件本体，用于 `LogicFlow.use()` 或 `plugins` 配置 |
+| `Flowable.getFlowableDndItems()`          | `() => Array`                  | 获取左侧拖拽面板的 BPMN 节点配置列表                              |
+| `Flowable.toBpmnXml(lf)`                  | `(lf: LogicFlow) => string`    | 将当前流程图数据转换为标准 BPMN 2.0 XML 字符串                     |
+| `Flowable.registerPropertyPanel(options)` | `(opts: PanelOptions) => void` | 手动注册右侧属性面板（高级用法）                                   |
+
+> 所有方法均带有完整 TypeScript 类型定义和 JSDoc，IDE 自动提示支持良好。
+
+---
+
+## 🗂️ 项目结构
+
+```
+src/
+├── core/          # 插件主逻辑（节点注册、扩展）
+├── utils/         # 工具函数（XML 转换、DnD 生成）
+├── panel/         # 属性面板实现
+├── types/         # TypeScript 类型定义
+└── index.ts       # 统一导出入口
 ```
 
 ---
 
-### 2️⃣ 生成示例
+## 🧪 本地开发
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-                  xmlns:flowable="http://flowable.org/bpmn"
-                  targetNamespace="http://www.flowable.org/processdef">
-  <bpmn:process id="Process_1" isExecutable="true">
-    ...
-  </bpmn:process>
-</bpmn:definitions>
+```bash
+# 安装依赖
+npm install
+
+# 启动构建监听（输出到 dist/）
+npm run dev
+
+# 运行示例（直接打开 examples/basic.html）
+# 修改代码后刷新页面即可看到效果
 ```
-
----
-
-## ⚙️ 核心 API
-
-### `toBpmnXml(lf: LogicFlow)`
-
-将 LogicFlow 的 GraphData 转换为 BPMN XML。
-
----
-
-## 🧠 设计说明
-
-* **节点 → XML**：每个节点拥有独立的 `nodeToXml` 实现
-* **边 → XML**：统一由 `edgeToXml` 处理
-* **命名空间集中管理**：避免 XML 冲突
-* **格式化输出**：基于 `xml-formatter`
-
----
-
-## 🧪 适用场景
-
-* BPM / 工作流系统
-* Flowable 在线设计器
-* 低代码流程引擎
-* 自定义审批流
-
----
-
-## 📌 注意事项
-
-* 本项目关注 **建模与 XML 转换**，不包含 Flowable 后端部署逻辑
-* 不同引擎（Flowable / Camunda）扩展属性可能需要调整命名空间
 
 ---
 
 ## 🤝 贡献
 
-欢迎 PR / Issue：
+欢迎提交 Issue 或 Pull Request！  
+在贡献前，请确保：
 
-1. Fork 本仓库
-2. 新建分支：`feat/xxx`
-3. 提交代码
-4. 发起 Pull Request
+- 新增节点遵循现有模式
+- 提交前运行 `npm run build`
+- 更新 README 中的支持列表（如适用）
 
 ---
 
 ## 📄 License
 
-Apache License 2.0
+本项目采用 [Apache License 2.0](LICENSE) 开源协议。  
+Copyright © 2025 yangxj96. All rights reserved.
 
----
-
-如果你正在构建 **LogicFlow + Flowable** 的流程设计器，这个项目可以直接作为基础能力层使用 👍
+> 本插件仅提供前端建模与 XML 生成能力，不包含 Flowable 引擎本身。
