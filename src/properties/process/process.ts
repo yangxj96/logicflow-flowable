@@ -9,7 +9,7 @@ export const ProcessProperties: BaseProperty[] = [
         group: "流程定义",
         xml: {
             attr: "id"
-        },
+        }
     },
     {
         key: "name",

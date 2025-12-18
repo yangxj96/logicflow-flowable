@@ -19,8 +19,8 @@ export class UserTaskModel extends RectNodeModel {
         this.isAllowOutgoing = true;
 
         let bpmnId = BpmnIdGenerator.generate();
-        this.id = bpmnId
-        this.text.value = "用户任务"
+        this.id = bpmnId;
+        this.text.value = "用户任务";
 
         // 初始化 properties（非常关键）
         this.properties = {};

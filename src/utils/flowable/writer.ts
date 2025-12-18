@@ -12,8 +12,8 @@ const DEFINITIONS_ATTR = {
     [`xmlns:${BPMN_PREFIX}`]: BPMN_NS,
     "xmlns:flowable": FLOWABLE_NAMESPACE,
     "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-    "targetNamespace": "http://www.omg.org/spec/BPMN/20100524/MODEL",
-    "id": BpmnIdGenerator.generate("DEFINITIONS")
+    targetNamespace: "http://www.omg.org/spec/BPMN/20100524/MODEL",
+    id: BpmnIdGenerator.generate("DEFINITIONS")
 };
 
 export function toBpmnXml(lf: LogicFlow) {

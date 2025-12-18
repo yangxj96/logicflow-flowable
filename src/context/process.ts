@@ -1,5 +1,5 @@
-// context/process.ts
 import type LogicFlow from "@logicflow/core";
+import { BpmnIdGenerator } from "../utils/id-generator";
 
 export const PROCESS_CONTEXT = Symbol("logicflow-flowable:process");
 
@@ -13,7 +13,7 @@ export function initProcessContext(lf: LogicFlow) {
     if ((lf as any)[PROCESS_CONTEXT]) return;
 
     (lf as any)[PROCESS_CONTEXT] = {
-        id: "process_1",
+        id: BpmnIdGenerator.generate("PROCESS"),
         name: "新建流程",
         isExecutable: true
     } satisfies ProcessModel;

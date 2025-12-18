@@ -2,7 +2,6 @@ import { attrsToString, buildXmlParts } from "../utils";
 import { UserTaskProperties } from "../../../properties/tasks/user-task";
 
 export function userTaskToXml(node: any): string {
-
     const { attrs, elements } = buildXmlParts(node, UserTaskProperties);
 
     const attrStr = attrsToString({

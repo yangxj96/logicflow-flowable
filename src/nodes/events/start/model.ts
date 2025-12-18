@@ -17,7 +17,7 @@ export class StartEventModel extends CircleNodeModel {
         this.isAllowOutgoing = true;
 
         let bpmnId = BpmnIdGenerator.generate();
-        this.id = bpmnId
+        this.id = bpmnId;
 
         // 初始化 properties（非常关键）
         this.properties = {};

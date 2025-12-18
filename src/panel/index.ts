@@ -7,7 +7,6 @@ import { getProcessContext } from "../context/process";
 import type { FormInstance } from "element-plus";
 import { buildElFormRules } from "../validation/ui/element-plus";
 
-
 /** 面板参数 */
 export interface PanelOptions {
     container: HTMLElement;
@@ -29,15 +28,11 @@ export function registerPropertyPanel({ container, lf }: PanelOptions) {
             const formRef = ref<FormInstance>();
             const elFormRules = computed(() => {
                 if (!currentNode.value) return {};
-                return buildElFormRules(
-                    properties.value,
-                    {
-                        nodeType: currentNode.value.type,
-                        allValues: currentNode.value.properties
-                    }
-                );
+                return buildElFormRules(properties.value, {
+                    nodeType: currentNode.value.type,
+                    allValues: currentNode.value.properties
+                });
             });
-
 
             // LogicFlow 事件
             lf.on("node:click", async ({ data }) => {
@@ -105,10 +100,7 @@ export function registerPropertyPanel({ container, lf }: PanelOptions) {
             const commitNodeUpdate = () => {
                 if (!currentNode.value) return;
 
-                lf.setProperties(
-                    currentNode.value.id,
-                    currentNode.value.properties as LogicFlow.PropertiesType
-                );
+                lf.setProperties(currentNode.value.id, currentNode.value.properties as LogicFlow.PropertiesType);
 
                 // 同步节点文本
                 const name = currentNode.value.properties?.name;
@@ -127,17 +119,14 @@ export function registerPropertyPanel({ container, lf }: PanelOptions) {
                     commitNodeUpdate();
                 };
 
-                return h(
-                    ElFormItem,
-                    { label: property.label, key: property.key, prop: property.key },
-                    () =>
-                        h(ElInput, {
-                            modelValue: value,
-                            "onUpdate:modelValue": update,
-                            placeholder: `请输入${property.label}`,
-                            readonly: property.key === "id",
-                            disabled: property.key === "id"
-                        })
+                return h(ElFormItem, { label: property.label, key: property.key, prop: property.key }, () =>
+                    h(ElInput, {
+                        modelValue: value,
+                        "onUpdate:modelValue": update,
+                        placeholder: `请输入${property.label}`,
+                        readonly: property.key === "id",
+                        disabled: property.key === "id"
+                    })
                 );
             };
 
@@ -147,15 +136,14 @@ export function registerPropertyPanel({ container, lf }: PanelOptions) {
                     return h("div", "请选择一个节点");
                 }
 
-                const collapseItems = Object.entries(groupedProperties.value).map(
-                    ([groupName, props]) =>
-                        h(
-                            ElCollapseItem,
-                            { title: groupName, name: groupName, key: groupName },
-                            {
-                                default: () => props.map(renderFormItem)
-                            }
-                        )
+                const collapseItems = Object.entries(groupedProperties.value).map(([groupName, props]) =>
+                    h(
+                        ElCollapseItem,
+                        { title: groupName, name: groupName, key: groupName },
+                        {
+                            default: () => props.map(renderFormItem)
+                        }
+                    )
                 );
                 return h(
                     "div",
@@ -209,48 +197,37 @@ export function registerPropertyPanel({ container, lf }: PanelOptions) {
                                 style: { paddingTop: "10px" }
                             },
                             () => [
-                                h(
-                                    ElFormItem,
-                                    { label: "流程 ID" },
-                                    () =>
-                                        h(ElInput, {
-                                            modelValue: model.id,
-                                            "onUpdate:modelValue": (v: string) => (model.id = v),
-                                            disabled: true,
-                                            readonly: true
-                                        })
+                                h(ElFormItem, { label: "流程 ID" }, () =>
+                                    h(ElInput, {
+                                        modelValue: model.id,
+                                        "onUpdate:modelValue": (v: string) => (model.id = v),
+                                        disabled: true,
+                                        readonly: true
+                                    })
                                 ),
 
-                                h(
-                                    ElFormItem,
-                                    { label: "流程名称" },
-                                    () =>
-                                        h(ElInput, {
-                                            modelValue: model.name,
-                                            "onUpdate:modelValue": (v: string) => (model.name = v)
-                                        })
+                                h(ElFormItem, { label: "流程名称" }, () =>
+                                    h(ElInput, {
+                                        modelValue: model.name,
+                                        "onUpdate:modelValue": (v: string) => (model.name = v)
+                                    })
                                 ),
 
-                                h(
-                                    ElFormItem,
-                                    { label: "是否可执行" },
-                                    () =>
-                                        h(ElInput, {
-                                            modelValue: String(model.isExecutable),
-                                            "onUpdate:modelValue": (v: string) =>
-                                                (model.isExecutable = v === "true")
-                                        })
+                                h(ElFormItem, { label: "是否可执行" }, () =>
+                                    h(ElInput, {
+                                        modelValue: String(model.isExecutable),
+                                        "onUpdate:modelValue": (v: string) => (model.isExecutable = v === "true")
+                                    })
                                 )
                             ]
                         )
-                    ]);
+                    ]
+                );
             };
 
             // 渲染
             return () => {
-                return selectedType.value === "node"
-                    ? renderNodePanel()
-                    : renderProcessPanel();
+                return selectedType.value === "node" ? renderNodePanel() : renderProcessPanel();
             };
         }
     });

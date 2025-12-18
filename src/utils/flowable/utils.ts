@@ -29,7 +29,10 @@ export function buildXmlAttrs(node: any, properties: BaseProperty[]): Record<str
     return attrs;
 }
 
-export function buildXmlParts(node: any, properties: BaseProperty[]): { attrs: Record<string, string>; elements: string[]; } {
+export function buildXmlParts(
+    node: any,
+    properties: BaseProperty[]
+): { attrs: Record<string, string>; elements: string[] } {
     const attrs: Record<string, string> = {};
     const elements: string[] = [];
     const values = node.properties || {};
@@ -45,37 +48,28 @@ export function buildXmlParts(node: any, properties: BaseProperty[]): { attrs: R
 
         /** attribute */
         if (xml.attr) {
-            const attrName = xml.namespace
-                ? `${xml.namespace}:${xml.attr}`
-                : xml.attr;
+            const attrName = xml.namespace ? `${xml.namespace}:${xml.attr}` : xml.attr;
 
             attrs[attrName] = String(value);
         }
 
         /** element（boolean 表示存在即可） */
         if (xml.element && value === true) {
-            const elementName = xml.namespace
-                ? `${xml.namespace}:${xml.element}`
-                : xml.element;
+            const elementName = xml.namespace ? `${xml.namespace}:${xml.element}` : xml.element;
 
             elements.push(`<${elementName} />`);
         }
 
         /** element + value（字符串子节点，预留） */
         if (xml.element && typeof value === "string" && value !== "") {
-            const elementName = xml.namespace
-                ? `${xml.namespace}:${xml.element}`
-                : xml.element;
+            const elementName = xml.namespace ? `${xml.namespace}:${xml.element}` : xml.element;
 
-            elements.push(
-                `<${elementName}>${escapeXml(value)}</${elementName}>`
-            );
+            elements.push(`<${elementName}>${escapeXml(value)}</${elementName}>`);
         }
     }
 
     return { attrs, elements };
 }
-
 
 export function attrsToString(attrs: Record<string, any> = {}): string {
     return Object.entries(attrs)
@@ -88,4 +82,3 @@ export function attrsToString(attrs: Record<string, any> = {}): string {
         })
         .join("");
 }
-

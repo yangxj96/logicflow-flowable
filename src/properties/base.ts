@@ -25,7 +25,7 @@ export interface BaseProperty {
     validate?: {
         required?: boolean;
         ruleKey?: string;
-    }
+    };
 }
 
 export const CommonNodeProperties: BaseProperty[] = [

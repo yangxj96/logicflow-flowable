@@ -2,7 +2,6 @@ import { attrsToString, buildXmlParts } from "../utils";
 import { EndEventProperties } from "../../../properties/events/end";
 
 export function endEventToXml(node: any): string {
-
     const { attrs, elements } = buildXmlParts(node, EndEventProperties);
 
     const attrStr = attrsToString({
