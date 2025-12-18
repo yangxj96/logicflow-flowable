@@ -15,5 +15,12 @@ export default defineConfig({
     esbuildOptions(options) {
         // 仅保留法律声明（如 MIT 许可证），用 /*! ... */ 包裹
         options.legalComments = "inline";
-    }
+    },
+    external: [
+        "vue",
+        "element-plus",
+        "@logicflow/core",
+        "@logicflow/extension"
+    ],
+
 });

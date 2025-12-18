@@ -2,8 +2,19 @@
     "name": "@yangxj96/logicflow-flowable",
     "version": "0.1.0",
     "description": "适用于 LogicFlow 的 BPMN 2.0 流程设计插件，与 Flowable 引擎兼容",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/yangxj96/logicflow-flowable.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yangxj96/logicflow-flowable/issues"
+    },
+    "homepage": "https://github.com/yangxj96/logicflow-flowable#readme",
     "keywords": ["bpmn", "flowable", "logicflow", "workflow", "lowcode", "process-designer"],
-    "author": "yangxj96",
+    "author": {
+      "name": "yangxj96",
+      "url": "https://github.com/yangxj96"
+    },
     "license": "Apache-2.0",
     "type": "module",
     "main": "dist/index.cjs",
