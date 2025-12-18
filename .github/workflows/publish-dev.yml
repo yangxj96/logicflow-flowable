@@ -3,16 +3,16 @@ name: Publish Dev Snapshot
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   publish-dev:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -23,10 +23,6 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           scope: '@yangxj96'
-
-      - name: Remove npm auth token (force OIDC)
-        run: |
-          npm config delete //registry.npmjs.org/:_authToken || true
 
       - name: Install dependencies
         run: npm ci
