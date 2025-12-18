@@ -1,5 +1,5 @@
-import { attrsToString, buildXmlParts } from "../utils";
-import { StartEventProperties } from "../../../properties/events/start";
+import { attrsToString, buildXmlParts } from "../../utils";
+import { StartEventProperties } from "../../../../properties/events/start";
 
 /**
  * 开始事件节点转BPMN格式的XML字符串

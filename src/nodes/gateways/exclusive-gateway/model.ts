@@ -5,26 +5,7 @@ import { BpmnIdGenerator } from "../../../utils/id-generator";
 
 export class ExclusiveGatewayModel extends DiamondNodeModel {
 
-    static readonly type = "ExclusiveGateway";
-
-    getNodeStyle(): {
-        [p: string]: unknown;
-        fill?: string;
-        stroke?: string;
-        strokeWidth?: number;
-        radius?: number;
-        rx?: number;
-        ry?: number;
-        width?: number;
-        height?: number;
-        path?: string
-    } {
-        const style = super.getNodeStyle();
-        style.stroke = "#222";
-        style.strokeWidth = 2;
-        style.fill = "#fff";
-        return style;
-    }
+    static readonly type = "bpmn:exclusiveGateway";
 
     override initNodeData(data: any) {
         super.initNodeData(data);
@@ -34,7 +15,7 @@ export class ExclusiveGatewayModel extends DiamondNodeModel {
         this.text.value = "排他网关";
 
         ExclusiveGatewayProperties.forEach(prop => {
-            this.properties[prop.key] = "";
+            this.properties[prop.key] ??= "";
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;
             }
@@ -42,6 +23,14 @@ export class ExclusiveGatewayModel extends DiamondNodeModel {
                 this.properties[prop.key] = "排他网关";
             }
         });
+    }
+
+    override getNodeStyle() {
+        const style = super.getNodeStyle();
+        style.stroke = "#222";
+        style.strokeWidth = 2;
+        style.fill = "#fff";
+        return style;
     }
 
     override getTextStyle() {

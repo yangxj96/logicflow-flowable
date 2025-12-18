@@ -5,6 +5,7 @@ import { registerTaskNodes } from "../nodes/tasks";
 // 注册线
 import { registerSequenceEdges } from "../edges/sequence";
 import { initProcessContext } from "../context/process";
+import { registerGatewayNodes } from "../nodes/gateways";
 
 /**
  * 注册相关的所有组件
@@ -17,4 +18,5 @@ export function registerAll(lf: LogicFlow) {
     registerEventNodes(lf);
     registerTaskNodes(lf);
     registerSequenceEdges(lf);
+    registerGatewayNodes(lf);
 }

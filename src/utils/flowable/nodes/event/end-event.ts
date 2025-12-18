@@ -1,5 +1,5 @@
-import { attrsToString, buildXmlParts } from "../utils";
-import { EndEventProperties } from "../../../properties/events/end";
+import { attrsToString, buildXmlParts } from "../../utils";
+import { EndEventProperties } from "../../../../properties/events/end";
 
 /**
  * 结束事件节点转BPMN格式的XML字符串

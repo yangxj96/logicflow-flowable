@@ -35,7 +35,6 @@ export function buildElFormRules(properties: BaseProperty[], context: any): Form
                 }
             }
         ];
-        console.log(rules);
     });
 
     return rules;

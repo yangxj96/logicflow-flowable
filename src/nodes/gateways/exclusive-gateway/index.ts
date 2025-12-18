@@ -1,12 +1,12 @@
 import { ExclusiveGatewayModel } from "./model";
 import { ExclusiveGatewayView } from "./view";
+import LogicFlow from "@logicflow/core";
 
 
-export const ExclusiveGateway = {
-    type: "exclusiveGateway",
-    view: ExclusiveGatewayView,
-    model: ExclusiveGatewayModel,
-};
-
-
-export default ExclusiveGateway;
+export function registerExclusiveGateway(lf: LogicFlow) {
+    lf.register({
+        type: ExclusiveGatewayModel.type,
+        view: ExclusiveGatewayView,
+        model: ExclusiveGatewayModel
+    });
+}
