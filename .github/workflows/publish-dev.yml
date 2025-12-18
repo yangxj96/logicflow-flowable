@@ -30,6 +30,12 @@ jobs:
       - name: Build package
         run: npm run build
 
+      - name: Force OIDC (remove token)
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken || true
+          rm -f ~/.npmrc
+          rm -f .npmrc
+
       - name: Generate dev version and publish
         run: |
           BASE_VERSION=$(node -p "require('./package.json').version")
@@ -41,6 +47,4 @@ jobs:
 
           npm pkg set version="$DEV_VERSION" --no-git-tag-version
 
-          # ✅ OIDC 发布的关键
           npm publish --tag dev --access public --provenance
-
