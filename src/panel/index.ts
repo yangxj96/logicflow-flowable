@@ -2,17 +2,16 @@ import type LogicFlow from "@logicflow/core";
 import { computed, createApp, defineComponent, h, ref } from "vue";
 import { ElCollapse, ElCollapseItem, ElDivider, ElForm, ElFormItem, ElInput } from "element-plus";
 import { NodeTypeToProperties } from "../properties";
-import { BaseProperty } from "../properties/base";
 import { getProcessContext } from "../context/process";
 import type { FormInstance } from "element-plus";
 import { buildElFormRules } from "../validation/ui/element-plus";
+import { PanelOptions, BaseProperty } from "../types";
 
-/** 面板参数 */
-export interface PanelOptions {
-    container: HTMLElement;
-    lf: LogicFlow;
-}
-
+/**
+ * 注册一个属性面板
+ * @param container html容器
+ * @param lf {@link LogicFlow对象}
+ */
 export function registerPropertyPanel({ container, lf }: PanelOptions) {
     const Panel = defineComponent({
         name: "LogicFlowPropertyPanel",
@@ -72,7 +71,7 @@ export function registerPropertyPanel({ container, lf }: PanelOptions) {
                 if (!currentNode.value) return;
 
                 const props = (currentNode.value.properties ||= {});
-                properties.value.forEach(p => {
+                properties.value.forEach((p: BaseProperty) => {
                     if (props[p.key] === undefined) {
                         props[p.key] = p.defaultValue ?? "";
                     }

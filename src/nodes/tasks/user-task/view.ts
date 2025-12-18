@@ -1,3 +1,7 @@
 import { RectNode } from "@logicflow/core";
 
-export class UserTaskView extends RectNode {}
+/**
+ * 用户任务视图
+ */
+export class UserTaskView extends RectNode {
+}

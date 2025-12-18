@@ -1,8 +1,12 @@
-// element-plus 校验
 import type { FormRules } from "element-plus";
 import { validateProperty } from "../registry";
-import { BaseProperty } from "../../properties/base";
+import { BaseProperty } from "../../types/common";
 
+/**
+ * 构建ElementPlus的表单校验对象
+ * @param properties 节点属性
+ * @param context 上下文
+ */
 export function buildElFormRules(properties: BaseProperty[], context: any): FormRules {
     const rules: FormRules = {};
     properties.forEach((prop: BaseProperty) => {

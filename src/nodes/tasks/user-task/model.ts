@@ -3,6 +3,9 @@ import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { UserTaskProperties } from "../../../properties/tasks/user-task";
 import { BPMN_PREFIX } from "../../../core/constants";
 
+/**
+ * 用户任务模型
+ */
 export class UserTaskModel extends RectNodeModel {
     static readonly type = `${BPMN_PREFIX}:userTask`;
 

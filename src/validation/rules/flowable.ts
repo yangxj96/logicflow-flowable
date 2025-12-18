@@ -1,6 +1,10 @@
-// Flowable 规则集中定义（可维护性极高）
+/**
+ * Flowable 表单校验规则
+ */
 export const flowableRules = {
-    // 受让人校验规则
+    /**
+     * 受让人校验规则
+     */
     flowableAssignee: {
         name: "flowableAssignee",
         validate(value: any) {
@@ -12,7 +16,9 @@ export const flowableRules = {
         }
     },
 
-    // 候选人校验规则
+    /**
+     * 候选人校验规则
+     */
     flowableCandidate: {
         name: "flowableCandidate",
         validate(value: any) {

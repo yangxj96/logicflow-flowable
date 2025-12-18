@@ -1,9 +1,11 @@
 import { CircleNodeModel } from "@logicflow/core";
 import { BPMN_PREFIX } from "../../../core/constants";
-import { UserTaskProperties } from "../../../properties/tasks/user-task";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { EndEventProperties } from "../../../properties/events/end";
 
+/**
+ * 结束事件节点模型
+ */
 export class EndEventModel extends CircleNodeModel {
     static readonly type = `${BPMN_PREFIX}:endEvent`;
 

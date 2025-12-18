@@ -1,5 +1,9 @@
-import { BaseProperty, CommonNodeProperties } from "../base";
+import { CommonNodeProperties } from "../base";
+import { BaseProperty } from "../../types";
 
+/**
+ * 结束事件节点属性
+ */
 export const EndEventProperties: BaseProperty[] = [
     ...CommonNodeProperties,
     {

@@ -1,5 +1,9 @@
 import { escapeXml } from "../utils";
 
+/**
+ * SequenceFlow节点转BPMN格式的XML字符串
+ * @param edge 节点
+ */
 export function sequenceFlowToXml(edge: any): string {
     const { id, sourceNodeId, targetNodeId, properties = {} } = edge;
     const { conditionExpression } = properties;

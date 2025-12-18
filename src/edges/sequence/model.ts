@@ -1,6 +1,9 @@
 import { PolylineEdgeModel } from "@logicflow/core";
 import { BPMN_PREFIX } from "../../core/constants";
 
+/**
+ * SequenceFlow模型,自定义连线
+ */
 export class SequenceFlowModel extends PolylineEdgeModel {
     static readonly type = `${BPMN_PREFIX}:sequenceFlow`;
 

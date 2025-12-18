@@ -1,38 +1,19 @@
-import { BaseProperty } from "../../properties/base";
+import { BaseProperty } from "../../types";
 
-export function attrs(obj: Record<string, any>) {
-    return Object.entries(obj)
-        .filter(([, v]) => v !== undefined && v !== "")
-        .map(([k, v]) => ` ${k}="${v}"`)
-        .join("");
-}
-
+/**
+ * 对xml特殊字符串替换转义
+ * @param str xml字符串
+ */
 export function escapeXml(str: string) {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-export function buildXmlAttrs(node: any, properties: BaseProperty[]): Record<string, any> {
-    const attrs: Record<string, any> = {};
-
-    const values = node.properties || {};
-
-    properties.forEach(prop => {
-        const xmlAttr = prop.xml?.attr;
-        if (!xmlAttr) return;
-
-        const value = values[prop.key];
-        if (value !== undefined && value !== "") {
-            attrs[xmlAttr] = value;
-        }
-    });
-
-    return attrs;
-}
-
-export function buildXmlParts(
-    node: any,
-    properties: BaseProperty[]
-): { attrs: Record<string, string>; elements: string[] } {
+/**
+ * 构建XML节点
+ * @param node 节点
+ * @param properties 节点的属性
+ */
+export function buildXmlParts(node: any, properties: BaseProperty[]): { attrs: Record<string, string>; elements: string[] } {
     const attrs: Record<string, string> = {};
     const elements: string[] = [];
     const values = node.properties || {};
@@ -71,6 +52,10 @@ export function buildXmlParts(
     return { attrs, elements };
 }
 
+/**
+ * attr转字符串
+ * @param attrs attrs
+ */
 export function attrsToString(attrs: Record<string, any> = {}): string {
     return Object.entries(attrs)
         .filter(([, value]) => value !== undefined && value !== null && value !== "")

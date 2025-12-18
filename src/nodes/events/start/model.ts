@@ -3,6 +3,9 @@ import { BPMN_PREFIX } from "../../../core/constants";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { StartEventProperties } from "../../../properties/events/start";
 
+/**
+ * 开始事件节点模型
+ */
 export class StartEventModel extends CircleNodeModel {
     static readonly type = `${BPMN_PREFIX}:startEvent`;
 

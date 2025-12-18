@@ -1,14 +1,13 @@
 import type LogicFlow from "@logicflow/core";
 import { BpmnIdGenerator } from "../utils/id-generator";
+import { ProcessModel } from "../types";
 
 export const PROCESS_CONTEXT = Symbol("logicflow-flowable:process");
 
-export interface ProcessModel {
-    id: string;
-    name: string;
-    isExecutable: boolean;
-}
-
+/**
+ * 初始化流程上下文
+ * @param lf {@link LogicFlow} 实例对象
+ */
 export function initProcessContext(lf: LogicFlow) {
     if ((lf as any)[PROCESS_CONTEXT]) return;
 
@@ -19,6 +18,10 @@ export function initProcessContext(lf: LogicFlow) {
     } satisfies ProcessModel;
 }
 
+/**
+ * 获取流程上下文
+ * @param lf {@link LogicFlow} 实例对象
+ */
 export function getProcessContext(lf: LogicFlow): ProcessModel {
     const ctx = (lf as any)[PROCESS_CONTEXT];
     if (!ctx) {

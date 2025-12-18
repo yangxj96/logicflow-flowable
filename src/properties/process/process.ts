@@ -1,5 +1,8 @@
-import { BaseProperty } from "../base";
+import { BaseProperty } from "../../types";
 
+/**
+ * 流程节点属性
+ */
 export const ProcessProperties: BaseProperty[] = [
     {
         key: "id",

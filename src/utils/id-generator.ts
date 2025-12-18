@@ -1,3 +1,6 @@
+/**
+ * BPMN ID生成器
+ */
 export class BpmnIdGenerator {
     /**
      * 生成符合 BPMN 规范的 UUID 风格 ID
