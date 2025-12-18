@@ -1,44 +1,25 @@
-name: Publish Dev Snapshot
+name: Publish Package
 
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
 
 permissions:
-  id-token: write
+  id-token: write  # Required for OIDC
   contents: read
 
 jobs:
-  publish-dev:
+  publish:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-          scope: '@yangxj96'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build package
-        run: npm run build
-
-      - name: Generate dev version and publish
-        run: |
-          BASE_VERSION=$(node -p "require('./package.json').version")
-          COMMIT=$(git rev-parse --short HEAD)
-          DATE=$(date +%Y%m%d)
-          DEV_VERSION="${BASE_VERSION}-dev.${DATE}.${COMMIT}"
-
-          echo "Publishing dev version: $DEV_VERSION"
-
-          npm pkg set version="$DEV_VERSION" --no-git-tag-version
-
-          npm publish --tag dev --access public --provenance
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+      - run: npm publish
