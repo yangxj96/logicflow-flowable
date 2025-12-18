@@ -30,7 +30,7 @@ jobs:
 
       - name: Generate dev version and publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           # 获取基础版本
           BASE_VERSION=$(node -p "require('./package.json').version")
