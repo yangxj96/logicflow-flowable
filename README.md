@@ -7,7 +7,6 @@
 [![License](https://img.shields.io/github/license/yangxj96/logicflow-flowable)](LICENSE)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@yangxj96/logicflow-flowable)](https://bundlephobia.com/package/@yangxj96/logicflow-flowable)
 
-![流程设计器示例](https://via.placeholder.com/800x450/e0e0e0/333333?text=LogicFlow+%2B+Flowable+BPMN+Designer+Preview)  
 *▲ 支持拖拽节点、属性配置、BPMN XML 导出*
 
 ---
