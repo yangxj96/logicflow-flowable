@@ -11,11 +11,14 @@
 
 ---
 
-暂时还达不到使用标准
+## 项目状态说明
 
-如果你也是又这样的痛点,想要这样的一个插件
+当前版本仍在持续完善中，尚未达到生产可用的标准。
 
-麻烦在 [Github](https://github.com/yangxj96/logicflow-flowable) 给我点个赞,开源不易
+如果你在使用 LogicFlow / Flowable 时也遇到类似需求，  
+欢迎在 [GitHub](https://github.com/yangxj96/logicflow-flowable) 为项目点个 ⭐，  
+你的支持将是项目持续迭代的重要动力。
+
 
 ---
 
