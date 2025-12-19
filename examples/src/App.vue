@@ -13,6 +13,7 @@ onMounted(() => {
     const lf = new LogicFlow({
         container: container.value!,
         grid: true,
+        history: true,
         plugins: [Control, DndPanel, SelectionSelect, Flowable.Plugin],
         pluginsOptions: {
             selectionSelect: {
