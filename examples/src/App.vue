@@ -41,6 +41,14 @@ onMounted(() => {
         container: panel.value!,
         lf: lf
     });
+
+    lf.on("property:selectChange", ({ node, property, payload }) => {
+        console.log("select 变化了");
+        console.log("节点:", node , node.id);
+        console.log("字段:", property , property.key);
+        console.log("新值:", payload , payload.value);
+    });
+
 });
 </script>
 

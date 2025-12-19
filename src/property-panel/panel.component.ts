@@ -1,5 +1,5 @@
 import type LogicFlow from "@logicflow/core";
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import { usePanelState } from "./panel.state";
 import { bindPanelEvents } from "./panel.events";
 import { renderNodePanel } from "./render/render-node";
@@ -29,9 +29,12 @@ export function createPropertyPanel(lf: LogicFlow) {
     return defineComponent({
         name: "LogicFlowPropertyPanel",
         setup() {
+            const instance = getCurrentInstance();
+            const app = instance!.appContext.app;
+
             const state = usePanelState(lf);
 
-            bindPanelEvents(lf, state);
+            bindPanelEvents(lf, state, app);
 
             return () =>
                 state.selectedType.value === "node"

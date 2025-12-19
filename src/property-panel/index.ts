@@ -24,5 +24,7 @@ import type { PanelOptions } from "../types";
  * @param lf {@link LogicFlow}实例
  */
 export function registerPropertyPanel({ container, lf }: PanelOptions) {
-    createApp(createPropertyPanel(lf)).mount(container);
+    const panel = createPropertyPanel(lf);
+    const app = createApp(panel);
+    app.mount(container);
 }

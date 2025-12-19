@@ -1,5 +1,6 @@
 import { NodeTypeToProperties } from "../properties";
 import { groupProperties, initNodeProperties, validateCurrentNode } from "./panel.actions";
+import { App } from "vue";
 
 /**
  * LogicFlow 事件层
@@ -20,22 +21,27 @@ import { groupProperties, initNodeProperties, validateCurrentNode } from "./pane
  *
  * @param lf {@link LogicFlow}实例
  * @param state 状态
+ * @param app vue实例
  */
-export function bindPanelEvents(lf: any, state: any) {
+export function bindPanelEvents(lf: any, state: any, app: App) {
     lf.on("node:click", async ({ data }: any) => {
-        const ok = await validateCurrentNode(state);
-        if (!ok) return;
+        await app.runWithContext(async () => {
+            const ok = await validateCurrentNode(state);
+            if (!ok) return;
 
-        state.selectedType.value = "node";
-        state.currentNode.value = data;
-        state.properties.value = NodeTypeToProperties[data.type] || [];
+            state.selectedType.value = "node";
+            state.currentNode.value = data;
+            state.properties.value = NodeTypeToProperties[data.type] || [];
 
-        initNodeProperties(state);
-        groupProperties(state);
+            initNodeProperties(state);
+            groupProperties(state);
+        });
     });
 
     lf.on("blank:click", () => {
-        state.selectedType.value = "process";
-        state.currentNode.value = null;
+        app.runWithContext(() => {
+            state.selectedType.value = "process";
+            state.currentNode.value = null;
+        });
     });
 }

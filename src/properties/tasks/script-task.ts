@@ -9,8 +9,14 @@ export const ScriptTaskProperties: BaseProperty[] = [
     {
         key: "scriptFormat",
         label: "脚本语言",
-        type: "string",
+        type: "select",
         group: "扩展信息",
+        ui: {
+            options: [
+                { label: "JavaScript", value: "javascript" },
+                { label: "Groovy", value: "groovy" }
+            ]
+        },
         xml: {
             attr: "scriptFormat"
         }
