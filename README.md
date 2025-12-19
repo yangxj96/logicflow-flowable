@@ -89,13 +89,12 @@ Flowable.registerPropertyPanel({
 
 #### 任务类
 
-| BPMN 元素 | 状态 | LogicFlow 节点类型  |
-|---------|----|-----------------|
-| 用户任务    | ✅  | `bpmn:userTask` |
-| 服务任务    | ⏳  | —               |
-| 脚本任务    | ⏳  | —               |
-| 接收任务    | ⏳  | —               |
-| 业务规则任务  | ⏳  | —               |
+| BPMN 元素 | 状态 | LogicFlow 节点类型     |
+|---------|----|--------------------|
+| 用户任务    | ✅  | `bpmn:userTask`    |
+| 服务任务    | ✅  | `bpmn:serviceTask` |
+| 脚本任务    | ✅  | `bpmn:scriptTask`  |
+| 接收任务    | ✅  | `bpmn:receiveTask` |
 
 #### 网关类
 
