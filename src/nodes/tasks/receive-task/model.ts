@@ -1,22 +1,24 @@
-import LogicFlow, { CircleNodeModel } from "@logicflow/core";
-import { BPMN_PREFIX } from "../../../core/constants";
+import LogicFlow, { RectNodeModel } from "@logicflow/core";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
-import { StartEventProperties } from "../../../properties/events/start";
+import { UserTaskProperties } from "../../../properties/tasks/user-task";
+import { BPMN_PREFIX } from "../../../core/constants";
 
 /**
- * 开始事件节点模型
+ * 接收任务模型
  */
-export class StartEventModel extends CircleNodeModel {
-    static readonly type = `${BPMN_PREFIX}:startEvent`;
+export class ReceiveTaskModel extends RectNodeModel {
+    static readonly type = `${BPMN_PREFIX}:receiveTask`;
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
 
-        // StartEvent 固定大小
-        this.r = 18;
+        // BPMN Task 标准尺寸
+        this.width = 110;
+        this.height = 50;
+        this.radius = 8;
 
-        // 语义约束
-        this.isAllowIncoming = false;
+        // 允许连入 / 连出
+        this.isAllowIncoming = true;
         this.isAllowOutgoing = true;
     }
 
@@ -25,26 +27,25 @@ export class StartEventModel extends CircleNodeModel {
 
         let bpmnId = BpmnIdGenerator.generate();
         this.id = bpmnId;
-        this.text.value = "开始";
+        this.text.value = "接收任务";
 
         // 初始化 properties（非常关键）
         this.properties = {};
-        StartEventProperties.forEach(prop => {
+        UserTaskProperties.forEach(prop => {
             this.properties[prop.key] = "";
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;
             }
             if (prop.key === "name") {
-                this.properties[prop.key] = "开始";
+                this.properties[prop.key] = "接收任务";
             }
         });
 
         // 默认文本
         if (!this.text?.value) {
-            this.text.value = "开始";
+            this.text.value = "接收任务";
             this.text.x = this.x;
             this.text.y = this.y + 4;
         }
     }
-
 }

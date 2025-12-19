@@ -1,4 +1,4 @@
-import { CircleNodeModel } from "@logicflow/core";
+import LogicFlow, { CircleNodeModel } from "@logicflow/core";
 import { BPMN_PREFIX } from "../../../core/constants";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { EndEventProperties } from "../../../properties/events/end";
@@ -18,9 +18,15 @@ export class EndEventModel extends CircleNodeModel {
         // 语义约束
         this.isAllowIncoming = true;
         this.isAllowOutgoing = false;
+    }
+
+
+    initNodeData(data: LogicFlow.NodeConfig) {
+        super.initNodeData(data);
 
         let bpmnId = BpmnIdGenerator.generate();
         this.id = bpmnId;
+        this.text.value = "结束";
 
         // 初始化 properties（非常关键）
         this.properties = {};
@@ -29,13 +35,17 @@ export class EndEventModel extends CircleNodeModel {
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;
             }
+            if (prop.key === "name") {
+                this.properties[prop.key] = "结束";
+            }
         });
 
         // 默认文本
         if (!this.text?.value) {
             this.text.value = "结束";
             this.text.x = this.x;
-            this.text.y = this.y + 30;
+            this.text.y = this.y + 4;
         }
     }
+
 }
