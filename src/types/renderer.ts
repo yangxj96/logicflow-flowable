@@ -9,3 +9,9 @@ export type PropertyRendererContext = {
     onChange: (value: any) => void;
     emit: (event: string, payload?: any) => void;
 };
+
+export interface PropertyContext {
+    target: any;          // node / process / anything
+    type: "node" | "process";
+    onCommit?: () => void;
+}

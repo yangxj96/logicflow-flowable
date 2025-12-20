@@ -15,6 +15,9 @@ export const CommonNodeProperties: BaseProperty[] = [
         },
         validate: {
             required: true
+        },
+        ui: {
+            disabled: true
         }
     },
     {

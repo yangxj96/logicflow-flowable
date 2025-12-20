@@ -1,4 +1,25 @@
 /**
+ * UI控制
+ */
+export interface UIContext {
+    /** 当前属性定义 */
+    property: BaseProperty;
+
+    /** 当前值 */
+    value: any;
+
+    /** 表单目标（node / process） */
+    target: any;
+
+    /** 上下文类型 */
+    type: "node" | "process";
+
+    /** LogicFlow 实例（可选） */
+    lf?: any;
+}
+
+
+/**
  * UI配置
  */
 export interface UI {
@@ -8,6 +29,8 @@ export interface UI {
     options?: Array<{ label: string; value: any }>;
     /** 触发事件名称（交给使用方） */
     onEvent?: string;
+    /** 是否禁用（支持动态） */
+    disabled?: boolean | ((ctx: UIContext) => boolean);
 }
 
 /**

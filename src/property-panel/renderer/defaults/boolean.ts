@@ -6,11 +6,14 @@ import { registerPropertyRenderer } from "../property-renderer.registry";
  * 注册boolean类型的渲染器
  */
 export function registerBooleanRenderer() {
-    registerPropertyRenderer("boolean", ({ value, onChange, property }) =>
-        h(ElSwitch, {
-            modelValue: value,
-            "onUpdate:modelValue": onChange,
-            ...property.ui?.props
-        })
+    registerPropertyRenderer("boolean", ({ value, onChange, property }) => {
+            const disabled = Boolean(property.ui?.disabled);
+            return h(ElSwitch, {
+                modelValue: value,
+                "onUpdate:modelValue": onChange,
+                disabled,
+                ...property.ui?.props
+            });
+        }
     );
 }

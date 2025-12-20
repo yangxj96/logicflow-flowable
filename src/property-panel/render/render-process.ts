@@ -1,5 +1,7 @@
 import { h } from "vue";
-import { ElDivider, ElForm, ElFormItem, ElInput } from "element-plus";
+import { ElDivider, ElForm } from "element-plus";
+import { ProcessProperties } from "../../properties/process/process";
+import { renderFormItem } from "./render-form-item";
 
 /**
  * 流程属性面板
@@ -7,6 +9,10 @@ import { ElDivider, ElForm, ElFormItem, ElInput } from "element-plus";
  */
 export function renderProcessPanel(state: any) {
     const model = state.processModel.value;
+
+    if (!model) {
+        return h("div", { style: { padding: "10px" } }, "未加载流程定义");
+    }
 
     return h("div", { style: { padding: "10px" } }, [
         h("div", { style: { fontSize: "16px", fontWeight: "600" } }, "流程定义"),
@@ -19,28 +25,14 @@ export function renderProcessPanel(state: any) {
                 model,
                 labelPosition: "top"
             },
-            () => [
-                h(ElFormItem, { label: "流程 ID" }, () =>
-                    h(ElInput, {
-                        modelValue: model.id,
-                        disabled: true
-                    })
-                ),
-
-                h(ElFormItem, { label: "流程名称" }, () =>
-                    h(ElInput, {
-                        modelValue: model.name,
-                        "onUpdate:modelValue": (v: string) => (model.name = v)
-                    })
-                ),
-
-                h(ElFormItem, { label: "是否可执行" }, () =>
-                    h(ElInput, {
-                        modelValue: String(model.isExecutable),
-                        "onUpdate:modelValue": (v: string) => (model.isExecutable = v === "true")
-                    })
-                )
-            ]
+            () => ProcessProperties.map((prop) =>
+                renderFormItem(state, prop, {
+                    type: "process",
+                    target: state.processModel.value,
+                    onCommit: () => {
+                        // 可选：流程级更新 / 校验 / emit
+                    }
+                }))
         )
     ]);
 }

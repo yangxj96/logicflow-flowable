@@ -1,6 +1,7 @@
 import { h } from "vue";
 import { ElCollapse, ElCollapseItem, ElForm } from "element-plus";
 import { renderFormItem } from "./render-form-item";
+import { commitNodeUpdate } from "../panel.actions";
 
 /**
  * 节点属性面板
@@ -14,7 +15,11 @@ export function renderNodePanel(state: any) {
     }
 
     const collapseItems = Object.entries(state.groupedProperties.value).map(([group, props]: any) =>
-        h(ElCollapseItem, { title: group, name: group }, () => props.map((p: any) => renderFormItem(state, p)))
+        h(ElCollapseItem, { title: group, name: group }, () => props.map((p: any) => renderFormItem(state, p, {
+            type: "node",
+            target: state.currentNode.value.properties,
+            onCommit: () => commitNodeUpdate(state)
+        })))
     );
 
     return h("div", { style: { padding: "10px" } }, [
