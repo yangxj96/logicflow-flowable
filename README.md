@@ -19,6 +19,17 @@
 欢迎在 [GitHub](https://github.com/yangxj96/logicflow-flowable) 为项目点个 ⭐，  
 你的支持将是项目持续迭代的重要动力。
 
+---
+
+## Versioning Strategy
+
+This project follows a simple versioning strategy:
+
+- `latest`: Production-ready, recommended versions
+- `dev`: Active development versions, APIs may change
+- `alpha`: Experimental or breaking changes
+
+Before v0.1.0, all versions are considered **unstable**.
 
 ---
 
