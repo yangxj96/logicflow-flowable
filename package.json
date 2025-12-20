@@ -1,7 +1,7 @@
 {
   "name": "@yangxj96/logicflow-flowable",
-  "version": "0.0.0",
-  "description": "This package is under heavy development. Use dev tag instead.基于 LogicFlow 的 Flowable / BPMN 2.0 流程建模与可视化扩展插件",
+  "version": "0.0.1-dev.20251220",
+  "description": "基于 LogicFlow 的 Flowable / BPMN 2.0 流程建模与可视化扩展插件",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yangxj96/logicflow-flowable.git"
