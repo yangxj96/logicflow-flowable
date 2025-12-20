@@ -13,171 +13,143 @@
 
 ## 项目状态说明
 
-当前版本仍在持续完善中，尚未达到生产可用的标准。
-
+当前版本仍在持续完善中，尚未达到生产可用的标准。  
 如果你在使用 LogicFlow / Flowable 时也遇到类似需求，  
 欢迎在 [GitHub](https://github.com/yangxj96/logicflow-flowable) 为项目点个 ⭐，  
 你的支持将是项目持续迭代的重要动力。
 
 ---
 
-## Versioning Strategy
+## 版本策略
 
-This project follows a simple versioning strategy:
+该项目采用了简单的版本控制策略:
 
-- `latest`: Production-ready, recommended versions
-- `dev`: Active development versions, APIs may change
-- `alpha`: Experimental or breaking changes
+- `latest`: 可投入生产使用的、推荐的版本
+- `dev`: 活跃的开发版本中，API 可能会发生变化
+- `alpha`: 实验性或重大变更
 
-Before v0.1.0, all versions are considered **unstable**.
+在 0.1.0 版本之前，所有版本都被视为**不稳定**的版本。
 
 ---
 
-## 🚀 快速开始
+## 🧪 示例（examples）
 
-### 1. 安装
+项目内置了一个 **最小可运行示例**，位于 `examples/` 目录中：
+
+- 基于 **Vue 3**
+- 集成 **LogicFlow + logicflow-flowable**
+- 用于验证节点渲染、属性面板与 BPMN XML 导出能力
+
+该示例是一个 **完整的前端项目**，适合用于：
+
+- 本地调试插件功能
+- 验证新节点 / 新属性
+- 对照理解插件的实际使用方式
+
+### 运行示例
 
 ```bash
-npm install @yangxj96/logicflow-flowable
-```
-
-### 2. 使用
-
-```ts
-import LogicFlow from '@logicflow/core';
-import '@logicflow/core/dist/style/index.css';
-
-// 引入扩展（如 Control）
-import { Control, DndPanel } from '@logicflow/extension';
-import '@logicflow/extension/dist/style/index.css';
-
-// 引入本插件
-import Flowable from '@yangxj96/logicflow-flowable';
-
-// 初始化画布
-const lf = new LogicFlow({
-    container: document.getElementById('app'),
-    plugins: [Control, DndPanel, Flowable.Plugin], // 注册插件
-    grid: true,
-});
-
-// 设置左侧工具栏（DnD 面板）
-(Control as any)?.dndPanel?.setPatternItems(Flowable.getFlowableDndItems());
-
-// 添加“导出 BPMN”按钮
-(Control as any)?.control?.addItem({
-    key: 'export-bpmn',
-    text: '导出 BPMN',
-    onClick: () => {
-        const xml = Flowable.toBpmnXml(lf);
-        console.log(xml);
-        // 可下载或发送至后端 Flowable 引擎
-    }
-});
-
-lf.render({});
-
-// 注册属性面板
-Flowable.registerPropertyPanel({
-    container: panel.value!,
-    lf: lf
-});
+cd examples
+npm install
+npm run dev
 ```
 
 ---
 
 ## 🧰 支持的 BPMN 元素
 
-#### 事件类
+以下列表以 **v1.0 覆盖真实 Flowable 项目 90% 使用场景** 为目标进行规划。
 
-| BPMN 元素 | 状态 | LogicFlow 节点类型    |
-|---------|----|-------------------|
-| 开始事件    | ✅  | `bpmn:startEvent` |
-| 结束事件    | ✅  | `bpmn:endEvent`   |
-| 消息开始事件  | ⏳  | —                 |
-| 定时开始事件  | ⏳  | —                 |
-| 中间捕获事件  | ⏳  | —                 |
+### v1.0（核心支持）
 
-#### 任务类
+#### 事件（Events）
 
-| BPMN 元素 | 状态 | LogicFlow 节点类型     |
-|---------|----|--------------------|
-| 用户任务    | ✅  | `bpmn:userTask`    |
-| 服务任务    | ✅  | `bpmn:serviceTask` |
-| 脚本任务    | ✅  | `bpmn:scriptTask`  |
-| 接收任务    | ✅  | `bpmn:receiveTask` |
+| BPMN 元素       | 状态 | LogicFlow 节点类型                |
+|---------------|----|-------------------------------|
+| 开始事件          | ✅  | `bpmn:startEvent`             |
+| 结束事件          | ✅  | `bpmn:endEvent`               |
+| 中间事件（捕获）      | ✅  | `bpmn:intermediateCatchEvent` |
+| 中间事件（抛出）      | ✅  | `bpmn:intermediateThrowEvent` |
+| 边界事件（定时 / 消息） | ✅  | `bpmn:boundaryEvent`          |
 
-#### 网关类
+---
+
+#### 任务（Tasks）
+
+| BPMN 元素 | 状态 | LogicFlow 节点类型          |
+|---------|----|-------------------------|
+| 用户任务    | ✅  | `bpmn:userTask`         |
+| 服务任务    | ✅  | `bpmn:serviceTask`      |
+| 脚本任务    | ✅  | `bpmn:scriptTask`       |
+| 接收任务    | ✅  | `bpmn:receiveTask`      |
+| 手工任务    | ✅  | `bpmn:manualTask`       |
+| 业务规则任务  | ✅  | `bpmn:businessRuleTask` |
+
+---
+
+#### 网关（Gateways）
 
 | BPMN 元素 | 状态 | LogicFlow 节点类型          |
 |---------|----|-------------------------|
 | 排他网关    | ✅  | `bpmn:exclusiveGateway` |
-| 并行网关    | ⏳  | —                       |
-| 包容网关    | ⏳  | —                       |
-| 事件网关    | ⏳  | —                       |
+| 并行网关    | ✅  | `bpmn:parallelGateway`  |
+| 包容网关    | ✅  | `bpmn:inclusiveGateway` |
 
-#### 子流程与调用
+---
 
-| BPMN 元素 | 状态 | LogicFlow 节点类型 |
-|---------|----|----------------|
-| 嵌入式子流程  | ⏳  | —              |
-| 调用活动    | ⏳  | —              |
+#### 子流程与调用（SubProcess）
 
-#### 连线类
+| BPMN 元素 | 状态 | LogicFlow 节点类型            |
+|---------|----|---------------------------|
+| 嵌入式子流程  | ✅  | `bpmn:subProcess`         |
+| 展开子流程   | ✅  | `bpmn:expandedSubProcess` |
+| 调用活动    | ✅  | `bpmn:callActivity`       |
+
+---
+
+#### 连线（Flows）
 
 | BPMN 元素 | 状态 | LogicFlow 节点类型      |
 |---------|----|---------------------|
-| 序列流（连线） | ✅  | `bpmn:sequenceFlow` |
-| 消息流     | ⏳  | —                   |
-
-> ✅ = 已支持 ⏳ = 计划中（欢迎 PR！）
-
----
-
-## 📦 API
-
-本插件导出一个命名空间对象，推荐按如下方式使用：
-
-```ts
-import Flowable from '@yangxj96/logicflow-flowable';
-```
-
-| 属性/方法                                     | 类型                             | 说明                                                 |
-|-------------------------------------------|--------------------------------|----------------------------------------------------|
-| `Flowable.Plugin`                         | `object`                       | LogicFlow 插件本体，用于 `LogicFlow.use()` 或 `plugins` 配置 |
-| `Flowable.getFlowableDndItems()`          | `() => Array`                  | 获取左侧拖拽面板的 BPMN 节点配置列表                              |
-| `Flowable.toBpmnXml(lf)`                  | `(lf: LogicFlow) => string`    | 将当前流程图数据转换为标准 BPMN 2.0 XML 字符串                     |
-| `Flowable.registerPropertyPanel(options)` | `(opts: PanelOptions) => void` | 手动注册右侧属性面板（高级用法）                                   |
-
-> 所有方法均带有完整 TypeScript 类型定义和 JSDoc，IDE 自动提示支持良好。
+| 序列流     | ✅  | `bpmn:sequenceFlow` |
+| 条件序列流   | ✅  | `bpmn:sequenceFlow` |
+| 默认序列流   | ✅  | `bpmn:sequenceFlow` |
 
 ---
 
-## 🗂️ 项目结构
+### Planned（规划中）
 
-```
-src/
-├── core/          # 插件主逻辑（节点注册、扩展）
-├── utils/         # 工具函数（XML 转换、DnD 生成）
-├── panel/         # 属性面板实现
-├── types/         # TypeScript 类型定义
-└── index.ts       # 统一导出入口
-```
+#### 事件（Events）
+
+- 消息开始事件
+- 定时开始事件
+- 条件事件
+- 信号事件
+- 多重事件
 
 ---
 
-## 🧪 本地开发
+#### 网关（Gateways）
 
-```bash
-# 安装依赖
-npm install
+- 事件网关
+- 复杂网关
 
-# 启动构建监听（输出到 dist/）
-npm run dev
+---
 
-# 运行示例（直接打开 examples/basic.html）
-# 修改代码后刷新页面即可看到效果
-```
+#### 子流程（SubProcess）
+
+- 事件子流程
+- 事务子流程
+
+---
+
+#### 协作与泳道（Collaboration）
+
+- Pool（参与者）
+- Lane（泳道）
+- 消息流（Message Flow）
+
+> ⏳ Planned 功能将根据社区反馈与实际使用情况逐步推进，欢迎提交 Issue 或 PR 参与共建。
 
 ---
 
