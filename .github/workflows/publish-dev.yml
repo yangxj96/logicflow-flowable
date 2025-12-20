@@ -1,4 +1,4 @@
-name: Publish Package
+name: Publish Dev Package
 
 on:
   push:
