@@ -1,13 +1,13 @@
 import { RectNodeModel } from "@logicflow/core";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { UserTaskProperties } from "../../../properties/tasks/user-task";
-import { BPMN_PREFIX } from "../../../core/constants";
+import { NODE_TYPES } from "../../../core/constants";
 
 /**
  * 用户任务模型
  */
 export class UserTaskModel extends RectNodeModel {
-    static readonly type = `${BPMN_PREFIX}:userTask`;
+    static readonly type = NODE_TYPES.USER_TASK;
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);

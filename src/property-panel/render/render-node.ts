@@ -13,13 +13,8 @@ export function renderNodePanel(state: any) {
         return h("div", { style: { padding: "10px" } }, "请选择一个节点");
     }
 
-    const collapseItems = Object.entries(state.groupedProperties.value).map(
-        ([group, props]: any) =>
-            h(
-                ElCollapseItem,
-                { title: group, name: group },
-                () => props.map((p: any) => renderFormItem(state, p))
-            )
+    const collapseItems = Object.entries(state.groupedProperties.value).map(([group, props]: any) =>
+        h(ElCollapseItem, { title: group, name: group }, () => props.map((p: any) => renderFormItem(state, p)))
     );
 
     return h("div", { style: { padding: "10px" } }, [

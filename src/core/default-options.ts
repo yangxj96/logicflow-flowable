@@ -6,7 +6,6 @@ export const DEFAULT_FLOWABLE_PLUGIN_OPTIONS = {
     }
 } as const;
 
-
 /**
  * 解析并合并 Flowable 插件配置
  * - 保证返回完整配置
@@ -18,8 +17,7 @@ export function resolveFlowableOptions(rawOptions?: any): ResolvedFlowableOption
     return {
         propertyPanel: {
             defaultRenderers:
-                user?.propertyPanel?.defaultRenderers ??
-                DEFAULT_FLOWABLE_PLUGIN_OPTIONS.propertyPanel.defaultRenderers
+                user?.propertyPanel?.defaultRenderers ?? DEFAULT_FLOWABLE_PLUGIN_OPTIONS.propertyPanel.defaultRenderers
         }
     };
 }

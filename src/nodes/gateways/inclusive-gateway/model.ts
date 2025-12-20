@@ -4,17 +4,17 @@ import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { NODE_TYPES } from "../../../core/constants";
 
 /**
- * 排他网关模型
+ * 包容网关模型
  */
-export class ExclusiveGatewayModel extends DiamondNodeModel {
-    static readonly type = NODE_TYPES.EXCLUSIVE_GATEWAY;
+export class InclusiveGatewayModel extends DiamondNodeModel {
+    static readonly type = NODE_TYPES.INCLUSIVE_GATEWAY;
 
     override initNodeData(data: any) {
         super.initNodeData(data);
         // BPMN 属性
         let bpmnId = BpmnIdGenerator.generate();
         this.id = bpmnId;
-        this.text.value = "排他网关";
+        this.text.value = "包容网关";
 
         ExclusiveGatewayProperties.forEach(prop => {
             this.properties[prop.key] ??= "";
@@ -22,7 +22,7 @@ export class ExclusiveGatewayModel extends DiamondNodeModel {
                 this.properties[prop.key] = bpmnId;
             }
             if (prop.key === "name") {
-                this.properties[prop.key] = "排他网关";
+                this.properties[prop.key] = "包容网关";
             }
         });
     }

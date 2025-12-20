@@ -1,5 +1,5 @@
 import LogicFlow, { CircleNodeModel } from "@logicflow/core";
-import { BPMN_PREFIX } from "../../../core/constants";
+import { NODE_TYPES } from "../../../core/constants";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { StartEventProperties } from "../../../properties/events/start";
 
@@ -7,7 +7,7 @@ import { StartEventProperties } from "../../../properties/events/start";
  * 开始事件节点模型
  */
 export class StartEventModel extends CircleNodeModel {
-    static readonly type = `${BPMN_PREFIX}:startEvent`;
+    static readonly type = NODE_TYPES.END_EVENT;
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
@@ -46,5 +46,4 @@ export class StartEventModel extends CircleNodeModel {
             this.text.y = this.y + 4;
         }
     }
-
 }

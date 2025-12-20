@@ -1,5 +1,5 @@
 import type LogicFlow from "@logicflow/core";
-import { ref, computed } from "vue";
+import { computed, ref } from "vue";
 import type { FormInstance } from "element-plus";
 import { getProcessContext } from "../context/process";
 import { buildElFormRules } from "../validation/ui/element-plus";
@@ -28,7 +28,7 @@ import type { BaseProperty } from "../types";
  * @param lf {@link LogicFlow}实例
  */
 export function usePanelState(lf: LogicFlow) {
-    const selectedType = ref<"node" | "process">("process");
+    const selectedType = ref<"node" | "edge" | "process">("process");
     const currentNode = ref<LogicFlow.NodeData | null>(null);
     const properties = ref<BaseProperty[]>([]);
     const groupedProperties = ref<Record<string, BaseProperty[]>>({});

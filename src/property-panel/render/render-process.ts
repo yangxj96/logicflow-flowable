@@ -37,8 +37,7 @@ export function renderProcessPanel(state: any) {
                 h(ElFormItem, { label: "是否可执行" }, () =>
                     h(ElInput, {
                         modelValue: String(model.isExecutable),
-                        "onUpdate:modelValue": (v: string) =>
-                            (model.isExecutable = v === "true")
+                        "onUpdate:modelValue": (v: string) => (model.isExecutable = v === "true")
                     })
                 )
             ]

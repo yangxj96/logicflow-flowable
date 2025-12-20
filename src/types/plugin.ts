@@ -3,7 +3,7 @@
  */
 export interface FlowablePluginOptions {
     propertyPanel?: {
-        defaultRenderers?: boolean
+        defaultRenderers?: boolean;
     };
 }
 

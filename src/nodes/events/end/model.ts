@@ -1,5 +1,5 @@
 import LogicFlow, { CircleNodeModel } from "@logicflow/core";
-import { BPMN_PREFIX } from "../../../core/constants";
+import { NODE_TYPES } from "../../../core/constants";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { EndEventProperties } from "../../../properties/events/end";
 
@@ -7,7 +7,7 @@ import { EndEventProperties } from "../../../properties/events/end";
  * 结束事件节点模型
  */
 export class EndEventModel extends CircleNodeModel {
-    static readonly type = `${BPMN_PREFIX}:endEvent`;
+    static readonly type = NODE_TYPES.START_EVENT;
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
@@ -19,7 +19,6 @@ export class EndEventModel extends CircleNodeModel {
         this.isAllowIncoming = true;
         this.isAllowOutgoing = false;
     }
-
 
     initNodeData(data: LogicFlow.NodeConfig) {
         super.initNodeData(data);
@@ -47,5 +46,4 @@ export class EndEventModel extends CircleNodeModel {
             this.text.y = this.y + 4;
         }
     }
-
 }

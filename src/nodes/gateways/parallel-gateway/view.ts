@@ -1,9 +1,9 @@
 import { DiamondNode, h } from "@logicflow/core";
 
 /**
- * 排他网关视图
+ * 并行网关视图
  */
-export class ExclusiveGatewayView extends DiamondNode {
+export class ParallelGatewayView extends DiamondNode {
     getShape() {
         const { x, y, width, height } = this.props.model;
 

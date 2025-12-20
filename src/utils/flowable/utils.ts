@@ -13,7 +13,10 @@ export function escapeXml(str: string) {
  * @param node 节点
  * @param properties 节点的属性
  */
-export function buildXmlParts(node: any, properties: BaseProperty[]): { attrs: Record<string, string>; elements: string[] } {
+export function buildXmlParts(
+    node: any,
+    properties: BaseProperty[]
+): { attrs: Record<string, string>; elements: string[] } {
     const attrs: Record<string, string> = {};
     const elements: string[] = [];
     const values = node.properties || {};

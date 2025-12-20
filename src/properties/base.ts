@@ -1,4 +1,4 @@
-import { BaseProperty } from "../types/common";
+import { BaseProperty } from "../types";
 
 /**
  * 通用节点属性

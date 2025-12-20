@@ -36,14 +36,11 @@ export function initNodeProperties(state: any) {
  * @param state 状态
  */
 export function groupProperties(state: any) {
-    state.groupedProperties.value = state.properties.value.reduce(
-        (acc: any, p: any) => {
-            const group = p.group || "基础信息";
-            (acc[group] ||= []).push(p);
-            return acc;
-        },
-        {}
-    );
+    state.groupedProperties.value = state.properties.value.reduce((acc: any, p: any) => {
+        const group = p.group || "基础信息";
+        (acc[group] ||= []).push(p);
+        return acc;
+    }, {});
 }
 
 /**

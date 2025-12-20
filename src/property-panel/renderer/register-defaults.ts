@@ -1,8 +1,8 @@
 import {
-    registerStringRenderer,
-    registerSelectRenderer,
+    registerBooleanRenderer,
     registerNumberRenderer,
-    registerBooleanRenderer
+    registerSelectRenderer,
+    registerStringRenderer
 } from "./defaults";
 
 /**

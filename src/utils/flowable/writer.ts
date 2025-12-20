@@ -13,7 +13,7 @@ const DEFINITIONS_ATTR = {
     "xmlns:flowable": "http://flowable.org/bpmn",
     "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
     targetNamespace: "http://www.omg.org/spec/BPMN/20100524/MODEL",
-    "id": BpmnIdGenerator.generate("DEFINITIONS")
+    id: BpmnIdGenerator.generate("DEFINITIONS")
 };
 
 /**

@@ -1,12 +1,11 @@
 import { h } from "vue";
-import { ElSelect, ElOption } from "element-plus";
+import { ElOption, ElSelect } from "element-plus";
 import { registerPropertyRenderer } from "../property-renderer.registry";
 
 /**
  * 注册select类型的渲染器
  */
 export function registerSelectRenderer() {
-
     registerPropertyRenderer("select", ({ value, onChange, property, emit }) =>
         h(
             ElSelect,

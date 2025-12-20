@@ -37,7 +37,7 @@ export function createPropertyPanel(lf: LogicFlow) {
             bindPanelEvents(lf, state, app);
 
             return () =>
-                state.selectedType.value === "node"
+                state.selectedType.value === "node" || state.selectedType.value === "edge"
                     ? renderNodePanel(state)
                     : renderProcessPanel(state);
         }

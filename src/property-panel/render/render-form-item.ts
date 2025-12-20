@@ -19,7 +19,7 @@ export function renderFormItem(state: any, property: any) {
     const vnode = renderer({
         property,
         value,
-        onChange: (v) => {
+        onChange: v => {
             state.currentNode.value.properties[property.key] = v;
             commitNodeUpdate(state);
         },
@@ -32,9 +32,5 @@ export function renderFormItem(state: any, property: any) {
         }
     });
 
-    return h(
-        ElFormItem,
-        { label: property.label, prop: property.key },
-        () => vnode
-    );
+    return h(ElFormItem, { label: property.label, prop: property.key }, () => vnode);
 }

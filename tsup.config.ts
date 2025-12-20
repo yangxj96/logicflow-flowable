@@ -21,6 +21,6 @@ export default defineConfig({
         "element-plus",
         "@logicflow/core",
         "@logicflow/extension"
-    ],
+    ]
 
 });

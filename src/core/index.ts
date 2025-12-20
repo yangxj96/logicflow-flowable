@@ -2,6 +2,7 @@ import type LogicFlow from "@logicflow/core";
 import { registerAll } from "./register";
 import { registerDefaultPropertyRenderers } from "../property-panel/renderer/register-defaults";
 import { resolveFlowableOptions } from "./default-options";
+import { NODE_TYPES } from "./constants";
 
 /**
  * 插件定义
@@ -18,6 +19,9 @@ export const FlowablePlugin: LogicFlow.ExtensionDefinition = {
 
         // 注册所有组件
         registerAll(lf);
+
+        // 设置默认连线
+        lf.setDefaultEdgeType(NODE_TYPES.SEQUENCE_FLOW);
     }
 };
 

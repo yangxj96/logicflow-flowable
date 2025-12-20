@@ -2,12 +2,12 @@ import { BaseProperty } from "../../types";
 import { CommonNodeProperties } from "../base";
 
 /**
- * 排他网关属性定义
+ * 并行网关属性定义
  */
-export const ExclusiveGatewayProperties: BaseProperty[] = [
+export const ParallelGatewayProperties: BaseProperty[] = [
     ...CommonNodeProperties,
     {
-        key: "default",
+        key: "defaultFlow",
         label: "默认连线",
         type: "string",
         group: "扩展信息",

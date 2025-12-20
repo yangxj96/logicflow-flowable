@@ -1,4 +1,4 @@
-import type { LogicFlow } from '@logicflow/core';
+import type { LogicFlow } from "@logicflow/core";
 
 /**
  * 面板参数
