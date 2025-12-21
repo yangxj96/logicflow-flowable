@@ -1,23 +1,24 @@
-import { escapeXml } from "../utils";
+import { attrsToString, buildXmlParts } from "../utils";
+import { SequenceFlowProperties } from "../../../properties/edges/sequence-flow";
 
 /**
  * SequenceFlow节点转BPMN格式的XML字符串
  * @param edge 节点
  */
 export function sequenceFlowToXml(edge: any): string {
-    const { id, sourceNodeId, targetNodeId, properties = {} } = edge;
-    const { conditionExpression } = properties;
+    const { attrs, elements } = buildXmlParts(edge, SequenceFlowProperties);
 
-    // 无条件（普通流转）
-    if (!conditionExpression) {
-        return `<bpmn:sequenceFlow id="${id}" sourceRef="${sourceNodeId}" targetRef="${targetNodeId}" />`;
+    const attrStr = attrsToString({
+        id: edge.id,
+        name: edge.text?.value,
+        ...attrs
+    });
+
+    if (elements.length) {
+        return `<bpmn:endEvent${attrStr}>
+      ${elements.join("")}
+    </bpmn:endEvent>`;
     }
 
-    // 条件流转
-    return `
-<bpmn:sequenceFlow id="${id}" sourceRef="${sourceNodeId}" targetRef="${targetNodeId}">
-  <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
-    <![CDATA[ ${escapeXml(conditionExpression)} ]]>
-  </bpmn:conditionExpression>
-</bpmn:sequenceFlow>`;
+    return `<bpmn:sequenceFlow${attrStr} />`;
 }

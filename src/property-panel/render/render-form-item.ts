@@ -12,14 +12,14 @@ import { PropertyContext } from "../../types/renderer";
  */
 export function renderFormItem(state: any, property: any, ctx: PropertyContext) {
     const value = ctx.target?.[property.key];
-
+    const node = state.currentNode.value;
     const renderer = getPropertyRenderer(property.type);
     if (!renderer) {
         return h("div", `未注册的属性类型: ${property.type}`);
     }
     const vnode = renderer({
-        property,
-        value,
+        property: property,
+        value: value,
         onChange: v => {
             ctx.target[property.key] = v;
             if (ctx.type === "node") {
@@ -31,6 +31,7 @@ export function renderFormItem(state: any, property: any, ctx: PropertyContext) 
         },
         emit: (event, payload) => {
             state.lf.emit(`property:${event}`, {
+                node,
                 property,
                 payload,
                 target: ctx.target,
@@ -39,5 +40,5 @@ export function renderFormItem(state: any, property: any, ctx: PropertyContext) 
         }
     });
 
-    return h(ElFormItem, { label: property.label, prop: property.key }, () => vnode);
+    return h(ElFormItem, { label: property.label, prop: property.key }, { default: () => [vnode] });
 }

@@ -18,7 +18,6 @@ export interface UIContext {
     lf?: any;
 }
 
-
 /**
  * UI配置
  */
@@ -33,17 +32,29 @@ export interface UI {
     disabled?: boolean | ((ctx: UIContext) => boolean);
 }
 
-/**
- * XML元数据
- */
+export type XmlElementKind = "empty" | "text" | "cdata" | "raw";
+
 export interface XmlMeta {
-    // 作为属性导出
-    attr?: string;
-    // 作为子节点导出（预留）
+    /** element 名称 */
     element?: string;
-    // 命名空间（可选）
+
+    /** element 命名空间 */
     namespace?: string;
+
+    /** element 类型 */
+    kind?: XmlElementKind;
+
+    /** element 自身 attribute */
+    elementAttrs?: Record<string, string>;
+
+    /** 子节点（递归） */
+    children?: XmlMeta[];
+
+    /** 作为 attribute 输出（顶层） */
+    attr?: string;
 }
+
+export type XmlMetaFactory = (value: any, node: any) => XmlMeta | null | undefined;
 
 /**
  * 表单验证
@@ -61,11 +72,10 @@ export interface Validate {
 export interface BaseProperty {
     key: string;
     label: string;
-    type: "string" | "number" | "boolean" | "select";
-    required?: boolean;
+    type: "string" | "textarea" | "number" | "boolean" | "select";
     defaultValue?: any;
     group: string;
-    xml?: XmlMeta;
+    xml?: XmlMeta | XmlMetaFactory;
     ui?: UI;
     validate?: Validate;
 }

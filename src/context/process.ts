@@ -12,7 +12,7 @@ export function initProcessContext(lf: LogicFlow) {
     if ((lf as any)[PROCESS_CONTEXT]) return;
 
     (lf as any)[PROCESS_CONTEXT] = {
-        id: BpmnIdGenerator.generate("PROCESS"),
+        id: BpmnIdGenerator.generate(),
         name: "新建流程",
         isExecutable: true
     } satisfies ProcessModel;

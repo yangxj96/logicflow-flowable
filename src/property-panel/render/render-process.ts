@@ -25,14 +25,16 @@ export function renderProcessPanel(state: any) {
                 model,
                 labelPosition: "top"
             },
-            () => ProcessProperties.map((prop) =>
-                renderFormItem(state, prop, {
-                    type: "process",
-                    target: state.processModel.value,
-                    onCommit: () => {
-                        // 可选：流程级更新 / 校验 / emit
-                    }
-                }))
+            () =>
+                ProcessProperties.map(prop =>
+                    renderFormItem(state, prop, {
+                        type: "process",
+                        target: state.processModel.value,
+                        onCommit: () => {
+                            // 可选：流程级更新 / 校验 / emit
+                        }
+                    })
+                )
         )
     ]);
 }

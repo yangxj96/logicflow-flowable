@@ -8,7 +8,6 @@ export const ProcessProperties: BaseProperty[] = [
         key: "id",
         label: "流程 ID",
         type: "string",
-        required: true,
         group: "流程定义",
         xml: {
             attr: "id"
@@ -29,11 +28,10 @@ export const ProcessProperties: BaseProperty[] = [
     {
         key: "documentation",
         label: "流程描述",
-        type: "string",
+        type: "textarea",
         group: "流程定义",
         xml: {
-            element: "documentation",
-            namespace: "bpmn"
+            element: "bpmn:documentation"
         }
     },
     {
@@ -44,6 +42,9 @@ export const ProcessProperties: BaseProperty[] = [
         group: "流程定义",
         xml: {
             attr: "isExecutable"
+        },
+        validate: {
+            required: false
         }
     }
 ];

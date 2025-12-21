@@ -47,11 +47,13 @@ onMounted(() => {
         lf: lf
     });
 
-    lf.on("property:selectChange", ({ node, property, payload }) => {
+    lf.on("property:selectChange", ({ node, property, payload, target, targetType }) => {
         console.log("select 变化了");
-        console.log("节点:", node, node.id);
-        console.log("字段:", property, property.key);
-        console.log("新值:", payload, payload.value);
+        console.log("节点:", node);
+        console.log("字段:", property);
+        console.log("新值:", payload);
+        console.log("target:", target);
+        console.log("targetType:", targetType);
     });
 
 });

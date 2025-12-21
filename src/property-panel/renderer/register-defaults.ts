@@ -2,7 +2,8 @@ import {
     registerBooleanRenderer,
     registerNumberRenderer,
     registerSelectRenderer,
-    registerStringRenderer
+    registerStringRenderer,
+    registerTextareaRenderer
 } from "./defaults";
 
 /**
@@ -11,6 +12,7 @@ import {
  */
 export function registerDefaultPropertyRenderers() {
     registerStringRenderer();
+    registerTextareaRenderer();
     registerSelectRenderer();
     registerNumberRenderer();
     registerBooleanRenderer();

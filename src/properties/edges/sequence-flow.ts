@@ -8,7 +8,6 @@ export const SequenceFlowProperties: BaseProperty[] = [
         key: "id",
         label: "节点 ID",
         type: "string",
-        required: true,
         group: "基础信息",
         xml: {
             attr: "id"
@@ -25,16 +24,12 @@ export const SequenceFlowProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "name"
-        },
-        validate: {
-            required: true
         }
     },
     {
         key: "sourceRef",
         label: "来源节点",
         type: "string",
-        required: true,
         group: "基础信息",
         xml: {
             attr: "sourceRef"
@@ -47,7 +42,6 @@ export const SequenceFlowProperties: BaseProperty[] = [
         key: "targetRef",
         label: "目标节点",
         type: "string",
-        required: true,
         group: "基础信息",
         xml: {
             attr: "targetRef"
@@ -59,14 +53,15 @@ export const SequenceFlowProperties: BaseProperty[] = [
     {
         key: "conditionExpression",
         label: "执行条件",
-        type: "string",
-        required: true,
+        type: "textarea",
         group: "基础信息",
         xml: {
-            element: "conditionExpression"
-        },
-        validate: {
-            required: true
+            element: "conditionExpression",
+            namespace: "bpmn",
+            elementAttrs: {
+                "xsi:type": "bpmn:tFormalExpression"
+            },
+            kind: "cdata"
         }
     }
 ];

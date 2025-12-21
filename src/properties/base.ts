@@ -8,7 +8,6 @@ export const CommonNodeProperties: BaseProperty[] = [
         key: "id",
         label: "节点 ID",
         type: "string",
-        required: true,
         group: "基础信息",
         xml: {
             attr: "id"
@@ -36,7 +35,7 @@ export const CommonNodeProperties: BaseProperty[] = [
     {
         key: "documentation",
         label: "描述",
-        type: "string",
+        type: "textarea",
         defaultValue: "",
         group: "基础信息",
         xml: {

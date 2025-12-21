@@ -27,76 +27,95 @@ import { NODE_TYPES } from "../core/constants";
  */
 export function bindPanelEvents(lf: any, state: any, app: App) {
     // 节点点击
-    lf.on("node:click", async ({ data }: { data: unknown }) => {
-        await app.runWithContext(() => selectNode(data, lf, state));
-    });
+    lf.on("node:click", async ({ data }: { data: unknown }) => selectNode(data, lf, state, app));
 
     // 线点击
-    lf.on("edge:click", async ({ data }: { data: unknown }) => {
-        await app.runWithContext(() => selectEdge(data, lf, state));
-    });
+    lf.on("edge:click", async ({ data }: { data: unknown }) => selectEdge(data, lf, state, app));
 
     // 画布点击
-    lf.on("blank:click", () => {
-        app.runWithContext(() => {
-            state.selectedType.value = "process";
-            state.currentNode.value = null;
-        });
-    });
+    lf.on("blank:click", () => selectProcess(state, app));
 }
 
 function isNodeType(type: unknown): type is NodeType {
     return Object.values(NODE_TYPES).includes(type as NodeType);
 }
 
-// 节点校验
+/**
+ * 节点校验
+ * @param state 状态
+ */
 async function beforeSelect(state: any) {
     return await validateCurrentNode(state);
 }
 
-// 节点被选中
-async function selectNode(data: unknown, lf: any, state: any) {
-    if (!(await beforeSelect(state))) return;
+/**
+ * 节点被选中
+ * @param data 数据
+ * @param lf {@link LogicFlow} 实例
+ * @param state 状态
+ * @param app VUE实例
+ */
+async function selectNode(data: unknown, lf: any, state: any, app: App) {
+    await app.runWithContext(async () => {
+        if (!(await beforeSelect(state))) return;
 
-    // 🔑 关键：清除线选中
-    lf.clearSelectElements();
+        // 清除线选中
+        lf.clearSelectElements();
 
-    state.selectedType.value = "node";
-    state.currentNode.value = data;
+        state.selectedType.value = "node";
+        state.currentNode.value = data;
 
-    if (typeof data === "object" && data !== null && "type" in data && isNodeType((data as any).type)) {
-        const type = (data as { type: NodeType }).type;
-        state.properties.value = NodeTypeToProperties[type] ?? [];
-    } else {
-        state.properties.value = [];
-    }
+        if (typeof data === "object" && data !== null && "type" in data && isNodeType((data as any).type)) {
+            const type = (data as { type: NodeType }).type;
+            state.properties.value = NodeTypeToProperties[type] ?? [];
+        } else {
+            state.properties.value = [];
+        }
 
-    lf.selectElementById((data as any).id);
-
-    initNodeProperties(state);
-    groupProperties(state);
+        initNodeProperties(state);
+        groupProperties(state);
+    });
 }
 
-async function selectEdge(data: unknown, lf: any, state: any) {
-    if (!(await beforeSelect(state))) return;
+/**
+ * 线被选中
+ * @param data 数据
+ * @param lf {@link LogicFlow} 实例
+ * @param state 状态
+ * @param app VUE实例
+ */
+async function selectEdge(data: unknown, lf: any, state: any, app: App) {
+    await app.runWithContext(async () => {
+        if (!(await beforeSelect(state))) return;
 
-    // 清除节点选中
-    lf.clearSelectElements();
+        // 清除节点选中
+        lf.clearSelectElements();
 
-    console.log(data);
-    state.selectedType.value = "edge";
-    state.currentNode.value = data;
-    if (typeof data === "object" && data !== null && "type" in data && isNodeType((data as any).type)) {
-        const type = (data as { type: NodeType }).type;
-        console.log(type);
-        state.properties.value = NodeTypeToProperties[type] ?? [];
-        console.log(state.properties.value);
-    } else {
-        state.properties.value = [];
-    }
+        console.log(data);
+        state.selectedType.value = "edge";
+        state.currentNode.value = data;
+        if (typeof data === "object" && data !== null && "type" in data && isNodeType((data as any).type)) {
+            const type = (data as { type: NodeType }).type;
+            console.log(type);
+            state.properties.value = NodeTypeToProperties[type] ?? [];
+            console.log(state.properties.value);
+        } else {
+            state.properties.value = [];
+        }
 
-    // lf.selectEdgeById((data as any).id);
+        initNodeProperties(state);
+        groupProperties(state);
+    });
+}
 
-    initNodeProperties(state);
-    groupProperties(state);
+/**
+ * 画布被选中
+ * @param state 状态
+ * @param app VUE实例
+ */
+function selectProcess(state: any, app: App) {
+    app.runWithContext(() => {
+        state.selectedType.value = "process";
+        state.currentNode.value = null;
+    });
 }

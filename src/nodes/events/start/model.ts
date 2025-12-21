@@ -7,7 +7,7 @@ import { StartEventProperties } from "../../../properties/events/start";
  * 开始事件节点模型
  */
 export class StartEventModel extends CircleNodeModel {
-    static readonly type = NODE_TYPES.END_EVENT;
+    static readonly type = NODE_TYPES.START_EVENT;
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
@@ -45,5 +45,13 @@ export class StartEventModel extends CircleNodeModel {
             this.text.x = this.x;
             this.text.y = this.y + 4;
         }
+    }
+
+    getNodeStyle() {
+        return {
+            stroke: "#333",
+            strokeWidth: 1,
+            fill: "#fff"
+        };
     }
 }

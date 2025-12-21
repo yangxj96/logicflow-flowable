@@ -24,7 +24,7 @@ export const ScriptTaskProperties: BaseProperty[] = [
     {
         key: "script",
         label: "脚本内容",
-        type: "string",
+        type: "textarea",
         group: "扩展信息",
         xml: {
             element: "bpmn:script"
