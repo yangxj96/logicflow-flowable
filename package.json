@@ -44,9 +44,7 @@
     "prepublishOnly": "npm run build",
     "dev": "tsup --watch",
     "format": "prettier --write ./src",
-    "format:check": "prettier --check ./src",
-    "version:dev": "node scripts/bump-dev-version.js",
-    "publish:dev": "npm run version:dev && git commit -am \"chore: dev release\" && git tag v%npm_package_version% && git push --follow-tags && git push --follow-tags && npm publish --tag dev"
+    "format:check": "prettier --check ./src"
   },
   "peerDependencies": {
     "@logicflow/core": "^2.2.0",
