@@ -13,7 +13,7 @@ import { SequenceFlowProperties } from "./edges/sequence-flow";
 /**
  * 节点类型映射属性对象
  */
-export const NodeTypeToProperties: Partial<Record<NodeType | string, Property[]>> = {
+export const NodeTypeToProperties: Partial<Record<NodeType , Property[]>> = {
     // 特殊节点,流程定义
     [NODE_TYPES.PROCESS]: ProcessProperties,
     // 连线

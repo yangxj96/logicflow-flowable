@@ -1,7 +1,7 @@
 import { NodeTypeToProperties } from "../properties";
 import { groupProperties, initNodeProperties, validateCurrentNode } from "./panel.actions";
 import { App } from "vue";
-import { PanelState } from "../types";
+import { NodeType, PanelState } from "../types";
 import LogicFlow from "@logicflow/core";
 
 /**
@@ -60,7 +60,7 @@ async function selectNode(data: LogicFlow.NodeData, lf: LogicFlow, state: PanelS
 
         state.selectedType.value = "node";
         state.currentNode.value = data;
-        state.properties.value = NodeTypeToProperties[data.type] ?? [];
+        state.properties.value = NodeTypeToProperties[data.type as NodeType] ?? [];
 
         initNodeProperties(state);
         groupProperties(state);
@@ -83,7 +83,7 @@ async function selectEdge(data: LogicFlow.EdgeData, lf: LogicFlow, state: PanelS
 
         state.selectedType.value = "edge";
         state.currentNode.value = data;
-        state.properties.value = NodeTypeToProperties[data.type] ?? [];
+        state.properties.value = NodeTypeToProperties[data.type as NodeType] ?? [];
 
         initNodeProperties(state);
         groupProperties(state);
