@@ -1,10 +1,10 @@
-import { BaseProperty } from "../../types";
+import { Property } from "../../types";
 import { CommonNodeProperties } from "../base";
 
 /**
  * 并行网关属性定义
  */
-export const ParallelGatewayProperties: BaseProperty[] = [
+export const ParallelGatewayProperties: Property[] = [
     ...CommonNodeProperties,
     {
         key: "defaultFlow",
@@ -13,10 +13,6 @@ export const ParallelGatewayProperties: BaseProperty[] = [
         group: "扩展信息",
         xml: {
             attr: "default"
-        },
-        validate: {
-            required: true,
-            ruleKey: "flowableAssignee"
         }
     }
 ];

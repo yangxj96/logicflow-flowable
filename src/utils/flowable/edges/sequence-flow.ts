@@ -1,11 +1,12 @@
 import { attrsToString, buildXmlParts } from "../utils";
 import { SequenceFlowProperties } from "../../../properties/edges/sequence-flow";
+import LogicFlow from "@logicflow/core";
 
 /**
  * SequenceFlow节点转BPMN格式的XML字符串
  * @param edge 节点
  */
-export function sequenceFlowToXml(edge: any): string {
+export function sequenceFlowToXml(edge: LogicFlow.EdgeData): string {
     const { attrs, elements } = buildXmlParts(edge, SequenceFlowProperties);
 
     const attrStr = attrsToString({

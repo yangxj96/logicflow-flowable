@@ -1,8 +1,8 @@
 import { NodeTypeToProperties } from "../properties";
 import { groupProperties, initNodeProperties, validateCurrentNode } from "./panel.actions";
 import { App } from "vue";
-import { NodeType } from "../types";
-import { NODE_TYPES } from "../core/constants";
+import { PanelState } from "../types";
+import LogicFlow from "@logicflow/core";
 
 /**
  * LogicFlow 事件层
@@ -25,26 +25,22 @@ import { NODE_TYPES } from "../core/constants";
  * @param state 状态
  * @param app vue实例
  */
-export function bindPanelEvents(lf: any, state: any, app: App) {
+export function bindPanelEvents(lf: LogicFlow, state: PanelState, app: App) {
     // 节点点击
-    lf.on("node:click", async ({ data }: { data: unknown }) => selectNode(data, lf, state, app));
+    lf.on("node:click", async (args) => selectNode(args.data, lf, state, app));
 
     // 线点击
-    lf.on("edge:click", async ({ data }: { data: unknown }) => selectEdge(data, lf, state, app));
+    lf.on("edge:click", async (args) => selectEdge(args.data, lf, state, app));
 
     // 画布点击
     lf.on("blank:click", () => selectProcess(state, app));
-}
-
-function isNodeType(type: unknown): type is NodeType {
-    return Object.values(NODE_TYPES).includes(type as NodeType);
 }
 
 /**
  * 节点校验
  * @param state 状态
  */
-async function beforeSelect(state: any) {
+async function beforeSelect(state: PanelState) {
     return await validateCurrentNode(state);
 }
 
@@ -55,7 +51,7 @@ async function beforeSelect(state: any) {
  * @param state 状态
  * @param app VUE实例
  */
-async function selectNode(data: unknown, lf: any, state: any, app: App) {
+async function selectNode(data: LogicFlow.NodeData, lf: LogicFlow, state: PanelState, app: App) {
     await app.runWithContext(async () => {
         if (!(await beforeSelect(state))) return;
 
@@ -64,13 +60,7 @@ async function selectNode(data: unknown, lf: any, state: any, app: App) {
 
         state.selectedType.value = "node";
         state.currentNode.value = data;
-
-        if (typeof data === "object" && data !== null && "type" in data && isNodeType((data as any).type)) {
-            const type = (data as { type: NodeType }).type;
-            state.properties.value = NodeTypeToProperties[type] ?? [];
-        } else {
-            state.properties.value = [];
-        }
+        state.properties.value = NodeTypeToProperties[data.type] ?? [];
 
         initNodeProperties(state);
         groupProperties(state);
@@ -84,24 +74,16 @@ async function selectNode(data: unknown, lf: any, state: any, app: App) {
  * @param state 状态
  * @param app VUE实例
  */
-async function selectEdge(data: unknown, lf: any, state: any, app: App) {
+async function selectEdge(data: LogicFlow.EdgeData, lf: LogicFlow, state: PanelState, app: App) {
     await app.runWithContext(async () => {
         if (!(await beforeSelect(state))) return;
 
         // 清除节点选中
         lf.clearSelectElements();
 
-        console.log(data);
         state.selectedType.value = "edge";
         state.currentNode.value = data;
-        if (typeof data === "object" && data !== null && "type" in data && isNodeType((data as any).type)) {
-            const type = (data as { type: NodeType }).type;
-            console.log(type);
-            state.properties.value = NodeTypeToProperties[type] ?? [];
-            console.log(state.properties.value);
-        } else {
-            state.properties.value = [];
-        }
+        state.properties.value = NodeTypeToProperties[data.type] ?? [];
 
         initNodeProperties(state);
         groupProperties(state);
@@ -113,7 +95,7 @@ async function selectEdge(data: unknown, lf: any, state: any, app: App) {
  * @param state 状态
  * @param app VUE实例
  */
-function selectProcess(state: any, app: App) {
+function selectProcess(state: PanelState, app: App) {
     app.runWithContext(() => {
         state.selectedType.value = "process";
         state.currentNode.value = null;

@@ -1,10 +1,10 @@
+import { Property } from "../../types";
 import { CommonNodeProperties } from "../base";
-import { BaseProperty } from "../../types";
 
 /**
  * 开始事件节点属性
  */
-export const StartEventProperties: BaseProperty[] = [
+export const StartEventProperties: Property[] = [
     ...CommonNodeProperties,
     {
         key: "formKey",

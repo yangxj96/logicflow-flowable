@@ -1,10 +1,10 @@
 import { CommonNodeProperties } from "../base";
-import { BaseProperty } from "../../types";
+import { Property } from "../../types";
 
 /**
  * 用户任务节点属性
  */
-export const UserTaskProperties: BaseProperty[] = [
+export const UserTaskProperties: Property[] = [
     ...CommonNodeProperties,
     {
         key: "assignee",
@@ -14,9 +14,11 @@ export const UserTaskProperties: BaseProperty[] = [
         xml: {
             attr: "flowable:assignee"
         },
-        validate: {
-            required: true,
-            ruleKey: "flowableAssignee"
+        ui: {
+            rules: {
+                required: true,
+                ruleKey: "flowable:assignee"
+            }
         }
     },
     {

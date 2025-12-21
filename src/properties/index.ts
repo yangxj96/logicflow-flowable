@@ -2,7 +2,7 @@ import { UserTaskProperties } from "./tasks/user-task";
 import { StartEventProperties } from "./events/start";
 import { EndEventProperties } from "./events/end";
 import { ProcessProperties } from "./process/process";
-import { BaseProperty, NodeType } from "../types";
+import { NodeType, Property } from "../types";
 import { ExclusiveGatewayProperties } from "./gateways/exclusive-gateway";
 import { ReceiveTaskProperties } from "./tasks/receive-task";
 import { ScriptTaskProperties } from "./tasks/script-task";
@@ -13,7 +13,7 @@ import { SequenceFlowProperties } from "./edges/sequence-flow";
 /**
  * 节点类型映射属性对象
  */
-export const NodeTypeToProperties: Partial<Record<NodeType, BaseProperty[]>> = {
+export const NodeTypeToProperties: Partial<Record<NodeType | string, Property[]>> = {
     // 特殊节点,流程定义
     [NODE_TYPES.PROCESS]: ProcessProperties,
     // 连线

@@ -1,9 +1,9 @@
-import { BaseProperty } from "../../types";
+import { Property } from "../../types";
 
 /**
  * SequenceFlow线的属性
  */
-export const SequenceFlowProperties: BaseProperty[] = [
+export const SequenceFlowProperties: Property[] = [
     {
         key: "id",
         label: "节点 ID",
@@ -11,9 +11,6 @@ export const SequenceFlowProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "id"
-        },
-        validate: {
-            required: true
         }
     },
     {
@@ -33,9 +30,6 @@ export const SequenceFlowProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "sourceRef"
-        },
-        validate: {
-            required: true
         }
     },
     {
@@ -45,9 +39,6 @@ export const SequenceFlowProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "targetRef"
-        },
-        validate: {
-            required: true
         }
     },
     {
@@ -56,8 +47,8 @@ export const SequenceFlowProperties: BaseProperty[] = [
         type: "textarea",
         group: "基础信息",
         xml: {
-            element: "conditionExpression",
             namespace: "bpmn",
+            element: "conditionExpression",
             elementAttrs: {
                 "xsi:type": "bpmn:tFormalExpression"
             },

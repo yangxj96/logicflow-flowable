@@ -1,9 +1,9 @@
-import { BaseProperty } from "../types";
+import { Property } from "../types";
 
 /**
  * 通用节点属性
  */
-export const CommonNodeProperties: BaseProperty[] = [
+export const CommonNodeProperties: Property[] = [
     {
         key: "id",
         label: "节点 ID",
@@ -11,9 +11,6 @@ export const CommonNodeProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "id"
-        },
-        validate: {
-            required: true
         },
         ui: {
             disabled: true
@@ -27,9 +24,6 @@ export const CommonNodeProperties: BaseProperty[] = [
         group: "基础信息",
         xml: {
             attr: "name"
-        },
-        validate: {
-            required: true
         }
     },
     {
@@ -39,7 +33,8 @@ export const CommonNodeProperties: BaseProperty[] = [
         defaultValue: "",
         group: "基础信息",
         xml: {
-            element: "bpmn:documentation"
+            namespace: "bpmn",
+            element: "documentation"
         }
     }
 ];

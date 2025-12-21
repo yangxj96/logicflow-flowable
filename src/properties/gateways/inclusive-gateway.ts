@@ -1,10 +1,10 @@
-import { BaseProperty } from "../../types";
+import { Property } from "../../types";
 import { CommonNodeProperties } from "../base";
 
 /**
  * 包容网关属性定义
  */
-export const InclusiveGatewayProperties: BaseProperty[] = [
+export const InclusiveGatewayProperties: Property[] = [
     ...CommonNodeProperties,
     {
         key: "defaultFlow",
@@ -13,10 +13,6 @@ export const InclusiveGatewayProperties: BaseProperty[] = [
         group: "扩展信息",
         xml: {
             attr: "default"
-        },
-        validate: {
-            required: true,
-            ruleKey: "flowableAssignee"
         }
     }
 ];

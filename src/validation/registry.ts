@@ -1,6 +1,10 @@
+import { ValidationRule } from "../types";
 import { flowableRules } from "./rules/flowable";
 
-const ruleMap = {
+/**
+ * 验证规则集合
+ */
+const ruleMap: Record<string, ValidationRule> = {
     ...flowableRules
 };
 
@@ -11,7 +15,6 @@ const ruleMap = {
  * @param context 上下文
  */
 export function validateProperty(ruleKey: string, value: any, context: any) {
-    // @ts-ignore
     const rule = ruleMap[ruleKey];
     if (!rule) return null;
     return rule.validate(value, context);

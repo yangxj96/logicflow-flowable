@@ -1,10 +1,10 @@
 import { CommonNodeProperties } from "../base";
-import { BaseProperty } from "../../types";
+import { Property } from "../../types";
 
 /**
  * 用户任务节点属性
  */
-export const ReceiveTaskProperties: BaseProperty[] = [
+export const ReceiveTaskProperties: Property[] = [
     ...CommonNodeProperties,
     {
         key: "messageRef",

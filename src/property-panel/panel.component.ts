@@ -3,6 +3,7 @@ import { defineComponent, getCurrentInstance } from "vue";
 import { usePanelState } from "./panel.state";
 import { bindPanelEvents } from "./panel.events";
 import { renderNodePanel } from "./render/render-node";
+import { renderEdgePanel } from "./render/render-edge";
 import { renderProcessPanel } from "./render/render-process";
 
 /**
@@ -36,10 +37,16 @@ export function createPropertyPanel(lf: LogicFlow) {
 
             bindPanelEvents(lf, state, app);
 
-            return () =>
-                state.selectedType.value === "node" || state.selectedType.value === "edge"
-                    ? renderNodePanel(state)
-                    : renderProcessPanel(state);
+            return () => {
+                const type = state.selectedType.value;
+                if (type === "node") {
+                    return renderNodePanel(state);
+                } else if (type === "edge") {
+                    return renderEdgePanel(state);
+                } else {
+                    return renderProcessPanel(state);
+                }
+            };
         }
     });
 }

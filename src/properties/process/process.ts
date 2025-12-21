@@ -1,9 +1,9 @@
-import { BaseProperty } from "../../types";
+import { Property } from "../../types";
 
 /**
  * 流程节点属性
  */
-export const ProcessProperties: BaseProperty[] = [
+export const ProcessProperties: Property[] = [
     {
         key: "id",
         label: "流程 ID",
@@ -42,9 +42,6 @@ export const ProcessProperties: BaseProperty[] = [
         group: "流程定义",
         xml: {
             attr: "isExecutable"
-        },
-        validate: {
-            required: false
         }
     }
 ];

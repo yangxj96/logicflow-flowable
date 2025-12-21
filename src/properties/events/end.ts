@@ -1,10 +1,10 @@
+import { Property } from "../../types";
 import { CommonNodeProperties } from "../base";
-import { BaseProperty } from "../../types";
 
 /**
  * 结束事件节点属性
  */
-export const EndEventProperties: BaseProperty[] = [
+export const EndEventProperties: Property[] = [
     ...CommonNodeProperties,
     {
         key: "terminate",

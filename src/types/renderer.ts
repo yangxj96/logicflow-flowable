@@ -1,10 +1,11 @@
-import type { BaseProperty } from "./common";
+import type { VNode } from "vue";
+import type { Property } from "./property";
 
 /**
  * 属性渲染上下文
  */
 export type PropertyRendererContext = {
-    property: BaseProperty;
+    property: Property;
     value: any;
     onChange: (value: any) => void;
     emit: (event: string, payload?: any) => void;
@@ -15,3 +16,5 @@ export interface PropertyContext {
     type: "node" | "process";
     onCommit?: () => void;
 }
+
+export type PropertyRenderer = (ctx: PropertyRendererContext) => VNode;

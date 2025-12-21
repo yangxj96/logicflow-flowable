@@ -3,6 +3,7 @@ import { ElFormItem } from "element-plus";
 import { commitNodeUpdate } from "../panel.actions";
 import { getPropertyRenderer } from "../renderer/property-renderer.registry";
 import { PropertyContext } from "../../types/renderer";
+import { PanelState, Property } from "../../types";
 
 /**
  * 最小渲染单元
@@ -10,7 +11,7 @@ import { PropertyContext } from "../../types/renderer";
  * @param property 属性
  * @param ctx 属性上下文
  */
-export function renderFormItem(state: any, property: any, ctx: PropertyContext) {
+export function renderFormItem(state: PanelState, property: Property, ctx: PropertyContext) {
     const value = ctx.target?.[property.key];
     const node = state.currentNode.value;
     const renderer = getPropertyRenderer(property.type);

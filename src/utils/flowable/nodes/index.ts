@@ -8,12 +8,13 @@ import { scriptTaskToXml } from "./task/script-task";
 import { serviceTaskToXml } from "./task/service-task";
 import { inclusiveGatewayToXml } from "./gateway/inclusive-gateway";
 import { parallelGatewayToXml } from "./gateway/parallel-gateway";
+import LogicFlow from "@logicflow/core";
 
 /**
  * 组件节点转BPMN格式的XML字符串
  * @param node 组件节点
  */
-export function nodeToXml(node: any): string {
+export function nodeToXml(node: LogicFlow.NodeData): string {
     switch (node.type) {
         // 网关
         case NODE_TYPES.EXCLUSIVE_GATEWAY: // 排他网关

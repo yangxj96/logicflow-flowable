@@ -1,8 +1,8 @@
-import type { VNode } from "vue";
-import { PropertyRendererContext } from "../../types/renderer";
+import { PropertyRenderer } from "../../types/renderer";
 
-export type PropertyRenderer = (ctx: PropertyRendererContext) => VNode;
-
+/**
+ * 注册了的渲染器
+ */
 const rendererRegistry = new Map<string, PropertyRenderer>();
 
 /**

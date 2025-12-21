@@ -1,3 +1,5 @@
+import { ValidationRule } from "../../types";
+
 /**
  * Flowable 表单校验规则
  */
@@ -29,4 +31,4 @@ export const flowableRules = {
             return null;
         }
     }
-};
+} as const satisfies Record<string, ValidationRule>;

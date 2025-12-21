@@ -1,11 +1,12 @@
 import { attrsToString, buildXmlParts } from "../../utils";
 import { ServiceTaskProperties } from "../../../../properties/tasks/service-task";
+import LogicFlow from "@logicflow/core";
 
 /**
  * 服务任务节点转BPMN格式的XML字符串
  * @param node 节点
  */
-export function serviceTaskToXml(node: any): string {
+export function serviceTaskToXml(node: LogicFlow.NodeData): string {
     const { attrs, elements } = buildXmlParts(node, ServiceTaskProperties);
 
     const attrStr = attrsToString({

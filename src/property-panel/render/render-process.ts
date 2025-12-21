@@ -2,12 +2,13 @@ import { h } from "vue";
 import { ElDivider, ElForm } from "element-plus";
 import { ProcessProperties } from "../../properties/process/process";
 import { renderFormItem } from "./render-form-item";
+import { PanelState } from "../../types";
 
 /**
  * 流程属性面板
  * @param state 状态
  */
-export function renderProcessPanel(state: any) {
+export function renderProcessPanel(state: PanelState) {
     const model = state.processModel.value;
 
     if (!model) {

@@ -1,14 +1,15 @@
+import { PanelState } from "../../types";
 import { h } from "vue";
 import { ElCollapse, ElCollapseItem, ElForm } from "element-plus";
 import { renderFormItem } from "./render-form-item";
 import { commitNodeUpdate } from "../panel.actions";
-import { PanelState } from "../../types";
+
 
 /**
- * 节点属性面板
- * @param state 状态
+ * 线的属性面板
+ * @param state 上下文状态
  */
-export function renderNodePanel(state: PanelState) {
+export function renderEdgePanel(state: PanelState) {
     const node = state.currentNode.value;
 
     if (!node) {
@@ -28,7 +29,7 @@ export function renderNodePanel(state: PanelState) {
     );
 
     return h("div", { style: { padding: "10px" } }, [
-        h("div", { style: { fontSize: "16px", fontWeight: "600" } }, "节点属性"),
+        h("div", { style: { fontSize: "16px", fontWeight: "600" } }, "连线属性"),
 
         h(
             ElForm,

@@ -1,10 +1,10 @@
-import { BaseProperty } from "../../types";
+import { Property } from "../../types";
 import { CommonNodeProperties } from "../base";
 
 /**
  * 排他网关属性定义
  */
-export const ExclusiveGatewayProperties: BaseProperty[] = [
+export const ExclusiveGatewayProperties: Property[] = [
     ...CommonNodeProperties,
     {
         key: "default",
@@ -13,10 +13,6 @@ export const ExclusiveGatewayProperties: BaseProperty[] = [
         group: "扩展信息",
         xml: {
             attr: "default"
-        },
-        validate: {
-            required: true,
-            ruleKey: "flowableAssignee"
         }
     }
 ];
