@@ -2,7 +2,8 @@ import { h } from "vue";
 import { ElCollapse, ElCollapseItem, ElForm } from "element-plus";
 import { renderFormItem } from "./render-form-item";
 import { commitNodeUpdate } from "../panel.actions";
-import { PanelState } from "../../types";
+import { NodeType, PanelState } from "../../types";
+import { NodeTypeToName } from "../../properties";
 
 /**
  * 节点属性面板
@@ -27,8 +28,10 @@ export function renderNodePanel(state: PanelState) {
         )
     );
 
+    const title = NodeTypeToName[state.currentNode.value?.type as NodeType] ?? "节点属性";
+
     return h("div", { style: { padding: "10px" } }, [
-        h("div", { style: { fontSize: "16px", fontWeight: "600" } }, "节点属性"),
+        h("div", { style: { fontSize: "16px", fontWeight: "600" } }, title),
 
         h(
             ElForm,
