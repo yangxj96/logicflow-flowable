@@ -1,12 +1,13 @@
-import { DiamondNodeModel } from "@logicflow/core";
 import { ExclusiveGatewayProperties } from "../../../properties/gateways/exclusive-gateway";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { NODE_TYPES } from "../../../core/constants";
+import { GatewayBaseModel } from "../gateway-base-model";
 
 /**
  * 包容网关模型
  */
-export class InclusiveGatewayModel extends DiamondNodeModel {
+export class InclusiveGatewayModel extends GatewayBaseModel {
+
     static readonly type = NODE_TYPES.INCLUSIVE_GATEWAY;
 
     override initNodeData(data: any) {
@@ -27,17 +28,4 @@ export class InclusiveGatewayModel extends DiamondNodeModel {
         });
     }
 
-    override getNodeStyle() {
-        const style = super.getNodeStyle();
-        style.stroke = "#222";
-        style.strokeWidth = 2;
-        style.fill = "#fff";
-        return style;
-    }
-
-    override getTextStyle() {
-        const style = super.getTextStyle();
-        style.fontSize = 12;
-        return style;
-    }
 }

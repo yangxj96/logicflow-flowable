@@ -1,39 +1,34 @@
-import { DiamondNode, h } from "@logicflow/core";
+import { GatewayBaseView } from "../gateway-base-view";
+import { h } from "@logicflow/core";
 
 /**
  * 排他网关视图
  */
-export class ExclusiveGatewayView extends DiamondNode {
-    getShape() {
-        const { x, y, width, height } = this.props.model;
+export class ExclusiveGatewayView extends GatewayBaseView {
 
-        return h(
-            "g",
-            {},
-            // 菱形
-            h("polygon", {
-                points: `${x},${y - height / 2} ${x + width / 2},${y} ${x},${y + height / 2} ${x - width / 2},${y}`,
-                fill: "#fff",
-                stroke: "#222",
-                strokeWidth: 2
-            }),
-            // 中间 X 标识
+    protected renderInnerIcon(x: number, y: number, size: number, strokeColor: string, strokeWidth: number) {
+        const half = size / 2;
+
+        return h("g", {}, [
             h("line", {
-                x1: x - 6,
-                y1: y - 6,
-                x2: x + 6,
-                y2: y + 6,
-                stroke: "#222",
-                strokeWidth: 2
+                x1: x - half,
+                y1: y - half,
+                x2: x + half,
+                y2: y + half,
+                stroke: strokeColor,
+                strokeWidth,
+                strokeLinecap: "round"
             }),
             h("line", {
-                x1: x + 6,
-                y1: y - 6,
-                x2: x - 6,
-                y2: y + 6,
-                stroke: "#222",
-                strokeWidth: 2
+                x1: x + half,
+                y1: y - half,
+                x2: x - half,
+                y2: y + half,
+                stroke: strokeColor,
+                strokeWidth,
+                strokeLinecap: "round"
             })
-        );
+        ]);
     }
+
 }
