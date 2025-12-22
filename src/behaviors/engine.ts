@@ -1,5 +1,5 @@
 import LogicFlow from "@logicflow/core";
-import { BehaviorsBase, ValidateResult } from "../types";
+import { BehaviorsBase, EdgeValidateContext, NodeValidateContext, ValidateResult } from "../types";
 
 export class BehaviorsEngine {
 
@@ -8,15 +8,10 @@ export class BehaviorsEngine {
 
     /* ================= 连线校验 ================= */
 
-    validateEdge(edgeId: string): ValidateResult {
-        const edge = this.lf.getEdgeModelById(edgeId);
-        if (!edge) return { valid: true };
+    validateEdge(context: EdgeValidateContext): ValidateResult {
+        const { source, target, edge } = context;
 
-        const source = this.lf.getNodeModelById(edge.sourceNodeId);
-        const target = this.lf.getNodeModelById(edge.targetNodeId);
-        if (!source || !target) return { valid: true };
-
-        /* source */
+        // source 规则
         if (this.hasBehavior(source)) {
             const behavior = source.getBehavior();
 
@@ -24,22 +19,16 @@ export class BehaviorsEngine {
                 return { valid: false, message: "该节点不能作为出线节点" };
             }
 
-            if (
-                behavior.maxOut !== undefined &&
-                source.outgoing.edges.length > behavior.maxOut
-            ) {
+            if (behavior.maxOut !== undefined && source.outgoing.edges.length > behavior.maxOut) {
                 return { valid: false, message: "出线数量超过限制" };
             }
 
-            if (
-                behavior.allowTargetTypes &&
-                !behavior.allowTargetTypes.includes(target.type as any)
-            ) {
+            if (behavior.allowTargetTypes && !behavior.allowTargetTypes.includes(target.type as any)) {
                 return { valid: false, message: "不允许连接到该类型节点" };
             }
         }
 
-        /* target */
+        // target 规则
         if (this.hasBehavior(target)) {
             const behavior = target.getBehavior();
 
@@ -47,17 +36,11 @@ export class BehaviorsEngine {
                 return { valid: false, message: "该节点不能作为入线节点" };
             }
 
-            if (
-                behavior.maxIn !== undefined &&
-                target.incoming.edges.length > behavior.maxIn
-            ) {
+            if (behavior.maxIn !== undefined && target.incoming.edges.length > behavior.maxIn) {
                 return { valid: false, message: "入线数量超过限制" };
             }
 
-            if (
-                behavior.allowSourceTypes &&
-                !behavior.allowSourceTypes.includes(source.type as any)
-            ) {
+            if (behavior.allowSourceTypes && !behavior.allowSourceTypes.includes(source.type as any)) {
                 return { valid: false, message: "不允许从该类型节点连入" };
             }
         }
@@ -67,11 +50,8 @@ export class BehaviorsEngine {
 
     /* ================= 节点校验 ================= */
 
-    validateNode(nodeId: string): ValidateResult[] {
-        const node = this.lf.getNodeModelById(nodeId);
-        if (!node || !this.hasBehavior(node)) return [];
-
-        const behavior = node.getBehavior();
+    validateNode(context: NodeValidateContext): ValidateResult[] {
+        const { node, behavior } = context;
         const inCount = node.incoming.edges.length;
         const outCount = node.outgoing.edges.length;
 
@@ -98,10 +78,20 @@ export class BehaviorsEngine {
     validateGraph(): ValidateResult[] {
         const results: ValidateResult[] = [];
 
-        // @ts-ignore
-        this.lf.getGraphData().nodes.forEach((n) => {
-            results.push(...this.validateNode(n.id));
-        });
+        // 线获取数据
+        let graph = this.lf.getGraphData();
+        if (graph) {
+            (graph as LogicFlow.GraphData).nodes.forEach(node => {
+                if (!this.hasBehavior(node)) return;
+                const behavior = node.getBehavior();
+                results.push(...this.validateNode({ node: this.lf.getNodeModelById(node.id)!, behavior }));
+            });
+        } else {
+            results.push({
+                valid: false,
+                message: "未获取到节点数据"
+            });
+        }
 
         return results;
     }

@@ -43,17 +43,26 @@ export interface BehaviorsBase {
     getBehavior(): NodeBehavior;
 }
 
+/**
+ * 连线行为校验上下文
+ */
 export interface EdgeValidateContext {
     source: BaseNodeModel;
     target: BaseNodeModel;
     edge: BaseEdgeModel;
 }
 
+/**
+ * 节点行为校验上下文
+ */
 export interface NodeValidateContext {
     node: BaseNodeModel;
     behavior: NodeBehavior;
 }
 
+/**
+ * 校验结果
+ */
 export interface ValidateResult {
     valid: boolean;
     message?: string;
