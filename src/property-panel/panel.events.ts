@@ -27,10 +27,10 @@ import LogicFlow from "@logicflow/core";
  */
 export function bindPanelEvents(lf: LogicFlow, state: PanelState, app: App) {
     // 节点点击
-    lf.on("node:click", async (args) => selectNode(args.data, lf, state, app));
+    lf.on("node:click", async args => selectNode(args.data, lf, state, app));
 
     // 线点击
-    lf.on("edge:click", async (args) => selectEdge(args.data, lf, state, app));
+    lf.on("edge:click", async args => selectEdge(args.data, lf, state, app));
 
     // 画布点击
     lf.on("blank:click", () => selectProcess(state, app));

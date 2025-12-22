@@ -3,6 +3,7 @@ import { registerAll } from "./register";
 import { registerDefaultPropertyRenderers } from "../property-panel/renderer/register-defaults";
 import { resolveFlowableOptions } from "./default-options";
 import { NODE_TYPES } from "./constants";
+import { registerContextMenu } from "../context-menu";
 
 /**
  * 插件定义
@@ -19,6 +20,9 @@ export const FlowablePlugin: LogicFlow.ExtensionDefinition = {
 
         // 注册所有组件
         registerAll(lf);
+
+        // 注册右键上下文菜单
+        registerContextMenu(lf);
 
         // 设置默认连线
         lf.setDefaultEdgeType(NODE_TYPES.SEQUENCE_FLOW);

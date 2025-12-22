@@ -4,7 +4,6 @@ import { h, RectNode } from "@logicflow/core";
  * 抽象的任务视图
  */
 export class TaskBaseView extends RectNode {
-
     // 头部高度
     static readonly HEADER_HEIGHT: number = 28;
     // 内边距
@@ -13,7 +12,6 @@ export class TaskBaseView extends RectNode {
     // static readonly ICON_SIZE: number = 14;
     // 图标与文字之间的间隔
     // static readonly ICON_TEXT_GAP: number = 6;
-
 
     getText() {
         return null;
@@ -58,22 +56,29 @@ export class TaskBaseView extends RectNode {
             //     },
             // }),
             // 头部标题（text.value）
-            h("text", {
-                x: x - width / 2 + TaskBaseView.PADDING,
-                y: y - height / 2 + TaskBaseView.HEADER_HEIGHT / 2 + 4,
-                fill: "#fff",
-                fontSize: 14
-            }, text.value),
+            h(
+                "text",
+                {
+                    x: x - width / 2 + TaskBaseView.PADDING,
+                    y: y - height / 2 + TaskBaseView.HEADER_HEIGHT / 2 + 4,
+                    fill: "#fff",
+                    fontSize: 14
+                },
+                text.value
+            ),
             // 正文
-            h("text", {
-                x: x,
-                y: (y - height / 2 + TaskBaseView.HEADER_HEIGHT) + (height - TaskBaseView.HEADER_HEIGHT) / 2,
-                textAnchor: "middle",
-                dominantBaseline: "middle",
-                fill: "#333",
-                fontSize: 14
-            }, `${properties.name}`)
+            h(
+                "text",
+                {
+                    x: x,
+                    y: y - height / 2 + TaskBaseView.HEADER_HEIGHT + (height - TaskBaseView.HEADER_HEIGHT) / 2,
+                    textAnchor: "middle",
+                    dominantBaseline: "middle",
+                    fill: "#333",
+                    fontSize: 14
+                },
+                `${properties.name}`
+            )
         ]);
     }
-
 }

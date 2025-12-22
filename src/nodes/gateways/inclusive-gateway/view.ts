@@ -5,7 +5,6 @@ import { h } from "@logicflow/core";
  * 包容网关视图
  */
 export class InclusiveGatewayView extends GatewayBaseView {
-
     protected renderInnerIcon(x: number, y: number, size: number, strokeColor: string, strokeWidth: number) {
         const r = size * 0.5;
 
@@ -18,5 +17,4 @@ export class InclusiveGatewayView extends GatewayBaseView {
             strokeWidth
         });
     }
-
 }

@@ -4,7 +4,6 @@ import { DiamondNodeModel } from "@logicflow/core";
  * 网关通用基类模型
  */
 export class GatewayBaseModel extends DiamondNodeModel {
-
     override initNodeData(data: any) {
         super.initNodeData(data);
 
@@ -13,5 +12,4 @@ export class GatewayBaseModel extends DiamondNodeModel {
             ry: 24
         });
     }
-
 }

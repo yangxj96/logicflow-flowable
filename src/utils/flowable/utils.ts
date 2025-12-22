@@ -11,7 +11,10 @@ import LogicFlow from "@logicflow/core";
  * @param node 当前要序列化的节点或边数据
  * @param properties 该类型节点/边支持的所有属性元数据（含如何转 XML 的规则）
  */
-export function buildXmlParts(node: LogicFlow.NodeData | LogicFlow.EdgeData, properties: Property[]): {
+export function buildXmlParts(
+    node: LogicFlow.NodeData | LogicFlow.EdgeData,
+    properties: Property[]
+): {
     attrs: Record<string, string>;
     elements: string[];
 } {

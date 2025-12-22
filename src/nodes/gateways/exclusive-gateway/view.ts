@@ -5,7 +5,6 @@ import { h } from "@logicflow/core";
  * 排他网关视图
  */
 export class ExclusiveGatewayView extends GatewayBaseView {
-
     protected renderInnerIcon(x: number, y: number, size: number, strokeColor: string, strokeWidth: number) {
         const half = size / 2;
 
@@ -30,5 +29,4 @@ export class ExclusiveGatewayView extends GatewayBaseView {
             })
         ]);
     }
-
 }

@@ -5,7 +5,6 @@ import { renderFormItem } from "./render-form-item";
 import { commitNodeUpdate } from "../panel.actions";
 import { NodeTypeToName } from "../../properties";
 
-
 /**
  * 线的属性面板
  * @param state 上下文状态
@@ -19,7 +18,7 @@ export function renderEdgePanel(state: PanelState) {
 
     const collapseItems = Object.entries(state.grouping.value).map(([group, props]) =>
         h(ElCollapseItem, { title: group, name: group }, () =>
-            props.map((p) =>
+            props.map(p =>
                 renderFormItem(state, p, {
                     type: "node",
                     target: state.currentNode.value?.properties,

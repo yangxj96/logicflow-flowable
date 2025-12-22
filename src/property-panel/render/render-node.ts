@@ -18,7 +18,7 @@ export function renderNodePanel(state: PanelState) {
 
     const collapseItems = Object.entries(state.grouping.value).map(([group, props]) =>
         h(ElCollapseItem, { title: group, name: group }, () =>
-            props.map((p) =>
+            props.map(p =>
                 renderFormItem(state, p, {
                     type: "node",
                     target: state.currentNode.value?.properties,

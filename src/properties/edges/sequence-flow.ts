@@ -11,6 +11,9 @@ export const SequenceFlowProperties: Property[] = [
         group: "基础信息",
         xml: {
             attr: "id"
+        },
+        ui: {
+            disabled: true
         }
     },
     {

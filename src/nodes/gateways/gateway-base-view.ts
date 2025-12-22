@@ -4,17 +4,17 @@ import { DiamondNode, h } from "@logicflow/core";
  * 并行网关视图
  */
 export abstract class GatewayBaseView extends DiamondNode {
-
     getText() {
         return null;
     }
 
-    protected abstract renderInnerIcon(x: number,
-                                       y: number,
-                                       size: number,
-                                       strokeColor: string,
-                                       strokeWidth: number): any;
-
+    protected abstract renderInnerIcon(
+        x: number,
+        y: number,
+        size: number,
+        strokeColor: string,
+        strokeWidth: number
+    ): any;
 
     getShape() {
         const { x, y, width, height, isSelected } = this.props.model;
@@ -46,5 +46,4 @@ export abstract class GatewayBaseView extends DiamondNode {
             this.renderInnerIcon(x, y, innerSize, strokeColor, strokeWidth)
         ]);
     }
-
 }

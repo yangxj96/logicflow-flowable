@@ -4,7 +4,6 @@ import { RectNodeModel } from "@logicflow/core";
  * 抽象的任务模型
  */
 export class TaskBaseModel extends RectNodeModel {
-
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
 
@@ -16,6 +15,5 @@ export class TaskBaseModel extends RectNodeModel {
         // 允许连入 / 连出
         this.isAllowIncoming = true;
         this.isAllowOutgoing = true;
-
     }
 }

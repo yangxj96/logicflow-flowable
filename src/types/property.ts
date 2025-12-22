@@ -11,7 +11,6 @@ export interface PropertyBase {
     type: "string" | "textarea" | "number" | "boolean" | "select";
 }
 
-
 /**
  * XML相关处理对象
  */
@@ -46,7 +45,6 @@ export interface XmlMeta {
  * XML元数据工厂
  */
 export type XmlMetaFactory = (value: any, node: any) => XmlMeta | null | undefined;
-
 
 /**
  * UI对象导出
