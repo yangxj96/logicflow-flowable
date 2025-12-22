@@ -12,7 +12,7 @@ export class StartEventView extends CircleNode {
                 cx: x,
                 cy: y,
                 r,
-                stroke: "#333",
+                stroke: "#1B7FFF",
                 strokeWidth: 1,
                 fill: "#fff"
             })

@@ -55,8 +55,8 @@ export function commitNodeUpdate(state: PanelState) {
 
     state.lf.setProperties(node.id, node.properties as LogicFlow.PropertiesType);
 
-    const name = node.properties?.name;
-    if (typeof name === "string") {
-        state.lf.updateText(node.id, name);
-    }
+    // const name = node.properties?.name;
+    // if (typeof name === "string") {
+    //     state.lf.updateText(node.id, name);
+    // }
 }

@@ -13,7 +13,7 @@ export class EndEventView extends CircleNode {
                 cx: x,
                 cy: y,
                 r,
-                stroke: "#333",
+                stroke: "#1B7FFF",
                 strokeWidth: 2,
                 fill: "#fff"
             }),
@@ -22,7 +22,7 @@ export class EndEventView extends CircleNode {
                 cx: x,
                 cy: y,
                 r: r - 4,
-                stroke: "#333",
+                stroke: "#1B7FFF",
                 strokeWidth: 1,
                 fill: "none"
             })

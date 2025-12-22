@@ -1,25 +1,18 @@
-import { RectNodeModel } from "@logicflow/core";
+import LogicFlow from "@logicflow/core";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { UserTaskProperties } from "../../../properties/tasks/user-task";
 import { NODE_TYPES } from "../../../core/constants";
+import { TaskBaseModel } from "../task-base-model";
 
 /**
  * 用户任务模型
  */
-export class UserTaskModel extends RectNodeModel {
+export class UserTaskModel extends TaskBaseModel {
+
     static readonly type = NODE_TYPES.USER_TASK;
 
-    constructor(data: any, graphModel: any) {
-        super(data, graphModel);
-
-        // BPMN UserTask 标准尺寸
-        this.width = 110;
-        this.height = 50;
-        this.radius = 8;
-
-        // 允许连入 / 连出
-        this.isAllowIncoming = true;
-        this.isAllowOutgoing = true;
+    initNodeData(data: LogicFlow.NodeConfig) {
+        super.initNodeData(data);
 
         let bpmnId = BpmnIdGenerator.generate();
         this.id = bpmnId;

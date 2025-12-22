@@ -1,20 +1,16 @@
 name: Publish Dev Package
-
 on:
   push:
     tags:
       - 'v*-dev.*'
-
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write
   contents: read
-
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '24'

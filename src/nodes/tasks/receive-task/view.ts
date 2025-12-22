@@ -1,6 +1,8 @@
-import { RectNode } from "@logicflow/core";
+import { TaskBaseView } from "../task-base-view";
 
 /**
  * 接收任务视图
  */
-export class ReceiveTaskView extends RectNode {}
+export class ReceiveTaskView extends TaskBaseView {
+
+}

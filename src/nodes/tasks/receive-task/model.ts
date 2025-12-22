@@ -1,26 +1,15 @@
-import LogicFlow, { RectNodeModel } from "@logicflow/core";
+import LogicFlow from "@logicflow/core";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { UserTaskProperties } from "../../../properties/tasks/user-task";
 import { NODE_TYPES } from "../../../core/constants";
+import { TaskBaseModel } from "../task-base-model";
 
 /**
  * 接收任务模型
  */
-export class ReceiveTaskModel extends RectNodeModel {
+export class ReceiveTaskModel extends TaskBaseModel {
+
     static readonly type = NODE_TYPES.RECEIVE_TASK;
-
-    constructor(data: any, graphModel: any) {
-        super(data, graphModel);
-
-        // BPMN Task 标准尺寸
-        this.width = 110;
-        this.height = 50;
-        this.radius = 8;
-
-        // 允许连入 / 连出
-        this.isAllowIncoming = true;
-        this.isAllowOutgoing = true;
-    }
 
     initNodeData(data: LogicFlow.NodeConfig) {
         super.initNodeData(data);

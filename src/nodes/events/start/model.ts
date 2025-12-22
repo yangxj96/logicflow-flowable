@@ -13,7 +13,7 @@ export class StartEventModel extends CircleNodeModel {
         super(data, graphModel);
 
         // StartEvent 固定大小
-        this.r = 18;
+        this.r = 26;
 
         // 语义约束
         this.isAllowIncoming = false;
