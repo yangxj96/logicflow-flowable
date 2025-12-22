@@ -33,7 +33,7 @@ export function registerSelectRenderer() {
                 placeholder: `请选择${property.label}`,
                 ...property.ui?.props
             },
-            options // 👈 直接 children，而不是 slot
+            options
         );
     });
 }

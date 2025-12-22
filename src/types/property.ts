@@ -66,7 +66,7 @@ export interface PropertyUI {
         ruleKey?: string;
     };
     // select类型专用的
-    options?: Array<{ label: string; value: unknown }>;
+    options?: Array<{ label: string; value: string }>;
 }
 
 export type Property = PropertyBase & PropertyUIExport & PropertyXMLExport;
