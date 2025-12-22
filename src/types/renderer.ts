@@ -12,7 +12,7 @@ export type PropertyRendererContext = {
 };
 
 export interface PropertyContext {
-    target: any; // node / process / anything
+    target: any; // nodes / process / anything
     type: "node" | "process";
     onCommit?: () => void;
 }

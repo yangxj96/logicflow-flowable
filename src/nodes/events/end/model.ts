@@ -2,12 +2,18 @@ import LogicFlow, { CircleNodeModel } from "@logicflow/core";
 import { NODE_TYPES } from "../../../core/constants";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { EndEventProperties } from "../../../properties/events/end";
+import { EndEventBehavior } from "../../../behaviors/nodes/events/end-event";
+import { BehaviorsBase, NodeBehavior } from "../../../types";
 
 /**
  * 结束事件节点模型
  */
-export class EndEventModel extends CircleNodeModel {
+export class EndEventModel extends CircleNodeModel implements BehaviorsBase {
     static readonly type = NODE_TYPES.END_EVENT;
+
+    getBehavior(): NodeBehavior {
+        return EndEventBehavior;
+    }
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);

@@ -5,7 +5,7 @@
 export const BPMN_PREFIX = `bpmn` as const;
 
 /**
- * BPMN node type 构建
+ * BPMN nodes type 构建
  */
 const bpmn = <T extends string>(name: T) => `${BPMN_PREFIX}:${name}` as const;
 

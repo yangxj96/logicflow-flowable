@@ -3,3 +3,4 @@ export * from "./node";
 export * from "./property";
 export * from "./validation";
 export * from "./menu";
+export * from "./behaviors";

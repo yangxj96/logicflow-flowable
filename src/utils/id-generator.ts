@@ -4,7 +4,7 @@
 export class BpmnIdGenerator {
     /**
      * 生成符合 BPMN 规范的 UUID 风格 ID
-     * @param prefix 前缀，如 node / edge / process
+     * @param prefix 前缀，如 nodes / edge / process
      * @returns 唯一 ID，例如 node_3f5b1a2c-4e6f-11ee-be56-0242ac120002
      */
     static generate(prefix: string = ""): string {

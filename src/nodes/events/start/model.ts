@@ -2,12 +2,19 @@ import LogicFlow, { CircleNodeModel } from "@logicflow/core";
 import { NODE_TYPES } from "../../../core/constants";
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { StartEventProperties } from "../../../properties/events/start";
+import { BehaviorsBase, NodeBehavior } from "../../../types";
+import { StartEventBehavior } from "../../../behaviors/nodes/events/start-event";
 
 /**
  * 开始事件节点模型
  */
-export class StartEventModel extends CircleNodeModel {
+export class StartEventModel extends CircleNodeModel implements BehaviorsBase {
+
     static readonly type = NODE_TYPES.START_EVENT;
+
+    getBehavior(): NodeBehavior {
+        return StartEventBehavior;
+    }
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);

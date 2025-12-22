@@ -13,9 +13,9 @@ import LogicFlow from "@logicflow/core";
  * - 切换状态
  * - 调用 actions
  * 只放
- * - lf.on("node:click")
+ * - lf.on("nodes:click")
  * - lf.on("blank:click")
- * - node:delete / edge:click
+ * - nodes:delete / edge:click
  * 不允许
  * - 写 UI
  * - 写 h()
