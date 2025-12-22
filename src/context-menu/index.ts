@@ -2,7 +2,7 @@ import type LogicFlow from "@logicflow/core";
 import { edgeMenu, nodeMenu } from "./menu.event";
 import { openContextMenu } from "./menu.state";
 import { createApp } from "vue";
-import Menu from "./menu.vue";
+import { ContextMenu } from "./menu.ui";
 
 let mounted = false;
 
@@ -37,5 +37,5 @@ export function mountContextMenu() {
     const el = document.createElement("div");
     document.body.appendChild(el);
 
-    createApp(Menu).mount(el);
+    createApp(ContextMenu).mount(el);
 }
