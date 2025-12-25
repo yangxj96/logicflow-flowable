@@ -21,7 +21,7 @@ export interface NodeBehavior {
 
     /* ===== 连接语义 ===== */
 
-    // 运行的来源
+    // 允许的来源
     allowSourceTypes?: string[];
     // 允许的目标
     allowTargetTypes?: string[];
