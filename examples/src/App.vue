@@ -47,6 +47,7 @@ onMounted(() => {
         lf: lf
     });
 
+    // 监听事件
     lf.on("property:selectChange", ({ node, property, payload, target, targetType }) => {
         console.log("select 变化了");
         console.log("节点:", node);

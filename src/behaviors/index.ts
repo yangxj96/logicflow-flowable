@@ -1,5 +1,6 @@
 import type LogicFlow from "@logicflow/core";
 import { BehaviorsEngine } from "./engine";
+import { ElMessage } from "element-plus";
 
 /**
  * 注册线初始化
@@ -18,6 +19,7 @@ export function registerEdgeConstraint(lf: LogicFlow) {
 
         if (!result.valid) {
             lf.deleteEdge(data.id);
+            ElMessage.error(result.message);
             lf.emit("toast", result.message);
         }
     });

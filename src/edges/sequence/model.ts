@@ -11,7 +11,6 @@ export class SequenceFlowModel extends PolylineEdgeModel {
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
-        console.log("连线创建", data, graphModel);
 
         // 默认属性，放条件表达式
         this.properties = {

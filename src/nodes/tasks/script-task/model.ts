@@ -3,12 +3,19 @@ import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { UserTaskProperties } from "../../../properties/tasks/user-task";
 import { NODE_TYPES } from "../../../core/constants";
 import { TaskBaseModel } from "../task-base-model";
+import { BehaviorsBase, NodeBehavior } from "../../../types";
+import { ScriptTaskBehavior } from "../../../behaviors/nodes/tasks/script-task";
 
 /**
  * 脚本任务模型
  */
-export class ScriptTaskModel extends TaskBaseModel {
+export class ScriptTaskModel extends TaskBaseModel implements BehaviorsBase {
+
     static readonly type = NODE_TYPES.SCRIPT_TASK;
+
+    getBehavior(): NodeBehavior {
+        return ScriptTaskBehavior;
+    }
 
     initNodeData(data: LogicFlow.NodeConfig) {
         super.initNodeData(data);

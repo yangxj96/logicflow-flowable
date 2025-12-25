@@ -2,12 +2,19 @@ import { ExclusiveGatewayProperties } from "../../../properties/gateways/exclusi
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { NODE_TYPES } from "../../../core/constants";
 import { GatewayBaseModel } from "../gateway-base-model";
+import { BehaviorsBase, NodeBehavior } from "../../../types";
+import { ParallelGatewayBehavior } from "../../../behaviors/nodes/gateways/parallel-gateway";
 
 /**
  * 并行网关模型
  */
-export class ParallelGatewayModel extends GatewayBaseModel {
+export class ParallelGatewayModel extends GatewayBaseModel implements BehaviorsBase {
+
     static readonly type = NODE_TYPES.PARALLEL_GATEWAY;
+
+    getBehavior(): NodeBehavior {
+        return ParallelGatewayBehavior;
+    }
 
     override initNodeData(data: any) {
         super.initNodeData(data);

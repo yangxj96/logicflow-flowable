@@ -2,12 +2,19 @@ import { ExclusiveGatewayProperties } from "../../../properties/gateways/exclusi
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { NODE_TYPES } from "../../../core/constants";
 import { GatewayBaseModel } from "../gateway-base-model";
+import { BehaviorsBase, NodeBehavior } from "../../../types";
+import { InclusiveGatewayBehavior } from "../../../behaviors/nodes/gateways/inclusive-gateway";
 
 /**
  * 包容网关模型
  */
-export class InclusiveGatewayModel extends GatewayBaseModel {
+export class InclusiveGatewayModel extends GatewayBaseModel implements BehaviorsBase {
+
     static readonly type = NODE_TYPES.INCLUSIVE_GATEWAY;
+
+    getBehavior(): NodeBehavior {
+        return InclusiveGatewayBehavior;
+    }
 
     override initNodeData(data: any) {
         super.initNodeData(data);

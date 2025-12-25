@@ -2,12 +2,19 @@ import { ExclusiveGatewayProperties } from "../../../properties/gateways/exclusi
 import { BpmnIdGenerator } from "../../../utils/id-generator";
 import { NODE_TYPES } from "../../../core/constants";
 import { GatewayBaseModel } from "../gateway-base-model";
+import { BehaviorsBase, NodeBehavior } from "../../../types";
+import { ExclusiveGatewayBehavior } from "../../../behaviors/nodes/gateways/exclusive-gateway";
 
 /**
  * 排他网关模型
  */
-export class ExclusiveGatewayModel extends GatewayBaseModel {
+export class ExclusiveGatewayModel extends GatewayBaseModel implements BehaviorsBase {
+
     static readonly type = NODE_TYPES.EXCLUSIVE_GATEWAY;
+
+    getBehavior(): NodeBehavior {
+        return ExclusiveGatewayBehavior;
+    }
 
     override initNodeData(data: any) {
         super.initNodeData(data);

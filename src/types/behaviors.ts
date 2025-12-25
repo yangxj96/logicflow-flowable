@@ -5,11 +5,18 @@ import type { BaseEdgeModel, BaseNodeModel } from "@logicflow/core";
  */
 export interface NodeBehavior {
     /* ===== 拓扑 ===== */
+
+    // 是否允许连接
     allowIn?: boolean;
+    // 是否运行被连接
     allowOut?: boolean;
+    // 最大入线数量
     maxIn?: number;
+    // 最大出线数量
     maxOut?: number;
+    // 最小入线数量
     minIn?: number;
+    // 最小出线数量
     minOut?: number;
 
     /* ===== 连接语义 ===== */
@@ -21,13 +28,17 @@ export interface NodeBehavior {
 
     /* ===== 边约束 ===== */
     edge?: {
+        // 允许同一节点之间存在多个连接
         allowMultipleBetweenSameNodes?: boolean;
+        // 必备条件
         mustHaveCondition?: boolean;
     };
 
     /* ===== 运行语义（流程合法性） ===== */
     validate?: (ctx: {
+        // 入线数量
         inCount: number;
+        // 出线数量
         outCount: number;
     }) => string | void;
 }

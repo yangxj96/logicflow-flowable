@@ -21,6 +21,8 @@ export const StartEventBehavior: NodeBehavior = {
         NODE_TYPES.PARALLEL_GATEWAY
     ],
 
+
+
     validate({ inCount }) {
         if (inCount === 0) {
             return "开始事件必须至少有一条出线";
