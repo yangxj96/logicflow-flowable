@@ -1,6 +1,6 @@
 import type LogicFlow from "@logicflow/core";
 import { BehaviorsEngine } from "./engine";
-import { ElMessage } from "element-plus";
+import { validateBeforePublish } from "../validation/graph-validator";
 
 /**
  * 注册线初始化
@@ -12,17 +12,22 @@ export function registerEdgeConstraint(lf: LogicFlow) {
     lf.on("edge:add", ({ data }) => {
         const source = lf.getNodeModelById(data.sourceNodeId);
         const target = lf.getNodeModelById(data.targetNodeId);
-        const edge   = lf.getEdgeModelById(data.id);
+        const edge = lf.getEdgeModelById(data.id);
         if (!source || !target || !edge) return;
 
-        const result = engine.validateEdge({ source, target, edge });
-
-        if (!result.valid) {
+        const { valid, message } = engine.validateEdge({ source, target, edge });
+        if (!valid) {
             lf.deleteEdge(data.id);
-            ElMessage.error(result.message);
-            lf.emit("toast", result.message);
+            lf.emit("toast", message);
         }
     });
 
+    // 自动保存
+    lf.on("graph:save", () => {
+        const errors = validateBeforePublish(lf);
+        if (errors.length === 0) {
+            console.log(`验证通过`);
+        }
+    });
 }
 

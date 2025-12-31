@@ -5,6 +5,7 @@ import "@logicflow/core/dist/index.css";
 import "@logicflow/extension/dist/index.css";
 import { onMounted, useTemplateRef } from "vue";
 import Flowable from "@yangxj96/logicflow-flowable";
+import { ElMessage } from "element-plus";
 
 const container = useTemplateRef<HTMLDivElement>("container");
 const panel = useTemplateRef<HTMLDivElement>("panel");
@@ -55,6 +56,11 @@ onMounted(() => {
         console.log("新值:", payload);
         console.log("target:", target);
         console.log("targetType:", targetType);
+    });
+
+    // 弹框
+    lf.on("toast", message => {
+        ElMessage.error(message);
     });
 
 });
