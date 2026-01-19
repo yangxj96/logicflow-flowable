@@ -18,7 +18,7 @@ export function renderFormItem(state: PanelState, property: Property, ctx: Prope
     if (!renderer) {
         return h("div", `未注册的属性类型: ${property.type}`);
     }
-    const vnode = renderer({
+    const renderFn = renderer({
         property: property,
         value: value,
         onChange: (v: any) => {
@@ -41,5 +41,5 @@ export function renderFormItem(state: PanelState, property: Property, ctx: Prope
         }
     });
 
-    return h(ElFormItem, { label: property.label, prop: property.key }, { default: () => [vnode] });
+    return h(ElFormItem, { label: property.label, prop: property.key }, { default: () => [renderFn()] });
 }

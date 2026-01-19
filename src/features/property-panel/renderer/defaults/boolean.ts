@@ -7,12 +7,14 @@ import { registerPropertyRenderer } from "../property-renderer.registry";
  */
 export function registerBooleanRenderer() {
     registerPropertyRenderer("boolean", ({ value, onChange, property }) => {
-        const disabled = Boolean(property.ui?.disabled);
-        return h(ElSwitch, {
-            modelValue: value,
-            "onUpdate:modelValue": onChange,
-            disabled,
-            ...property.ui?.props
-        });
+        return () => {
+            const disabled = Boolean(property.ui?.disabled);
+            return h(ElSwitch, {
+                modelValue: value,
+                "onUpdate:modelValue": onChange,
+                disabled,
+                ...property.ui?.props
+            });
+        };
     });
 }

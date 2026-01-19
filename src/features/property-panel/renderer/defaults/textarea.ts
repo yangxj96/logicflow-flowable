@@ -7,16 +7,18 @@ import { registerPropertyRenderer } from "../property-renderer.registry";
  */
 export function registerTextareaRenderer() {
     registerPropertyRenderer("textarea", ({ value, onChange, property }) => {
-        const disabled = Boolean(property.ui?.disabled);
-        return h(ElInput, {
-            modelValue: value,
-            "onUpdate:modelValue": onChange,
-            clearable: true,
-            disabled,
-            type: "textarea",
-            rows: 3,
-            placeholder: `请输入${property.label}`,
-            ...property.ui?.props
-        });
+        return () => {
+            const disabled = Boolean(property.ui?.disabled);
+            return h(ElInput, {
+                modelValue: value,
+                "onUpdate:modelValue": onChange,
+                clearable: true,
+                disabled,
+                type: "textarea",
+                rows: 3,
+                placeholder: `请输入${property.label}`,
+                ...property.ui?.props
+            });
+        };
     });
 }

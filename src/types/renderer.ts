@@ -17,4 +17,4 @@ export interface PropertyContext {
     onCommit?: () => void;
 }
 
-export type PropertyRenderer = (ctx: PropertyRendererContext) => VNode;
+export type PropertyRenderer = (ctx: PropertyRendererContext) => () => VNode;

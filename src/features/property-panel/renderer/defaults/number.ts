@@ -7,13 +7,15 @@ import { registerPropertyRenderer } from "../property-renderer.registry";
  */
 export function registerNumberRenderer() {
     registerPropertyRenderer("number", ({ value, onChange, property }) => {
-        const disabled = Boolean(property.ui?.disabled);
-        return h(ElInputNumber, {
-            modelValue: value,
-            "onUpdate:modelValue": onChange,
-            controlsPosition: "right",
-            disabled,
-            ...property.ui?.props
-        });
+        return () => {
+            const disabled = Boolean(property.ui?.disabled);
+            return h(ElInputNumber, {
+                modelValue: value,
+                "onUpdate:modelValue": onChange,
+                controlsPosition: "right",
+                disabled,
+                ...property.ui?.props
+            });
+        }
     });
 }
