@@ -16,7 +16,6 @@ export const UserTaskProperties: Property[] = [
         },
         ui: {
             rules: {
-                required: true,
                 ruleKey: "flowable:assignee"
             }
         }

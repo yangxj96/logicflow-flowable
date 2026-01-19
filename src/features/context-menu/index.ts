@@ -36,6 +36,5 @@ export function registerContextMenu(lf: LogicFlow) {
 export function mountContextMenu() {
     const el = document.createElement("div");
     document.body.appendChild(el);
-
     createApp(ContextMenu).mount(el);
 }

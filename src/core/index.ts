@@ -1,23 +1,19 @@
 import type LogicFlow from "@logicflow/core";
 import { registerAll } from "./register";
-import { resolveFlowableOptions } from "./default-options";
 import { NODE_TYPES } from "./constants";
 import { registerContextMenu } from "../features/context-menu";
-import { registerDefaultPropertyRenderers } from "../features/property-panel/renderer/register-defaults";
 import { registerEdgeConstraint } from "../features/behaviors";
+import { registerEvent } from "./event";
 
 /**
  * 插件定义
  */
 export const FlowablePlugin: LogicFlow.ExtensionDefinition = {
     pluginName: "flowable",
-    install(lf: LogicFlow, rawOptions?: any) {
-        const options = resolveFlowableOptions(rawOptions);
+    install(lf: LogicFlow) {
 
-        // 注册默认属性类型渲染器
-        if (options.propertyPanel.defaultRenderers) {
-            registerDefaultPropertyRenderers();
-        }
+        // 注册事件
+        registerEvent(lf);
 
         // 注册所有组件
         registerAll(lf);

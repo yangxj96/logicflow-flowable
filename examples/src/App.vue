@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import LogicFlow from "@logicflow/core";
-import { Control, DndPanel, SelectionSelect } from "@logicflow/extension";
+import { Control, SelectionSelect } from "@logicflow/extension";
 import "@logicflow/core/dist/index.css";
 import "@logicflow/extension/dist/index.css";
 import { onMounted, useTemplateRef } from "vue";
@@ -8,6 +8,7 @@ import Flowable from "@yangxj96/logicflow-flowable";
 import { ElMessage } from "element-plus";
 
 const container = useTemplateRef<HTMLDivElement>("container");
+const graph = useTemplateRef<HTMLDivElement>("graph");
 const panel = useTemplateRef<HTMLDivElement>("panel");
 
 onMounted(() => {
@@ -15,37 +16,54 @@ onMounted(() => {
         container: container.value!,
         grid: true,
         history: true,
-        plugins: [Control, DndPanel, SelectionSelect, Flowable.Plugin],
+        plugins: [Control, SelectionSelect, Flowable.Plugin],
         pluginsOptions: {
             selectionSelect: {
                 exclusiveMode: false
             },
             flowable: {
                 propertyPanel: {
+                    enabled: true,
+                    container: panel.value!,
                     defaultRenderers: true
+                },
+                dndPanel: {
+                    enabled: true,
+                    container: graph.value!
                 }
             }
         }
     });
 
-    (lf.extension.dndPanel as DndPanel)?.setPatternItems(Flowable.getFlowableDndItems());
     (lf.extension.control as Control)?.addItem({
         key: "export",
         title: "",
         text: "导出",
         iconClass: "export",
         onClick: lf => {
-            console.log(lf);
             let xml = Flowable.toBpmnXml(lf);
             console.log(xml);
         }
     });
 
-    lf.render({});
-
-    Flowable.registerPropertyPanel({
-        container: panel.value!,
-        lf: lf
+    lf.render({
+        nodes: [
+            {
+                type: "bpmn:startEvent",
+                x: 100,
+                y: 200
+            },
+            {
+                type: "bpmn:userTask",
+                x: 300,
+                y: 200
+            },
+            {
+                type: "bpmn:endEvent",
+                x: 500,
+                y: 200
+            }
+        ]
     });
 
     // 监听事件
@@ -68,7 +86,10 @@ onMounted(() => {
 
 <template>
     <el-row class="box">
-        <el-col :span="18" class="col">
+        <el-col :span="4" class="col">
+            <div ref="graph" style="height: 100%; width: 100%" />
+        </el-col>
+        <el-col :span="14" class="col">
             <div ref="container" style="height: 99%; width: 100%" />
         </el-col>
         <el-col :span="6" class="col">
