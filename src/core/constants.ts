@@ -1,7 +1,6 @@
-/*--------------BPMN前缀--------------*/
-
-// BPMN前缀
-
+/**
+ * BPMN前缀
+ */
 export const BPMN_PREFIX = `bpmn` as const;
 
 /**

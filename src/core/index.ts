@@ -3,7 +3,7 @@ import { registerAll } from "./register";
 import { registerDefaultPropertyRenderers } from "../property-panel/renderer/register-defaults";
 import { resolveFlowableOptions } from "./default-options";
 import { NODE_TYPES } from "./constants";
-import { registerContextMenu } from "../context-menu";
+import { registerContextMenu } from "../features/context-menu";
 import { registerEdgeConstraint } from "../behaviors";
 
 /**

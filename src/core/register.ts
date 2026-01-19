@@ -1,11 +1,12 @@
 // 注册节点
 import { LogicFlow } from "@logicflow/core";
-import { registerEventNodes } from "../nodes/events";
-import { registerTaskNodes } from "../nodes/tasks";
+import { registerEventNodes } from "../elements/nodes/events";
+import { registerTaskNodes } from "../elements/nodes/tasks";
+import { registerGatewayNodes } from "../elements/nodes/gateways";
 // 注册线
-import { registerSequenceEdges } from "../edges/sequence";
-import { initProcessContext } from "../context/process";
-import { registerGatewayNodes } from "../nodes/gateways";
+import { registerSequenceEdges } from "../elements/edges/sequence";
+// 上下文
+import { initProcessContext } from "../features/context/process";
 
 /**
  * 注册相关的所有组件

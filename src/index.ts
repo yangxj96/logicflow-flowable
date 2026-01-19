@@ -18,7 +18,7 @@
 import FlowablePlugin from "./core";
 import { getFlowableDndItems } from "./utils/dnd";
 import { toBpmnXml } from "./utils/flowable";
-import { registerPropertyPanel } from "./property-panel";
+import { registerPropertyPanel } from "./features/property-panel";
 
 /**
  * 基于 LogicFlow 的 BPMN 2.0 流程图可视化与建模插件，无缝对接 Flowable 工作流引擎。
