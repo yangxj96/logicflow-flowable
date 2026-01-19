@@ -8,6 +8,11 @@ export interface DndPanelOptions {
     container: HTMLElement;
 }
 
+export interface DndState {
+    lf: LogicFlow;
+    nodes: DndNodeMeta[];
+}
+
 /**
  * 节点元数据定义
  */
