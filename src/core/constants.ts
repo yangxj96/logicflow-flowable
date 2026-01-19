@@ -1,7 +1,13 @@
 /**
+ * 插件名称
+ */
+export const PLUGIN_NAME = "flowable";
+
+/**
  * BPMN前缀
  */
 export const BPMN_PREFIX = `bpmn` as const;
+
 
 /**
  * BPMN nodes type 构建

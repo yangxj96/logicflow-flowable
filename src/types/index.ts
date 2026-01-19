@@ -1,3 +1,4 @@
+export * from "./plugin";
 export * from "./capabilities";
 export * from "./elements";
 export * from "./dnd";

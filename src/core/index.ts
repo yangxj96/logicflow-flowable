@@ -1,6 +1,6 @@
 import type LogicFlow from "@logicflow/core";
 import { registerAll } from "./register";
-import { NODE_TYPES } from "./constants";
+import { NODE_TYPES, PLUGIN_NAME } from "./constants";
 import { registerContextMenu } from "../features/context-menu";
 import { registerEdgeConstraint } from "../features/behaviors";
 import { registerEvent } from "./event";
@@ -9,7 +9,7 @@ import { registerEvent } from "./event";
  * 插件定义
  */
 export const FlowablePlugin: LogicFlow.ExtensionDefinition = {
-    pluginName: "flowable",
+    pluginName: PLUGIN_NAME,
     install(lf: LogicFlow) {
 
         // 注册事件
