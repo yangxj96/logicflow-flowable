@@ -1,10 +1,10 @@
 import type LogicFlow from "@logicflow/core";
 import { registerAll } from "./register";
-import { registerDefaultPropertyRenderers } from "../property-panel/renderer/register-defaults";
 import { resolveFlowableOptions } from "./default-options";
 import { NODE_TYPES } from "./constants";
 import { registerContextMenu } from "../features/context-menu";
-import { registerEdgeConstraint } from "../behaviors";
+import { registerDefaultPropertyRenderers } from "../features/property-panel/renderer/register-defaults";
+import { registerEdgeConstraint } from "../features/behaviors";
 
 /**
  * 插件定义

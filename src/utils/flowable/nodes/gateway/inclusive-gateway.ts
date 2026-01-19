@@ -1,6 +1,6 @@
 import { attrsToString, buildXmlParts } from "../../utils";
-import { InclusiveGatewayProperties } from "../../../../properties/gateways/inclusive-gateway";
 import LogicFlow from "@logicflow/core";
+import { InclusiveGatewayProperties } from "../../../../features/properties/gateways/inclusive-gateway";
 
 /**
  * 包容网关节点转 BPMN XML

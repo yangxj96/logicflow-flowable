@@ -1,6 +1,6 @@
 import { attrsToString, buildXmlParts } from "../../utils";
-import { ExclusiveGatewayProperties } from "../../../../properties/gateways/exclusive-gateway";
 import LogicFlow from "@logicflow/core";
+import { ExclusiveGatewayProperties } from "../../../../features/properties/gateways/exclusive-gateway";
 
 /**
  * 排他网关节点转 BPMN XML

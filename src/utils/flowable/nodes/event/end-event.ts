@@ -1,6 +1,6 @@
 import { attrsToString, buildXmlParts } from "../../utils";
-import { EndEventProperties } from "../../../../properties/events/end";
 import LogicFlow from "@logicflow/core";
+import { EndEventProperties } from "../../../../features/properties/events/end";
 
 /**
  * 结束事件节点转BPMN格式的XML字符串

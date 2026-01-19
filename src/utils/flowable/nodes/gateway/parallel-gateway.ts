@@ -1,6 +1,6 @@
 import { attrsToString, buildXmlParts } from "../../utils";
-import { ParallelGatewayProperties } from "../../../../properties/gateways/parallel-gateway";
 import LogicFlow from "@logicflow/core";
+import { ParallelGatewayProperties } from "../../../../features/properties/gateways/parallel-gateway";
 
 /**
  * 并行网关节点转 BPMN XML

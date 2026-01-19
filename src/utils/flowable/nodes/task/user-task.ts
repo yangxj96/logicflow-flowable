@@ -1,6 +1,6 @@
 import { attrsToString, buildXmlParts } from "../../utils";
-import { UserTaskProperties } from "../../../../properties/tasks/user-task";
 import LogicFlow from "@logicflow/core";
+import { UserTaskProperties } from "../../../../features/properties/tasks/user-task";
 
 /**
  * 用户任务节点转BPMN格式的XML字符串

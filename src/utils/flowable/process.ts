@@ -1,5 +1,5 @@
 import type LogicFlow from "@logicflow/core";
-import { getProcessContext } from "../../context/process";
+import { getProcessContext } from "../../features/context/process";
 
 /**
  * 流程节点转BPMN格式的XML字符串

@@ -1,6 +1,6 @@
 import { attrsToString, buildXmlParts } from "../utils";
-import { SequenceFlowProperties } from "../../../properties/edges/sequence-flow";
 import LogicFlow from "@logicflow/core";
+import { SequenceFlowProperties } from "../../../features/properties/edges/sequence-flow";
 
 /**
  * SequenceFlow节点转BPMN格式的XML字符串

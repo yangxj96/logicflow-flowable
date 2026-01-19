@@ -1,6 +1,6 @@
 import { attrsToString, buildXmlParts } from "../../utils";
-import { ReceiveTaskProperties } from "../../../../properties/tasks/receive-task";
 import LogicFlow from "@logicflow/core";
+import { ReceiveTaskProperties } from "../../../../features/properties/tasks/receive-task";
 
 /**
  * 接收任务节点转BPMN格式的XML字符串
