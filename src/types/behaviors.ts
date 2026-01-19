@@ -56,7 +56,7 @@ export interface NodeBehavior {
 }
 
 /**
- * 行为基类
+ * 行为功能,暂时放到这里,后续要移动到capabilities.ts中
  */
 export interface BehaviorsBase {
     /**

@@ -1,5 +1,5 @@
 import LogicFlow, { CircleNodeModel } from "@logicflow/core";
-import { BehaviorsBase, NodeBehavior } from "../../../../types";
+import { NodeBehavior, NodeCap, PropertyBase } from "../../../../types";
 import { NODE_TYPES } from "../../../../core/constants";
 import { EndEventBehavior } from "../../../../features/behaviors/nodes/events/end-event";
 import { BpmnIdGenerator } from "../../../../utils/id-generator";
@@ -9,12 +9,17 @@ import { EndEventProperties } from "../../../../features/properties/events/end";
 /**
  * 结束事件节点模型
  */
-export class EndEventModel extends CircleNodeModel implements BehaviorsBase {
+export class EndEventModel extends CircleNodeModel implements NodeCap {
     static readonly type = NODE_TYPES.END_EVENT;
+
+    getNodeProperties(): PropertyBase[] {
+        return EndEventProperties;
+    }
 
     getBehavior(): NodeBehavior {
         return EndEventBehavior;
     }
+
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
@@ -36,7 +41,7 @@ export class EndEventModel extends CircleNodeModel implements BehaviorsBase {
 
         // 初始化 properties（非常关键）
         this.properties = {};
-        EndEventProperties.forEach(prop => {
+        this.getNodeProperties().forEach(prop => {
             this.properties[prop.key] = "";
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;

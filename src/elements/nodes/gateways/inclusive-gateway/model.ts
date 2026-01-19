@@ -1,5 +1,5 @@
 import { GatewayBaseModel } from "../gateway-base-model";
-import { BehaviorsBase, NodeBehavior } from "../../../../types";
+import { NodeBehavior, NodeCap, PropertyBase } from "../../../../types";
 import { NODE_TYPES } from "../../../../core/constants";
 import { InclusiveGatewayBehavior } from "../../../../features/behaviors/nodes/gateways/inclusive-gateway";
 import { BpmnIdGenerator } from "../../../../utils/id-generator";
@@ -8,9 +8,13 @@ import { ExclusiveGatewayProperties } from "../../../../features/properties/gate
 /**
  * 包容网关模型
  */
-export class InclusiveGatewayModel extends GatewayBaseModel implements BehaviorsBase {
+export class InclusiveGatewayModel extends GatewayBaseModel implements NodeCap {
 
     static readonly type = NODE_TYPES.INCLUSIVE_GATEWAY;
+
+    getNodeProperties(): PropertyBase[] {
+        return ExclusiveGatewayProperties;
+    }
 
     getBehavior(): NodeBehavior {
         return InclusiveGatewayBehavior;
@@ -23,7 +27,7 @@ export class InclusiveGatewayModel extends GatewayBaseModel implements Behaviors
         this.id = bpmnId;
         this.text.value = "包容网关";
 
-        ExclusiveGatewayProperties.forEach(prop => {
+        this.getNodeProperties().forEach(prop => {
             this.properties[prop.key] ??= "";
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;

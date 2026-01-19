@@ -1,5 +1,5 @@
 import { GatewayBaseModel } from "../gateway-base-model";
-import { BehaviorsBase, NodeBehavior } from "../../../../types";
+import { BehaviorsBase, NodeBehavior, NodeCap, PropertyBase } from "../../../../types";
 import { NODE_TYPES } from "../../../../core/constants";
 import { ParallelGatewayBehavior } from "../../../../features/behaviors/nodes/gateways/parallel-gateway";
 import { BpmnIdGenerator } from "../../../../utils/id-generator";
@@ -8,9 +8,13 @@ import { ExclusiveGatewayProperties } from "../../../../features/properties/gate
 /**
  * 并行网关模型
  */
-export class ParallelGatewayModel extends GatewayBaseModel implements BehaviorsBase {
+export class ParallelGatewayModel extends GatewayBaseModel implements NodeCap {
 
     static readonly type = NODE_TYPES.PARALLEL_GATEWAY;
+
+    getNodeProperties(): PropertyBase[] {
+        return ExclusiveGatewayProperties;
+    }
 
     getBehavior(): NodeBehavior {
         return ParallelGatewayBehavior;
@@ -24,7 +28,7 @@ export class ParallelGatewayModel extends GatewayBaseModel implements BehaviorsB
         this.id = bpmnId;
         this.text.value = "并行网关";
 
-        ExclusiveGatewayProperties.forEach(prop => {
+        this.getNodeProperties().forEach(prop => {
             this.properties[prop.key] ??= "";
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;

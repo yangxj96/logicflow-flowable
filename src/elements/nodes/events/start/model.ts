@@ -1,16 +1,20 @@
 import LogicFlow, { CircleNodeModel } from "@logicflow/core";
 import { NODE_TYPES } from "../../../../core/constants";
 import { BpmnIdGenerator } from "../../../../utils/id-generator";
-import { BehaviorsBase, NodeBehavior } from "../../../../types";
+import { NodeBehavior, NodeCap, PropertyBase } from "../../../../types";
 import { StartEventBehavior } from "../../../../features/behaviors/nodes/events/start-event";
 import { StartEventProperties } from "../../../../features/properties/events/start";
 
 /**
  * 开始事件节点模型
  */
-export class StartEventModel extends CircleNodeModel implements BehaviorsBase {
+export class StartEventModel extends CircleNodeModel implements NodeCap {
 
     static readonly type = NODE_TYPES.START_EVENT;
+
+    getNodeProperties(): PropertyBase[] {
+        return StartEventProperties;
+    }
 
     getBehavior(): NodeBehavior {
         return StartEventBehavior;
@@ -36,7 +40,7 @@ export class StartEventModel extends CircleNodeModel implements BehaviorsBase {
 
         // 初始化 properties（非常关键）
         this.properties = {};
-        StartEventProperties.forEach(prop => {
+        this.getNodeProperties().forEach(prop => {
             this.properties[prop.key] = "";
             if (prop.key === "id") {
                 this.properties[prop.key] = bpmnId;

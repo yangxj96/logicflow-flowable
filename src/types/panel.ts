@@ -2,7 +2,7 @@ import type { LogicFlow } from "@logicflow/core";
 import type { ComputedRef, Ref } from "vue";
 import type { Property } from "./property";
 import type { FormInstance } from "element-plus";
-import type { ProcessModel } from "./node";
+import type { ProcessModel } from "./elements";
 
 /**
  * 面板参数
