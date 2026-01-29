@@ -5,9 +5,6 @@ import { registerPropertyPanel } from "../features/property-panel";
 import { registerDndPanel } from "../features/dnd-panel";
 import { PLUGIN_NAME } from "./constants";
 
-let defaultRenderersRegistered = false;
-let propertyPanelMounted = false;
-
 /**
  * 注册所有额外事件
  * @param lf LogicFlow实例
@@ -24,18 +21,16 @@ export function registerEvent(lf: LogicFlow) {
             let propertyPanel = options.propertyPanel;
 
             // 注册默认属性类型渲染器
-            if (propertyPanel.defaultRenderers && !defaultRenderersRegistered) {
+            if (propertyPanel.defaultRenderers) {
                 registerDefaultPropertyRenderers();
-                defaultRenderersRegistered = true;
             }
 
             // 注册属性面板
-            if (propertyPanel.enabled && propertyPanel.container && !propertyPanelMounted) {
+            if (propertyPanel.enabled && propertyPanel.container) {
                 registerPropertyPanel({
                     container: propertyPanel.container,
                     lf: lf
                 });
-                propertyPanelMounted = true;
             }
         }
 
