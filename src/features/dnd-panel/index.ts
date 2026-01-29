@@ -1,16 +1,22 @@
 import { DndNodeMeta, DndPanelOptions } from "../../types";
-import { createApp } from "vue";
+import { App, createApp } from "vue";
 import { createDndPanel } from "./dnd-panel.ui";
 import { NODE_ICONS, NODE_TYPES } from "../../core/constants";
 
-let mounted = false;
+
+const appMap = new WeakMap<HTMLElement, App>();
 
 export function registerDndPanel({ lf, container }: DndPanelOptions) {
-    // 只 mount 一次（非常重要）
-    if (!mounted) {
-        createApp(createDndPanel(lf)).mount(container);
-        mounted = true;
+    if (!container) return;
+
+    if (appMap.has(container)) {
+        return;
     }
+
+    const app = createApp(createDndPanel(lf));
+    app.mount(container);
+
+    appMap.set(container, app);
 }
 
 export const DEFAULT_DND_ITEMS = [
