@@ -49,7 +49,7 @@ export const ContextMenu = defineComponent({
                         {
                             key: item.key,
                             class: [
-                                "menu-item",
+                                "lf-context-menu-item",
                                 item.disabled?.(state.ctx!) ? "disabled" : "",
                             ],
                             onClick: () => handleClick(item),

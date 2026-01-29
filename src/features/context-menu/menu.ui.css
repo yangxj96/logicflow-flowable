@@ -8,17 +8,17 @@
     padding: 4px 0;
 }
 
-.menu-item {
+.lf-context-menu-item {
     padding: 6px 12px;
     cursor: pointer;
     font-size: 13px;
 }
 
-.menu-item:hover {
+.lf-context-menu-item:hover {
     background: #f5f7fa;
 }
 
-.menu-item.disabled {
+.lf-context-menu-item.disabled {
     color: #bbb;
     cursor: not-allowed;
 }
