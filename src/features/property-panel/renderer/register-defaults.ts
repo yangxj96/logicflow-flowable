@@ -1,19 +1,19 @@
-import {
-    registerBooleanRenderer,
-    registerNumberRenderer,
-    registerSelectRenderer,
-    registerStringRenderer,
-    registerTextareaRenderer
-} from "./defaults";
-
-/**
- * 注册插件内置的属性渲染器
- * 只应调用一次
- */
-export function registerDefaultPropertyRenderers() {
-    registerStringRenderer();
-    registerTextareaRenderer();
-    registerSelectRenderer();
-    registerNumberRenderer();
-    registerBooleanRenderer();
-}
+// import {
+//     registerBooleanRenderer,
+//     registerNumberRenderer,
+//     registerSelectRenderer,
+//     registerStringRenderer,
+//     registerTextareaRenderer
+// } from "./defaults";
+//
+// /**
+//  * 注册插件内置的属性渲染器
+//  * 只应调用一次
+//  */
+// export function registerDefaultPropertyRenderers() {
+//     registerStringRenderer();
+//     registerTextareaRenderer();
+//     registerSelectRenderer();
+//     registerNumberRenderer();
+//     registerBooleanRenderer();
+// }

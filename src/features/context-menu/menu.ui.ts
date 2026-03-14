@@ -1,7 +1,7 @@
 import { defineComponent, h, computed, onMounted, onBeforeUnmount } from "vue";
 import { closeContextMenu, contextMenuState as state } from "./menu.state";
-import type { ContextMenuItem } from "../../types";
 import "./menu.ui.css"
+import { ContextMenuItem } from "./types";
 
 export const ContextMenu = defineComponent({
     name: "LogicFlowContextMenu",
