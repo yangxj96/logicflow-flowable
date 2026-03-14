@@ -11,7 +11,7 @@ let mounted = false;
  * @param lf
  */
 export function registerContextMenu(lf: LogicFlow) {
-    // 只 mount 一次（非常重要）
+    // 只mount一次
     if (!mounted) {
         mountContextMenu();
         mounted = true;

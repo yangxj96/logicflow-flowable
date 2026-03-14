@@ -1,4 +1,4 @@
-import { FlowablePluginOptions, ResolvedFlowableOptions } from "../types/plugin";
+import { FlowablePluginOptions, ResolvedFlowableOptions } from "../types";
 
 /**
  * Flowable 插件默认配置
