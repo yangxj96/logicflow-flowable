@@ -1,52 +1,33 @@
 import { PropertyPanelState } from "./types";
-import { h } from "vue";
+import { computed, h } from "vue";
 import { ElCard, ElForm } from "element-plus";
-import { renderErrorCard } from "./property.render.common";
 import { NODE_TYPE_NAMES } from "../../core/constants";
-
-/**
- * 默认的标题
- */
-const DEFAULT_TITLES = {
-    process: "流程属性",
-    node: "节点属性",
-    edge: "线属性"
-} as const;
-
-/**
- * 获取属性面板标题
- * @param state 属性面板state
- */
-function getTitle(state: PropertyPanelState) {
-    const { mode, currentNode, currentEdge } = state;
-
-    if (mode.value === "process") {
-        return DEFAULT_TITLES.process;
-    }
-
-    if (mode.value === "node") {
-        const type = currentNode.value?.type;
-        return (type && NODE_TYPE_NAMES[type]) || DEFAULT_TITLES.node;
-    }
-
-    if (mode.value === "edge") {
-        const type = currentEdge.value?.type;
-        return (type && NODE_TYPE_NAMES[type]) || DEFAULT_TITLES.edge;
-    }
-
-    return "";
-}
 
 /**
  * 渲染属性
  * @param state 状态
  */
 export function renderProperty(state: PropertyPanelState) {
-    let title = getTitle(state);
+    const title = computed(() => {
+        const { mode, currentNode, currentEdge } = state;
 
-    if (!state.process.value) {
-        return renderErrorCard(title, "加载异常");
-    }
+        if (mode.value === "process") {
+            return "流程属性";
+        }
+
+        if (mode.value === "node") {
+            const type = currentNode.value?.type;
+            return (type && NODE_TYPE_NAMES[type]) || "节点属性";
+        }
+
+        if (mode.value === "edge") {
+            const type = currentEdge.value?.type;
+            return (type && NODE_TYPE_NAMES[type]) || "线属性";
+        }
+
+        return "";
+    });
+
     // 正常渲染
     return h(
         ElCard,
@@ -67,7 +48,7 @@ export function renderProperty(state: PropertyPanelState) {
                             fontWeight: 600
                         }
                     },
-                    title
+                    title.value
                 ),
             default: () =>
                 h(

@@ -8,6 +8,7 @@ export function registerPropertyEvents(options: PropertyEventOptions) {
 
     // ===== 节点点击 =====
     lf.on("node:click", ({ data }) => {
+        console.log(data);
         run(() => {
             state.mode.value = "node";
             state.currentNode.value = data;
