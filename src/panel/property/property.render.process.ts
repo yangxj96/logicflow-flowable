@@ -93,7 +93,9 @@ export function renderProcessPanel(state: PropertyPanelState) {
                             () =>
                                 h(ElInput, {
                                     modelValue: state.process.value.documentation,
-                                    "onUpdate:modelValue": (v: string) => (state.process.value.documentation = v)
+                                    "onUpdate:modelValue": (v: string) => (state.process.value.documentation = v),
+                                    type: "textarea",
+                                    rows: 5
                                 })
                         )
                     ]
