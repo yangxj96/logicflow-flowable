@@ -1,6 +1,4 @@
-import LogicFlow from "@logicflow/core";
-import { App } from "vue";
-import { PropertyEventOptions, PropertyPanelState } from "./types";
+import { PropertyEventOptions } from "./types";
 
 /**
  * 注册属性面板相关事件
@@ -8,53 +6,83 @@ import { PropertyEventOptions, PropertyPanelState } from "./types";
 export function registerPropertyEvents(options: PropertyEventOptions) {
     const { lf, app, state } = options;
 
-    const events = ["node:click", "edge:click", "blank:click"];
-
-    events.forEach(event => {
-        lf.on(event, () => {
-            updateSelection(lf, app, state);
+    // ===== 节点点击 =====
+    lf.on("node:click", ({ data }) => {
+        run(() => {
+            state.mode.value = "node";
+            state.currentNode.value = data;
+            state.currentEdge.value = undefined;
         });
     });
 
-    lf.on("node:add", ({ data }) => {
-        lf.selectElementById(data.id);
-        updateSelection(lf, app, state);
-    });
-
-    lf.on("node:dnd-add", ({ data }) => {
-        lf.selectElementById(data.id);
-        updateSelection(lf, app, state);
-    });
-
-    lf.on("edge:add", ({ data }) => {
-        lf.selectElementById(data.id);
-        updateSelection(lf, app, state);
-    });
-}
-
-function updateSelection(lf: LogicFlow, app: App, state: PropertyPanelState) {
-    const { nodes, edges } = lf.getSelectElements();
-
-    console.log(nodes);
-    console.log(edges);
-
-    app?.runWithContext(() => {
-        if (nodes.length) {
-            state.mode.value = "node";
-            state.currentNode.value = nodes[0];
-            state.currentEdge.value = undefined;
-            return;
-        }
-
-        if (edges.length) {
+    // ===== 边点击 =====
+    lf.on("edge:click", ({ data }) => {
+        run(() => {
             state.mode.value = "edge";
             state.currentNode.value = undefined;
-            state.currentEdge.value = edges[0];
-            return;
-        }
+            state.currentEdge.value = data;
+        });
+    });
 
+    // ===== 画布点击 =====
+    lf.on("blank:click", () => {
+        run(() => {
+            state.mode.value = "process";
+            state.currentNode.value = undefined;
+            state.currentEdge.value = undefined;
+        });
+    });
+
+    // ===== 新增节点（DND / add）=====
+    const handleNodeAdd = ({ data }: any) => {
+        lf.selectElementById(data.id);
+
+        run(() => {
+            state.mode.value = "node";
+            state.currentNode.value = data;
+            state.currentEdge.value = undefined;
+        });
+    };
+
+    lf.on("node:add", handleNodeAdd);
+    lf.on("node:dnd-add", handleNodeAdd);
+
+    // ===== 新增边 =====
+    lf.on("edge:add", ({ data }) => {
+        lf.selectElementById(data.id);
+
+        run(() => {
+            state.mode.value = "edge";
+            state.currentNode.value = undefined;
+            state.currentEdge.value = data;
+        });
+    });
+
+    // ===== 可选：删除时重置 =====
+    lf.on("node:delete", resetIfMatch);
+    lf.on("edge:delete", resetIfMatch);
+
+    // ===== 重置匹配 =====
+    function resetIfMatch({ data }: any) {
+        run(() => {
+            if (state.currentNode.value?.id === data.id) {
+                reset();
+            }
+            if (state.currentEdge.value?.id === data.id) {
+                reset();
+            }
+        });
+    }
+
+    // ===== 状态重置 =====
+    function reset() {
         state.mode.value = "process";
         state.currentNode.value = undefined;
         state.currentEdge.value = undefined;
-    });
+    }
+
+    // ===== Vue 上下文执行 =====
+    function run(fn: () => void) {
+        app?.runWithContext ? app.runWithContext(fn) : fn();
+    }
 }

@@ -9,7 +9,6 @@ export class EndEventModel extends CircleNodeModel {
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
-        //  固定大小
         this.r = 26;
     }
 

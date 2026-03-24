@@ -27,16 +27,19 @@ export function registerDndPanel({ lf, container }: DndPanelOptions): () => void
     };
 }
 
-export const DEFAULT_DND_ITEMS = [
+/**
+ * 默认DND列表
+ */
+export const DND_ITEMS = [
     {
         type: NODE_TYPES.START_EVENT,
-        label: "开始事件",
+        label: "开始",
         icon: NODE_ICONS.START_EVENT,
         group: "事件"
     },
     {
         type: NODE_TYPES.END_EVENT,
-        label: "结束事件",
+        label: "结束",
         icon: NODE_ICONS.END_EVENT,
         group: "事件"
     },

@@ -1,5 +1,6 @@
 import LogicFlow, { CircleNodeModel } from "@logicflow/core";
 import { NODE_TYPES } from "../../../../core/constants";
+import { BpmnIdGenerator } from "../../../../helper/id-generator";
 
 /**
  * 开始事件节点模型
@@ -9,15 +10,13 @@ export class StartEventModel extends CircleNodeModel {
 
     constructor(data: any, graphModel: any) {
         super(data, graphModel);
-        // StartEvent 固定大小
         this.r = 26;
     }
 
     initNodeData(data: LogicFlow.NodeConfig) {
         super.initNodeData(data);
-        this.id = this.id.toUpperCase();
+        this.id = BpmnIdGenerator.generate();
         this.properties = {
-            // id: BpmnIdGenerator.generate(),
             id: this.id,
             name: "测试"
         };

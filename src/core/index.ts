@@ -3,12 +3,9 @@ import { NODE_TYPES, PLUGIN_NAME } from "./constants";
 import { registerContextMenu } from "../features/context-menu";
 import { FlowablePluginOptions } from "./types";
 import { registerDndPanel } from "../panel/dnd";
-import { registerEventNodes } from "../elements/nodes/events";
-import { registerTaskNodes } from "../elements/nodes/tasks";
-import { registerSequenceEdges } from "../elements/edges/sequence";
-import { registerGatewayNodes } from "../elements/nodes/gateways";
 import { registerPropertyPanel } from "../panel/property";
 import { initProcessContext } from "../features/context/process";
+import { initElements } from "../elements";
 
 /**
  * 插件注册
@@ -30,71 +27,104 @@ export default class FlowablePlugin {
     options: FlowablePluginOptions;
 
     /**
-     * 需要销毁的
-     * @private
-     */
-    private disposers: (() => void)[] = [];
-
-    /**
      * 插件初始化
      * @param lf
      * @param options
      */
     constructor({ lf, options }: { lf: LogicFlow; options: FlowablePluginOptions }) {
         this.lf = lf;
-        this.options = options || {};
+        this.options = this.mergeOptions(options);
         this.init();
     }
 
     /**
-     * 插件渲染
-     * @param lf
-     * @param toolOverlay
+     * 初始化插件
+     * @private
      */
-    render(lf: LogicFlow, toolOverlay: HTMLElement) {}
-
-    /**
-     * 插件销毁
-     */
-    destroy() {
-        this.disposers.forEach(disposer => disposer());
-        this.disposers = [];
+    private init(): void {
+        this.initContext();
+        this.initElements();
+        this.initPlugins();
+        this.initDefaultConfig();
+        this.bindEvents();
     }
 
-    private init(): void {
-        // 初始化上下文
+    /**
+     * 初始化上下文
+     */
+    private initContext() {
         initProcessContext(this.lf);
-        // 画布渲染数据后触发，即 lf.render() 方法被调用后触发。
-        this.lf.on("graph:rendered", () => {
-            // DND面板
-            if (this.options.panel?.dnd) {
-                this.disposers.push(
-                    registerDndPanel({
-                        lf: this.lf,
-                        container: this.options.panel.dnd
-                    })
-                );
-            }
-            // 属性面板
-            if (this.options.panel?.property) {
-                this.disposers.push(
-                    registerPropertyPanel({
-                        lf: this.lf,
-                        container: this.options.panel.property
-                    })
-                );
-            }
-        });
-        // 初始化流程上下文
-        initProcessContext(this.lf);
-        // 注册相关节点
-        registerEventNodes(this.lf);
-        registerTaskNodes(this.lf);
-        registerSequenceEdges(this.lf);
-        registerGatewayNodes(this.lf);
-        // 注册右键上下文菜单
+    }
+
+    /**
+     * 注册节点
+     */
+    private initElements() {
+        initElements(this.lf);
+    }
+
+    /**
+     * 注册插件能力
+     */
+    private initPlugins() {
         registerContextMenu(this.lf);
-        // 设置默认连线
+    }
+
+    /**
+     * 默认配置
+     */
+    private initDefaultConfig() {
         this.lf.setDefaultEdgeType(NODE_TYPES.SEQUENCE_FLOW);
+    }
+
+    /**
+     * 事件绑定
+     */
+    private bindEvents() {
+        this.lf.on("graph:rendered", this.onGraphRendered);
+    }
+
+    /**
+     * 渲染完成
+     */
+    private onGraphRendered = () => {
+        this.initPanels();
+    };
+
+    /**
+     * 初始化面板
+     * @private
+     */
+    private initPanels() {
+        const { panel } = this.options;
+
+        if (!panel) return;
+
+        // DND面板
+        if (panel.dnd) {
+            registerDndPanel({
+                lf: this.lf,
+                container: panel.dnd
+            });
+        }
+        // 属性面板
+        if (panel.property) {
+            registerPropertyPanel({
+                lf: this.lf,
+                container: panel.property
+            });
+        }
+    }
+
+    /**
+     * 合并默认配置
+     */
+    private mergeOptions(options?: FlowablePluginOptions): Required<FlowablePluginOptions> {
+        return {
+            panel: {
+                dnd: options?.panel?.dnd,
+                property: options?.panel?.property
+            }
+        };
     }
 }
