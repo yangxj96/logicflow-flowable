@@ -4,7 +4,7 @@ import { Control, SelectionSelect } from "@logicflow/extension";
 import "@logicflow/core/dist/index.css";
 import "@logicflow/extension/dist/index.css";
 import { onMounted, useTemplateRef } from "vue";
-import Flowable from "@yangxj96/logicflow-flowable";
+import Flowable from "@yangxj96/logicflow-plugin-flowable";
 import { ElMessage, ElMessageBox } from "element-plus";
 
 const container = useTemplateRef<HTMLDivElement>("container");

@@ -4,7 +4,7 @@
 
 `@yangxj96/logicflow-plugin-flowable` 是基于 [LogicFlow](https://logicflow.org) 的 **BPMN 2.0 流程建模插件**，无缝对接 [Flowable](https://www.flowable.org) 工作流引擎。
 
-- 在 spectra-ui 中作为本地 `file:` 引用（`file:../logicflow-flowable`）
+- 在 spectra-ui 中作为本地 `file:` 引用（`file:../logicflow-plugin-flowable`）
 - 输出：ESM + CJS + .d.ts（通过 tsup 构建）
 - 对等依赖：`@logicflow/core`、`@logicflow/extension`、`element-plus`、`vue`
 
@@ -61,9 +61,9 @@ src/
 
 ### 在 spectra-ui 中调试
 
-1. 在 `logicflow-flowable/` 执行 `pnpm run dev`（监听模式，自动重新构建）
+1. 在 `logicflow-plugin-flowable/` 执行 `pnpm run dev`（监听模式，自动重新构建）
 2. 在 `spectra-ui/` 执行 `pnpm start`
-3. 修改 logicflow-flowable 源码后，构建产物会自动更新到 spectra-ui
+3. 修改 logicflow-plugin-flowable 源码后，构建产物会自动更新到 spectra-ui
 
 ### 添加新节点
 

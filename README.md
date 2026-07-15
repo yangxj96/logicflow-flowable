@@ -59,7 +59,7 @@ cd examples && pnpm install && pnpm dev
 |---|---|
 | 流程建模插件 | `docs/20-前端/30-流程建模插件.md` |
 | 工作流模块 | `docs/10-后端/60-工作流.md` |
-| 执行计划 | `docs/98-计划/logicflow-flowable/P-子流程标准化修复计划.md` |
+| 执行计划 | `docs/98-计划/logicflow-plugin-flowable/P-子流程标准化修复计划.md` |
 
 ## 许可证
 
