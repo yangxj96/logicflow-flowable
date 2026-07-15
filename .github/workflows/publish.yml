@@ -44,4 +44,4 @@ jobs:
           fi
 
       - name: Publish to npm
-        run: pnpm publish --tag ${{ steps.disttag.outputs.tag }} --access public --provenance
+        run: pnpm publish --tag ${{ steps.disttag.outputs.tag }} --access public --provenance --no-git-checks
