@@ -141,12 +141,42 @@ export class SubProcessView extends DynamicGroupNode {
 
 ### 阶段七：更新文档
 
-#### 7.1 更新 NodeBehaviors.md
+#### 7.1 更新行为规则文档
 
 **操作**：
-- 修改 `document/NodeBehaviors.md`：
-  - 删除展开子流程的行为规则描述
-  - 更新子流程的行为规则描述
+- 将 `document/NodeBehaviors.md` 拆分为模块化文档：
+  - `document/Nodes/00-行为规则总览.md`
+  - `document/Nodes/01-事件节点.md`
+  - `document/Nodes/02-任务节点.md`
+  - `document/Nodes/03-子流程与调用.md`
+  - `document/Nodes/04-网关节点.md`
+  - `document/Nodes/05-边与设计原则.md`
+- 删除 `document/NodeBehaviors.md`
+
+### 阶段八：BPMN 导出标准化
+
+#### 8.1 修复 EndEvent terminateAll 导出格式
+
+**操作**：
+- 修改 `src/features/schema/nodes/event/end-event.ts`：
+  - `terminateAll` 类型从 `inline` 改为 `children`
+
+**效果**：导出时输出 `<terminateEventDefinition />` 而非属性。
+
+#### 8.2 修复事件定义子元素导出格式
+
+**操作**：
+- 修改 `src/features/export/builder.ts` 的 `buildChildren` 函数：
+  - 事件定义字段（`timerEventDefinition`、`messageEventDefinition`、`signalEventDefinition`、`errorEventDefinition`）输出为空元素 `<xxx />`
+  - `terminateAll` 输出为 `<terminateEventDefinition />`
+
+#### 8.3 修复 conditionExpression 导出格式
+
+**操作**：
+- 修改 `src/features/export/builder.ts`：
+  - 添加 `XSI_NS` 常量
+  - `definitions` 根元素添加 `xmlns:xsi` 命名空间
+  - `conditionExpression` 添加 `xsi:type="tFormalExpression"` 属性
 
 ## 文件变更清单
 
@@ -154,15 +184,25 @@ export class SubProcessView extends DynamicGroupNode {
 |------|----------|
 | 删除 | `src/elements/nodes/subprocess/expanded-sub-process/` 目录 |
 | 删除 | `src/features/schema/nodes/subprocess/expanded-sub-process.ts` |
+| 删除 | `document/NodeBehaviors.md` |
+| 新建 | `document/Nodes/00-行为规则总览.md` |
+| 新建 | `document/Nodes/01-事件节点.md` |
+| 新建 | `document/Nodes/02-任务节点.md` |
+| 新建 | `document/Nodes/03-子流程与调用.md` |
+| 新建 | `document/Nodes/04-网关节点.md` |
+| 新建 | `document/Nodes/05-边与设计原则.md` |
 | 修改 | `src/core/constants.ts` |
 | 修改 | `src/features/schema/index.ts` |
 | 修改 | `src/features/schema/nodes/subprocess/sub-process.ts` |
+| 修改 | `src/features/schema/nodes/event/end-event.ts` |
 | 修改 | `src/features/behaviors/index.ts` |
 | 修改 | `src/features/import/types.ts` |
 | 修改 | `src/features/export/types.ts` |
+| 修改 | `src/features/export/builder.ts` |
 | 修改 | `src/panel/dnd/index.ts` |
 | 修改 | `src/elements/nodes/subprocess/sub-process/view.ts` |
-| 修改 | `document/NodeBehaviors.md` |
+| 修改 | `AGENTS.md` |
+| 修改 | `README.md` |
 
 ## 验证步骤
 
@@ -170,6 +210,7 @@ export class SubProcessView extends DynamicGroupNode {
 2. **导入测试**：导入包含 `<expandedSubProcess>` 的旧 BPMN 文件，验证自动转换为 `subProcess`
 3. **导出测试**：导出包含子流程的流程图，验证 XML 结构正确
 4. **视觉测试**：检查子流程节点显示加粗边框
+5. **导出标准化验证**：对照 Flowable 标准验证导出的 XML 结构
 
 ## 风险评估
 
@@ -182,4 +223,4 @@ export class SubProcessView extends DynamicGroupNode {
 
 - BPMN 2.0 规范：https://www.omg.org/spec/BPMN/2.0
 - Flowable 文档：https://www.flowable.com/open-source/docs/bpmn/ch07b-Flowable-BPMN-Extensions
-- NodeBehaviors.md — BPMN 验证规则设计文档
+- `document/Nodes/00-行为规则总览.md` — BPMN 验证规则设计文档

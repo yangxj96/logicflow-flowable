@@ -53,8 +53,8 @@ _▲ 支持拖拽节点、属性配置、BPMN XML 导出_
 
 ```bash
 cd examples
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ---
@@ -102,11 +102,12 @@ npm run dev
 
 #### 子流程与调用（SubProcess）
 
-| BPMN 元素 | 状态 | LogicFlow 节点类型            |
-|---------|----|---------------------------|
-| 嵌入式子流程  | ✅  | `bpmn:subProcess`         |
-| 展开子流程   | ✅  | `bpmn:expandedSubProcess` |
-| 调用活动    | ✅  | `bpmn:callActivity`       |
+| BPMN 元素 | 状态 | LogicFlow 节点类型 |
+|---------|----|-------------------|
+| 嵌入式子流程  | ✅  | `bpmn:subProcess` |
+| 调用活动    | ✅  | `bpmn:callActivity` |
+
+> 注：BPMN 2.0 标准中，展开/折叠是视图行为，不作为独立类型。旧版 `expandedSubProcess` 已合并为 `subProcess`。
 
 ---
 
@@ -162,7 +163,7 @@ npm run dev
 在贡献前，请确保:
 
 - 新增节点遵循现有模式
-- 提交前运行 `npm run build`
+- 提交前运行 `pnpm run build`
 - 更新 README 中的支持列表（如适用）
 
 ---

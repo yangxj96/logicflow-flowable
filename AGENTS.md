@@ -43,7 +43,8 @@ src/
 │   ├── nodes/
 │   │   ├── events/           # 开始/结束事件
 │   │   ├── tasks/            # 用户/服务/脚本/接收任务
-│   │   └── gateways/         # 排他/包容/并行网关
+│   │   ├── gateways/         # 排他/包容/并行网关
+│   │   └── subprocess/       # 嵌入式子流程/调用活动
 │   └── edges/sequence/       # 序列流
 ├── panel/
 │   ├── dnd/                  # 拖拽组件面板（Vue 3）
@@ -73,7 +74,17 @@ src/
 
 ## 参考文档
 
-- `document/NodeBehaviors.md` — BPMN 验证规则设计文档
+### 知识图谱（Nodes 行为规则）
+
+- `document/Nodes/00-行为规则总览.md` — 校验阶段 + 通用规则
+- `document/Nodes/01-事件节点.md` — 开始/结束/中间/边界事件
+- `document/Nodes/02-任务节点.md` — 用户/服务/脚本/接收任务
+- `document/Nodes/03-子流程与调用.md` — SubProcess + CallActivity
+- `document/Nodes/04-网关节点.md` — 排他/包容/并行网关
+- `document/Nodes/05-边与设计原则.md` — 边规则 + 设计原则
+
+### 其他文档
+
 - `document/Plans/P-子流程标准化修复计划.md` — 子流程组件标准化修复计划
 - `README.md` — 支持的 BPMN 元素矩阵
 - `examples/` — 最小可运行示例（Vue 3 + Vite）
